@@ -25,7 +25,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <time.h>
-#include <pthread.h>
 #include <signal.h>
 #include <sys/wait.h>
 #include <sys/ipc.h>
@@ -33,17 +32,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+typedef unsigned int uint32;
+typedef int int32;
 
 
 
