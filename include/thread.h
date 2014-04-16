@@ -19,8 +19,15 @@ class CThread
 		
 		int32		start(thread_fn tfn,void* arg);
 		int32		stop();
+
+		/*
+		 * This static method can be used to separate user's passed routine
+		 * */
+	   static void *threadRoutine (void *arg);
 	private:
 		pthread_t	m_nThreadId;
+
+	public:
 		thread_fn	m_fThreadRoutine;
 		void*		m_pArg;
 };
