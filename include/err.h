@@ -14,26 +14,4 @@
 					   abort();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#define	output_debug(str)	 fprintf (stdout, "%s (%s:%d)\n",str , __FILE__, __LINE__);

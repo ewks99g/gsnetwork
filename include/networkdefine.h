@@ -26,86 +26,16 @@
 
 
 
-typedef unsigned int uint32;
+typedef unsigned int  uint32;
 typedef int int32;
+typedef unsigned char uint8;
+typedef char int8;
+
+///
+typedef int THandler;
 
 
-
-
-
+#define MAX_EPOLL_HINT_FILE_SIZE 1024   //just a hint, make no sense
+#define MAX_EPOLL_NETWORK_EVENT_SIZE 8190
 
 #endif		//endof __NETWORK_DEFINE_H__
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
