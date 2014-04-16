@@ -25,14 +25,10 @@
 #include <sys/shm.h>
 
 
-
-typedef unsigned int  uint32;
-typedef int int32;
-typedef unsigned char uint8;
-typedef char int8;
+#include "typedef.h"
 
 ///
-typedef int THandler;
+typedef int32 THandler;
 
 
 #define MAX_EPOLL_HINT_FILE_SIZE 1024   //just a hint, make no sense
