@@ -64,19 +64,19 @@ void CEpoll::loop()
 		int32 _eventCnt = epoll_wait(m_nEpollHandler,m_vEventCache,MAX_EPOLL_NETWORK_EVENT_SIZE,-1);
 		for(_i =0;_i < _eventCnt; ++_i)
 		{
-			 CIoEvent* _ioEvent = ((poll_entry_t*) ev_buf [i].data.ptr);     
-			 if (pe->fd == retired_fd)
-			 continue; 
-			 if (ev_buf [i].events & (EPOLLERR | EPOLLHUP))     
-			 	pe->events->in_event (); 
-			 if (pe->fd == retired_fd) 
-			 	continue;   
-			if (ev_buf [i].events & EPOLLOUT) 
-				pe->events->out_event ();  
-			if (pe->fd == retired_fd)            
-				continue;   
-			if (ev_buf [i].events & EPOLLIN)    
-				pe->events->in_event ();
+			 CIoEvent* _ioEvent = ((CIoEvent*)m_vEventCache[_i].data.ptr);     
+	//		 if (pe->fd == retired_fd)
+	//			continue; 
+			 if (m_vEventCache[i].events & (EPOLLERR | EPOLLHUP))     
+			 	_ioEvent->in_event (); 
+	//		 if (pe->fd == retired_fd) 
+	//		 	continue;   
+			if (m_vEventCache[i].events & EPOLLOUT) 
+				_ioEvent->out_event ();  
+//			if (pe->fd == retired_fd)            
+//				continue;   
+			if (m_vEventCache[i].events & EPOLLIN)    
+				_ioEvent->in_event ();
 		}
 	}
 }
