@@ -1,9 +1,10 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.68])
+C_PREREQ([2.63])
 AC_INIT([gsnetwork], [1.0], [wang70bin@163.com])
 AC_CONFIG_SRCDIR([include/ipcbase.h])
+AM_INIT_AUTOMAKE(gsnetwork, 1.0)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -12,13 +13,16 @@ AC_PROG_CC
 # Checks for libraries.
 
 # Checks for header files.
+AC_CONFIG_HEADERS([config.h])
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h netdb.h netinet/in.h stdlib.h string.h sys/socket.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
 
+AC_PROG_RANLIB
+
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
-AC_OUTPUT(Makefile)
+AC_OUTPUT(Makefile source/Makefile)

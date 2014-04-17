@@ -7,10 +7,8 @@
 #pragma once
 
 
-
-
-#define output_error(x)   const char *errstr = strerror (x);\            
-					   fprintf (stderr, "%s (%s:%d)\n", errstr, __FILE__, __LINE__);\           
+#define output_error(descstr)   const char *errstr = strerror (errno);\
+					   fprintf (stderr, "%s: %s (%s:%d)\n",descstr,errstr, __FILE__, __LINE__);\
 					   abort();
 
 

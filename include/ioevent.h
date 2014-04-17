@@ -28,5 +28,5 @@ class CIoEvent
 	/*
 	 *This method is used to handler the timeout event from event listener,i.e. epoll.
 	 * */
-	virtual	void time_event() = 0
+	virtual	void time_event() = 0;
 };

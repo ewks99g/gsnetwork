@@ -54,7 +54,7 @@ bool CEpoll::rmvHandler(THandler handler)
 
 bool CEpoll::start()
 {
-	m_work.start(CEpoll::workerRoutine,this);
+	m_worker.start(CEpoll::workerRoutine,this);
 }
 
 void CEpoll::loop()
@@ -62,26 +62,29 @@ void CEpoll::loop()
 	while (true)
 	{
 		int32 _eventCnt = epoll_wait(m_nEpollHandler,m_vEventCache,MAX_EPOLL_NETWORK_EVENT_SIZE,-1);
-		for(_i =0;_i < _eventCnt; ++_i)
+		for(int32 _i =0;_i < _eventCnt; ++_i)
 		{
 			 CIoEvent* _ioEvent = ((CIoEvent*)m_vEventCache[_i].data.ptr);     
 	//		 if (pe->fd == retired_fd)
 	//			continue; 
-			 if (m_vEventCache[i].events & (EPOLLERR | EPOLLHUP))     
+			 if (m_vEventCache[_i].events & (EPOLLERR | EPOLLHUP))     
 			 	_ioEvent->in_event (); 
 	//		 if (pe->fd == retired_fd) 
 	//		 	continue;   
-			if (m_vEventCache[i].events & EPOLLOUT) 
+			if (m_vEventCache[_i].events & EPOLLOUT) 
 				_ioEvent->out_event ();  
 //			if (pe->fd == retired_fd)            
 //				continue;   
-			if (m_vEventCache[i].events & EPOLLIN)    
+			if (m_vEventCache[_i].events & EPOLLIN)    
 				_ioEvent->in_event ();
 		}
 	}
 }
 
-void CEpoll::workerRoutine (void* arg)
+void CEpoll::workerRoutine(void* arg)
 {
-	(CEpoll*)arg()->loop();
+	if (arg)
+	{
+		((CEpoll*)arg)->loop();
+	}
 }

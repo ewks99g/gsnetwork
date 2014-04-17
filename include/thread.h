@@ -9,15 +9,17 @@
 #pragma once
 
 #include <pthread.h>
-
+#include "networkdefine.h"
 
 typedef void (thread_fn) (void*);
 
 class CThread
 {
 	public:
-		
-		int32		start(thread_fn tfn,void* arg);
+		CThread();
+		~CThread();
+	public:
+		int32		start(thread_fn* tfn,void* arg);
 		int32		stop();
 
 		/*
@@ -28,6 +30,6 @@ class CThread
 		pthread_t	m_nThreadId;
 
 	public:
-		thread_fn	m_fThreadRoutine;
+		thread_fn*	m_fThreadRoutine;
 		void*		m_pArg;
 };

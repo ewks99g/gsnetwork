@@ -7,6 +7,7 @@
  *******************************************************************/
 
 #include "thread.h"
+#include "err.h"
 
 CThread::CThread()
 {
@@ -22,12 +23,12 @@ void* CThread::threadRoutine (void *arg)
 	_self->m_fThreadRoutine(_self->m_pArg);
 }
 
-int32 CThread::start(thread_fn tfn,void* arg)
+int32 CThread::start(thread_fn* tfn,void* arg)
 {
 	m_fThreadRoutine = tfn;
 	m_pArg = arg;
 
-	 int32 _result = pthread_create (&m_nThreadId, NULL, CThread::thread_routine, this);
+	 int32 _result = pthread_create (&m_nThreadId, NULL, CThread::threadRoutine, this);
 	 if (_result < 0)
 	 {
 	 	output_error("Create Thread");
