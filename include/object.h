@@ -3,5 +3,6 @@
 class CObject
 {
 public:
+	CObject(){}
 	virtual ~CObject() {}
 };

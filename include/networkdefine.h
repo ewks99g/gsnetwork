@@ -30,8 +30,6 @@
 
 ///
 typedef int32 THandler;
-
-
 #define MAX_EPOLL_HINT_FILE_SIZE 1024   //just a hint, make no sense
 #define MAX_EPOLL_NETWORK_EVENT_SIZE 8190
 

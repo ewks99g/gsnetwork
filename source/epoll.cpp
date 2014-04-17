@@ -68,15 +68,15 @@ void CEpoll::loop()
 	//		 if (pe->fd == retired_fd)
 	//			continue; 
 			 if (m_vEventCache[_i].events & (EPOLLERR | EPOLLHUP))     
-			 	_ioEvent->in_event (); 
+			 	_ioEvent->inEvent (); 
 	//		 if (pe->fd == retired_fd) 
 	//		 	continue;   
 			if (m_vEventCache[_i].events & EPOLLOUT) 
-				_ioEvent->out_event ();  
+				_ioEvent->outEvent ();  
 //			if (pe->fd == retired_fd)            
 //				continue;   
 			if (m_vEventCache[_i].events & EPOLLIN)    
-				_ioEvent->in_event ();
+				_ioEvent->inEvent ();
 		}
 	}
 }

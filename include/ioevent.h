@@ -13,20 +13,20 @@ class CIoEvent
 	public:
 		CIoEvent() {}
 		~CIoEvent() {}
-	public:
-	
+
+	protected:
 	/*
 	 * This method is used to handle the input event from event listener,i.e. epoll.
 	 * */
-	virtual void in_event() = 0;
+	virtual void inEvent() = 0;
 	
 	/*
 	 *This method is used to handler the output event from event listener,i.e. epoll.
 	 * */
-	virtual	void out_event() = 0;
+	virtual	void outEvent() = 0;
 
 	/*
 	 *This method is used to handler the timeout event from event listener,i.e. epoll.
 	 * */
-	virtual	void time_event() = 0;
+	virtual	void timeEvent() = 0;
 };
