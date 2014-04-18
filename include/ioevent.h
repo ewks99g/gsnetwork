@@ -14,7 +14,7 @@ class CIoEvent
 		CIoEvent() {}
 		~CIoEvent() {}
 
-	protected:
+	public:
 	/*
 	 * This method is used to handle the input event from event listener,i.e. epoll.
 	 * */

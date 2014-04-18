@@ -19,7 +19,7 @@ CIpcBase::~CIpcBase()
 /*****************************************************************/
 CSocketHandler::CSocketHandler()
 {
-	memset(m_uAddress,0,sizeof(sockaddr_in));
+	memset(&m_uAddress,0,sizeof(sockaddr_in));
 }
 
 CSocketHandler::~CSocketHandler()
@@ -62,7 +62,7 @@ void CSocketHandler::outEvent()
 
 }
 
-void CSocketHandler::time()
+void CSocketHandler::timeEvent()
 {
 
 }
