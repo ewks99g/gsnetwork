@@ -48,9 +48,9 @@ void CSocketHandler::open(const char* ipstring,uint16 port)
 		output_error("Can not connect the target server");
 		return;
 	}
-
 	
-}
+	
+}	
 
 void CSocketHandler::inEvent()
 {

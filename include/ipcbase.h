@@ -17,7 +17,7 @@ class CSocketHandler : public CIoEvent
 		~CSocketHandler();
 	public:
 		void open(const char* ipstring,uint16 port);
-	proteced:
+	public:
 		virtual void inEvent();
 		virtual void outEevent();
 		virtual void timeEevent();

@@ -25,4 +25,6 @@ AC_PROG_RANLIB
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
-AC_OUTPUT(Makefile source/Makefile)
+AC_PROG_MAKE_SET
+
+AC_OUTPUT(Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqclient/Makefile)

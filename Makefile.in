@@ -196,7 +196,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS = source
+SUBDIRS = source zmqware test
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
