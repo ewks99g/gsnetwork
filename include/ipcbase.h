@@ -2,11 +2,11 @@
 #include "networkdefine.h"
 #include "ioevent.h"
 
-class CIpcbase
+class CIpcBase
 {
 	public:
-		CIpcbase(){}
-		virtual ~CIpcbase(){}
+		CIpcBase();
+		virtual ~CIpcBase();
 };
 
 //template<class TMsgHandler>
@@ -19,10 +19,10 @@ class CSocketHandler : public CIoEvent
 		void open(const char* ipstring,uint16 port);
 	public:
 		virtual void inEvent();
-		virtual void outEevent();
-		virtual void timeEevent();
+		virtual void outEvent();
+		virtual void timeEvent();
 	private:
-		TMsgHandler		m_nHandler;
+		THandler		m_nHandler;
 		struct sockaddr_in		m_uAddress;
 
 //		NetIPv4			m_nIp;
