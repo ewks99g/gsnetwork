@@ -46,7 +46,7 @@ bool CZmqWrapper::addBindNode(std::string ipcstring)
 	}
 	catch (zmq::error_t e)
 	{
-		printf("%s,%s,error %d\n",__FUNCTION__,__LINE__,e.num());
+		printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,e.what());
 	}
 	return true;
 }
@@ -72,7 +72,7 @@ bool CZmqWrapper::addConNode(std::string ipcstring)
 	}
 	catch (zmq::error_t e)
 	{
-		printf("%s,%s,error %d\n",__FUNCTION__,__LINE__,e.num());
+		printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,e.what());
 	}
 	return true;
 }
@@ -108,7 +108,7 @@ void CZmqWrapper::run(TMsgHandler* msghandler)
 		}
 		catch(zmq::error_t e)
 		{
-			printf("%s,%s,error %d\n",__FUNCTION__,__LINE__,e.num());
+			printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,e.what());
 		}
 	}
 }
@@ -140,7 +140,7 @@ void CZmqWrapper::run()
 		}
 		catch(zmq::error_t e)
 		{
-			printf("%s,%s,error %d\n",__FUNCTION__,__LINE__,e.num());
+			printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,e.what());
 		}
 	}
 }
