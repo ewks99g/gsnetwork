@@ -27,4 +27,5 @@ AC_CHECK_FUNCS([memset])
 
 AC_PROG_MAKE_SET
 
-AC_OUTPUT(Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqclient/Makefile)
+AC_OUTPUT(Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile 
+			test/zmqbroker/Makefile test/zmqclient/Makefile)

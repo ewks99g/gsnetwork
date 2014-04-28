@@ -75,7 +75,7 @@ void CEpoll::loop()
 				_ioEvent->outEvent ();  
 //			if (pe->fd == retired_fd)            
 //				continue;   
-			if (m_vEventCache[_i].events & EPOLLIN)    
+			if (m_vEventCache[_i].events & EPOLLIN)
 				_ioEvent->inEvent ();
 		}
 	}

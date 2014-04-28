@@ -1,5 +1,5 @@
 #include "zmqwrap.h"
-
+#include "messagetypedef.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>

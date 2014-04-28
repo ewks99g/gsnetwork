@@ -21,6 +21,7 @@ public:
 	bool	init();
 	bool	addBindNode(std::string ipcstring);
 	bool	addConNode(std::string ipcstring);
+	bool    addDevice(std::string srcstring,std::string dststring);
 public:
 	template<typename TMsgHandler>
 	void	run(TMsgHandler* msghandler);

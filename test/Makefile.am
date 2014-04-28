@@ -1,3 +1,3 @@
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS=zmqserver zmqclient 
+SUBDIRS=zmqserver zmqclient zmqbroker
 #EXTRA_DIST=TESTREADME.md

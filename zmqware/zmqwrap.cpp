@@ -33,7 +33,6 @@ bool CZmqWrapper::addBindNode(std::string ipcstring)
 
 	try
 	{
-
 		_pSocket->bind(ipcstring.c_str());
 
 		m_vPollItem[m_nFreePollIndex].events = ZMQ_POLLIN;
@@ -77,6 +76,40 @@ bool CZmqWrapper::addConNode(std::string ipcstring)
 	return true;
 }
 
+bool CZmqWrapper::addDevice(std::string srcstring,std::string dststring)
+{
+  zmq::socket_t* _pSrcSocket = new zmq::socket_t(m_context,ZMQ_ROUTER);
+  if (!_pSrcSocket)
+  {
+      return false;
+  } 
+
+  try
+  {                                                                
+      _pSrcSocket->bind(srcstring.c_str());
+  }
+  catch(zmq::error_t err)
+  {
+	  printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,err.what());
+  }
+
+  zmq::socket_t* _pDstSocket = new zmq::socket_t(m_context,ZMQ_DEALER);
+  if (!_pDstSocket)
+  {
+	  return false;
+  }
+
+  try
+  {
+	  _pDstSocket->bind(dststring.c_str());
+  }
+  catch(zmq::error_t err)
+  {
+	printf("%s,%d,error %s\n",__FUNCTION__,__LINE__,err.what());
+  }
+
+  zmq_device(ZMQ_QUEUE,*_pSrcSocket,*_pDstSocket);
+}
 
 template<typename TMsgHandler>
 void CZmqWrapper::run(TMsgHandler* msghandler)

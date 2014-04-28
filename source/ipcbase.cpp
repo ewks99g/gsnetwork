@@ -26,30 +26,30 @@ CSocketHandler::~CSocketHandler()
 {
 }
 
-void CSocketHandler::open(const char* ipstring,uint16 port)
+bool CSocketHandler::open(const char* ipstring,uint16 port)
 {
 	m_uAddress.sin_family = AF_INET;
 	m_uAddress.sin_port = htons(port);
 	if(inet_aton(ipstring,&m_uAddress.sin_addr) == 0)
 	{
 		output_error("Convert number-and-dots notation to number of network byte order");
-		return;
+		return false;
 	}
 
 	m_nHandler = socket(PF_INET,SOCK_STREAM,0);
 	if (m_nHandler < 0)
 	{
 		output_error("Create Socket");
-		return;
+		return false;
 	}
 
 	if (connect(m_nHandler,(struct sockaddr*)&m_uAddress, sizeof(struct sockaddr_in)) < 0)
 	{
 		output_error("Can not connect the target server");
-		return;
+		return false;
 	}
 	
-	
+	return true;
 }	
 
 void CSocketHandler::inEvent()
@@ -63,6 +63,55 @@ void CSocketHandler::outEvent()
 }
 
 void CSocketHandler::timeEvent()
+{
+
+}
+/**********************************************************************************************/
+CTcpAcceptor::CTcpAcceptor()
+{
+}
+
+CTcpAcceptor::~CTcpAcceptor()
+{
+}
+
+bool CTcpAcceptor::open(const char* ipstring ,uint16 port)
+{
+	m_uAddress.sin_family = AF_INET;
+    m_uAddress.sin_port = htons(port);
+    if(inet_aton(ipstring,&m_uAddress.sin_addr) == 0)
+    {
+        output_error("Convert number-and-dots notation to number of network byte order");
+        return false;
+    }
+
+    m_nHandler = socket(PF_INET,SOCK_STREAM,0);
+    if (m_nHandler < 0)
+    {
+        output_error("Create Socket");
+        return false;
+    }
+
+    if (bind(m_nHandler,(struct sockaddr*)&m_uAddress, sizeof(struct sockaddr_in)) < 0)
+    {
+        output_error("Can not connect the target server");
+        return false;
+    }
+
+    return true;
+}
+
+void CTcpAcceptor::inEvent()
+{
+
+}
+
+void CTcpAcceptor::outEvent()
+{
+
+}
+
+void CTcpAcceptor::timeEvent()
 {
 
 }
