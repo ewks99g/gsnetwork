@@ -8,16 +8,18 @@
 #pragma once
 #include "epoll.h"
 #include "thread.h"
+#include "ipcbase.h"
 
 class CMultiplexContext
 {
 	public:
 		CMultiplexContext();
-		~CMultiplexContext();
+		virtual ~CMultiplexContext();
 	public:
-		bool addAcceptor(const char* ipstring,uint16 port);
-		bool addConnctor(const char* ipstring,uint16 port);
-		bool addFifo(const char* ipcstring);
+//		bool addAcceptor(const char* ipstring,uint16 port);
+//		bool addConnctor(const char* ipstring,uint16 port);
+//		bool addFifo(const char* ipcstring);
+		bool addNetNode(CIoEvent* object);
 		bool startRun();
 	private:
 		CEpoll		m_poll;

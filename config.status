@@ -322,7 +322,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile"
+config_files=" Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile"
 config_headers=" config.h"
 config_commands=" depfiles"
 
@@ -475,6 +475,8 @@ do
     "test/zmqserver/Makefile") CONFIG_FILES="$CONFIG_FILES test/zmqserver/Makefile" ;;
     "test/zmqbroker/Makefile") CONFIG_FILES="$CONFIG_FILES test/zmqbroker/Makefile" ;;
     "test/zmqclient/Makefile") CONFIG_FILES="$CONFIG_FILES test/zmqclient/Makefile" ;;
+    "test/normalserver/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalserver/Makefile" ;;
+    "test/normalclient/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalclient/Makefile" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}

@@ -9,28 +9,39 @@
 
 CMultiplexContext::CMultiplexContext()
 {
+
 }
 
 CMultiplexContext::~CMultiplexContext()
 {
+
 }
 
 bool CMultiplexContext::startRun()
 {
-
+	m_poll.start();
 }
 
-bool CMultiplexContext::addAcceptor(const char* ipstring,uint16 port)
-{
-	
+bool CMultiplexContext::addNetNode(CIoEvent* object)
+{	
+	if (!m_poll.addHandler(object->handle(),object))
+	{
+		return false;
+	}
+	return true;
 }
 
-bool CMultiplexContext::addConnctor(const char* ipstring,uint16 port)
-{
-
-}
-
-bool CMultiplexContext::addFifo(const char* ipcstring)
-{
-
-}
+//bool CMultiplexContext::addAcceptor(const char* ipstring,uint16 port)
+//{
+//	
+//}
+//
+//bool CMultiplexContext::addConnctor(const char* ipstring,uint16 port)
+//{
+//
+//}
+//
+//bool CMultiplexContext::addFifo(const char* ipcstring)
+//{
+//
+//}

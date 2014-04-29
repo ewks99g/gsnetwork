@@ -176,7 +176,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS = zmqserver zmqclient zmqbroker
+SUBDIRS = zmqserver zmqclient zmqbroker normalserver normalclient
 all: all-recursive
 
 .SUFFIXES:
@@ -189,9 +189,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign test/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu test/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign test/Makefile
+	  $(AUTOMAKE) --gnu test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

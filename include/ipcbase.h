@@ -1,6 +1,7 @@
 #pragma once
 #include "networkdefine.h"
 #include "ioevent.h"
+#include "context.h"
 
 class CIpcBase
 {
@@ -10,37 +11,31 @@ class CIpcBase
 };
 
 //template<class TMsgHandler>
-class CSocketHandler : public CIoEvent
+class CTcpConnector : public CIoEvent
 {
 	public:
-		CSocketHandler();
-		~CSocketHandler();
+		CTcpConnector(CMultiplexContext* pcontext);
+		~CTcpConnector();
 	public:
 		bool open(const char* ipstring,uint16 port);
+		bool sendData(const char* data,uint32 len);
 	public:
 		virtual void inEvent();
 		virtual void outEvent();
+		virtual void errorEvent();
 		virtual void timeEvent();
-	private:
-		THandler		m_nHandler;
-		struct sockaddr_in		m_uAddress;
-
-//		NetIPv4			m_nIp;
-//		NetPort			m_nPort;
 };
 
 class CTcpAcceptor : public CIoEvent
 {
 	public:
-		CTcpAcceptor();
+		CTcpAcceptor(CMultiplexContext* pcontext);
 		~CTcpAcceptor();
 	public:
 		bool open(const char* ipstring,uint16 port);
 	public:
 		virtual void inEvent();
 		virtual void outEvent();
+		virtual void errorEvent();
 		virtual void timeEvent();
-	private:
-		THandler        m_nHandler;
-		struct sockaddr_in      m_uAddress;
 };

@@ -24,7 +24,7 @@ CEpoll::~CEpoll()
 bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent)
 {
 	epoll_event _event;
-	_event.events = 0;
+	_event.events = EPOLLIN;
 	_event.data.ptr = ioevent;
 
 	int32 _result = epoll_ctl(m_nEpollHandler, EPOLL_CTL_ADD, handler, &_event);
@@ -33,7 +33,6 @@ bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent)
 		output_error("Epoll Add Handler");
 		return false;
 	}
-
 	return true;
 }
 
@@ -64,19 +63,20 @@ void CEpoll::loop()
 		int32 _eventCnt = epoll_wait(m_nEpollHandler,m_vEventCache,MAX_EPOLL_NETWORK_EVENT_SIZE,-1);
 		for(int32 _i =0;_i < _eventCnt; ++_i)
 		{
-			 CIoEvent* _ioEvent = ((CIoEvent*)m_vEventCache[_i].data.ptr);     
-	//		 if (pe->fd == retired_fd)
-	//			continue; 
-			 if (m_vEventCache[_i].events & (EPOLLERR | EPOLLHUP))     
-			 	_ioEvent->inEvent (); 
-	//		 if (pe->fd == retired_fd) 
-	//		 	continue;   
-			if (m_vEventCache[_i].events & EPOLLOUT) 
-				_ioEvent->outEvent ();  
-//			if (pe->fd == retired_fd)            
-//				continue;   
+			CIoEvent* _ioEvent = ((CIoEvent*)m_vEventCache[_i].data.ptr);
+			if (!_ioEvent)
+				continue;
+			
+			printf("rcvb evnt\n");
+			if (m_vEventCache[_i].events & (EPOLLERR | EPOLLHUP))     
+			{
+				 _ioEvent->errorEvent(); 
+			}
+
 			if (m_vEventCache[_i].events & EPOLLIN)
-				_ioEvent->inEvent ();
+			{
+				_ioEvent->inEvent();
+			}
 		}
 	}
 }

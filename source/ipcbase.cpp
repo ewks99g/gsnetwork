@@ -17,16 +17,16 @@ CIpcBase::~CIpcBase()
 }
 
 /*****************************************************************/
-CSocketHandler::CSocketHandler()
+CTcpConnector::CTcpConnector(CMultiplexContext* pcontext) : CIoEvent(pcontext)
 {
 	memset(&m_uAddress,0,sizeof(sockaddr_in));
 }
 
-CSocketHandler::~CSocketHandler()
+CTcpConnector::~CTcpConnector()
 {
 }
 
-bool CSocketHandler::open(const char* ipstring,uint16 port)
+bool CTcpConnector::open(const char* ipstring,uint16 port)
 {
 	m_uAddress.sin_family = AF_INET;
 	m_uAddress.sin_port = htons(port);
@@ -49,25 +49,50 @@ bool CSocketHandler::open(const char* ipstring,uint16 port)
 		return false;
 	}
 	
+	if (!m_pContext->addNetNode(this))
+	{
+		output_error("Can not connect the target server");
+        return false;
+	}
+
+
 	return true;
 }	
 
-void CSocketHandler::inEvent()
+void CTcpConnector::inEvent()
+{
+	printf("rcv data\n");
+}
+
+void CTcpConnector::outEvent()
 {
 
 }
 
-void CSocketHandler::outEvent()
+void CTcpConnector::errorEvent()
 {
 
 }
 
-void CSocketHandler::timeEvent()
+void CTcpConnector::timeEvent()
 {
 
+}
+bool CTcpConnector::sendData(const char* data,uint32 len)
+{
+	if (data && len > 0)
+	{
+		int32 _sndLen = send(m_nHandler,data,len,0);
+		if (_sndLen < len)
+		{
+			output_error("Send data error");
+			return false;
+		}
+	}
+	return true;
 }
 /**********************************************************************************************/
-CTcpAcceptor::CTcpAcceptor()
+CTcpAcceptor::CTcpAcceptor(CMultiplexContext* pcontext) : CIoEvent(pcontext) 
 {
 }
 
@@ -98,12 +123,33 @@ bool CTcpAcceptor::open(const char* ipstring ,uint16 port)
         return false;
     }
 
+	if (listen(m_nHandler,MAX_INNER_PORT_LISTEN_BACK_LOG) < 0)
+	{
+		output_error("Can not listen on this socket");
+		return false;
+	}
+
+	if (!m_pContext->addNetNode(this))
+	{
+		output_error("Can not add this node to multiplex way");
+        return false;
+	}
+
     return true;
 }
 
 void CTcpAcceptor::inEvent()
 {
+	THandler _rcvHandle = -1;
+	struct sockaddr_in _remoteAddr;
+	memset(&_remoteAddr,0,sizeof(struct sockaddr_in ));
+	socklen_t _addrLen = sizeof(struct sockaddr_in);
 
+	if (accept(m_nHandler,(struct sockaddr*)&_remoteAddr,&_addrLen) < 0)
+	{
+		output_error("Can not accept the comming connection request");
+	}
+	printf("Accept one comming request\n");
 }
 
 void CTcpAcceptor::outEvent()
@@ -114,4 +160,8 @@ void CTcpAcceptor::outEvent()
 void CTcpAcceptor::timeEvent()
 {
 
+}
+void CTcpAcceptor::errorEvent()
+{
+	printf("rcbv error event\n");
 }
