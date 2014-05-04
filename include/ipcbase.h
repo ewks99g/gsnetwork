@@ -24,6 +24,8 @@ class CTcpConnector : public CIoEvent
 		virtual void outEvent();
 		virtual void errorEvent();
 		virtual void timeEvent();
+	private:
+		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];
 };
 
 class CTcpAcceptor : public CIoEvent

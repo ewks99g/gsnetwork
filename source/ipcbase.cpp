@@ -49,7 +49,7 @@ bool CTcpConnector::open(const char* ipstring,uint16 port)
 		return false;
 	}
 	
-	if (!m_pContext->addNetNode(this))
+	if (!m_pContext->addNetNode(this,EPOLLIN))
 	{
 		output_error("Can not connect the target server");
         return false;
@@ -66,12 +66,29 @@ void CTcpConnector::inEvent()
 
 void CTcpConnector::outEvent()
 {
-
+	int32 _rcvLen = read(m_nHandler,&m_vRcvBuff[0],MAX_CONNCTOR_RCV_BUFF_SIZE);
+	
+	if (_rcvLen > 0)
+	{
+		printf("prepare to handle data\n");
+		return;
+	}
+	else 
+	{
+		if (!m_pContext->rmvNetNode(this))
+		{
+			output_error("Can not rmv the connect event");
+		}	
+	}
 }
 
 void CTcpConnector::errorEvent()
 {
-
+	printf("error event");
+	if (!m_pContext->rmvNetNode(this))
+	{
+		output_error("Can not rmv the connect event");
+	}
 }
 
 void CTcpConnector::timeEvent()
@@ -129,7 +146,7 @@ bool CTcpAcceptor::open(const char* ipstring ,uint16 port)
 		return false;
 	}
 
-	if (!m_pContext->addNetNode(this))
+	if (!m_pContext->addNetNode(this,EPOLLIN))
 	{
 		output_error("Can not add this node to multiplex way");
         return false;

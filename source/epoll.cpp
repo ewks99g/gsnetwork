@@ -21,10 +21,10 @@ CEpoll::~CEpoll()
 
 }
 
-bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent)
+bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag)
 {
 	epoll_event _event;
-	_event.events = EPOLLIN;
+	_event.events = eventflag;
 	_event.data.ptr = ioevent;
 
 	int32 _result = epoll_ctl(m_nEpollHandler, EPOLL_CTL_ADD, handler, &_event);

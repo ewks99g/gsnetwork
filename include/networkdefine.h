@@ -31,9 +31,16 @@
 ///
 typedef int32 THandler;
 #define MAX_EPOLL_HINT_FILE_SIZE 1024   //just a hint, make no sense
+
+//max epoll ctrl event
 #define MAX_EPOLL_NETWORK_EVENT_SIZE 8190
-#define MAX_INNER_PORT_LISTEN_BACK_LOG 10
+
+///
+#define MAX_INNER_PORT_LISTEN_BACK_LOG 10 
 #define MAX_OUTER_PORT_LISTEN_BACK_LOG 100
+
+///
+#define MAX_CONNCTOR_RCV_BUFF_SIZE 2048
 
 enum ENetworkMsgType
 {

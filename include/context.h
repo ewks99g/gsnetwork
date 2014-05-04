@@ -19,7 +19,8 @@ class CMultiplexContext
 //		bool addAcceptor(const char* ipstring,uint16 port);
 //		bool addConnctor(const char* ipstring,uint16 port);
 //		bool addFifo(const char* ipcstring);
-		bool addNetNode(CIoEvent* object);
+		bool addNetNode(CIoEvent* object,int32 eventflag);
+		bool rmvNetNode(CIoEvent* object);
 		bool startRun();
 	private:
 		CEpoll		m_poll;

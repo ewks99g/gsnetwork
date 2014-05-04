@@ -12,7 +12,7 @@ class CEpoll
 	public:
 		bool start();
 		void loop();
-		bool addHandler(THandler handler,CIoEvent* ioevent);
+		bool addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag);
 		bool rmvHandler(THandler handler);
 
 		 //  Main worker thread routine.        
