@@ -11,87 +11,89 @@
 #include <stdlib.h>
 #include <string.h>
 #include "typedef.h"
+#include "mutex.h"
 
-
-namespace NMemory
+template<class TAllocType,int32 InitSize,class MutexType=CMutex>
+class CMemAllocator
 {
-	template<class TAllocType,int32 InitSize>
-	class CMemAllocator
-	{
-		public:
-			CMemAllocator()
-			{
-				m_nInitSize = 0;
-				m_pDataList = NULL;
-				m_nInitSize = InitSize;
+	public:
+		CMemAllocator()
+		{
+			m_nInitSize = 0;
+			m_pDataList = NULL;
+			m_nInitSize = InitSize;
 
-				__initMem();
-			}
-			virtual ~CMemAllocator()
-			{
-				
-			}
-		public:
-			TAllocType* getFreeNode()
-			{
-				if (!m_pDataList)
-				{
-					__reAlloc(m_nInitSize);
-				}
-				TAllocType* _retData = &m_pDataList->uNodeData.curNode;
-				m_pDataList = m_pDataList->uNodeData.pNextNode;
-				
-				return _retData;
-			}
-			void freeNode(TAllocType* nodeData)
-			{
-				memset(nodeData,0,sizeof(TAllocType));
-				
-				TNodeInfo* _nodeInfo = (TNodeInfo*)nodeData;
-				_nodeInfo->uNodeData.pNextNode = m_pDataList;
-				m_pDataList = (TNodeInfo*)nodeData;
-			}
-		private:
-			void __initMem()
-			{
-				if (!m_pDataList)
-				{
-					__reAlloc(m_nInitSize);
-				}
-			}
-			void __reAlloc(int32 allocSize)
-			{
-				void* _ptrData = malloc(allocSize * sizeof(TNodeInfo));
-				if (!_ptrData)
-					return;
-				memset(_ptrData,0,sizeof(TNodeInfo) * allocSize);
+			__initMem();
+		}
+		virtual ~CMemAllocator()
+		{
+			
+		}
+	public:
+		TAllocType* getFreeNode()
+		{
+			CGuard _gurad(m_mutex);
 
-				for (int32 _i = 0; _i < allocSize; _i++)
+			if (!m_pDataList)
+			{
+				__reAlloc(m_nInitSize);
+			}
+			TAllocType* _retData = &m_pDataList->uNodeData.curNode;
+			m_pDataList = m_pDataList->uNodeData.pNextNode;
+			
+			return _retData;
+		}
+		void freeNode(TAllocType* nodeData)
+		{
+			CGuard _gurad(m_mutex);
+
+			memset(nodeData,0,sizeof(TAllocType));
+			
+			TNodeInfo* _nodeInfo = (TNodeInfo*)nodeData;
+			_nodeInfo->uNodeData.pNextNode = m_pDataList;
+			m_pDataList = (TNodeInfo*)nodeData;
+		}
+	private:
+		void __initMem()
+		{
+			if (!m_pDataList)
+			{
+				__reAlloc(m_nInitSize);
+			}
+		}
+		void __reAlloc(int32 allocSize)
+		{
+			void* _ptrData = malloc(allocSize * sizeof(TNodeInfo));
+			if (!_ptrData)
+				return;
+			memset(_ptrData,0,sizeof(TNodeInfo) * allocSize);
+
+			for (int32 _i = 0; _i < allocSize; _i++)
+			{
+				TNodeInfo* _nodePtr = (TNodeInfo*)((char*)_ptrData + sizeof(TNodeInfo) * _i);
+				if (m_pDataList)
 				{
-					TNodeInfo* _nodePtr = (TNodeInfo*)((char*)_ptrData + sizeof(TNodeInfo) * _i);
-					if (m_pDataList)
-					{
-						_nodePtr->uNodeData.pNextNode = m_pDataList;
-						m_pDataList = _nodePtr;
-					}
-					else
-					{
-						m_pDataList = _nodePtr;	
-					}
+					_nodePtr->uNodeData.pNextNode = m_pDataList;
+					m_pDataList = _nodePtr;
+				}
+				else
+				{
+					m_pDataList = _nodePtr;	
 				}
 			}
-		private:
-			struct TNodeInfo
+		}
+	private:
+		struct TNodeInfo
+		{
+			union
 			{
-				union
-				{
-					TAllocType  curNode;
-					TNodeInfo*  pNextNode;
-				}uNodeData;
-			};
-		private:
-			int32		m_nInitSize;
-			TNodeInfo*	m_pDataList;
-	};
-}
+				TAllocType  curNode;
+				TNodeInfo*  pNextNode;
+			}uNodeData;
+		};
+	private:
+		int32		m_nInitSize;
+		TNodeInfo*	m_pDataList;
+		MutexType	m_mutex;
+};
 

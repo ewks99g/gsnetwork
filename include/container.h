@@ -66,7 +66,7 @@ class CCircleQueue
 		T   m_temp;
 		int m_nPopPos;	
 		int m_nPushPos;
-	};
+};
 
 template <typename T,int size>
 class blockQueue
