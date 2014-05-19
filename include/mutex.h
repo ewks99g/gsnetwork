@@ -13,69 +13,53 @@
 *
 * Simple Mutex implement
 */
-class CMutex
+class Mutex
 {   
 public:
-    inline CMutex ()
+    Mutex()
     {   
-        int _result = pthread_mutex_init (&m_mutex, NULL);
-		if (_result < 0)
-		{
+        if (pthread_mutex_init (&mutex_, NULL) < 0)
 			printf("create lock errror\n");
-		}
     }   
 
-    inline ~CMutex ()
+    ~Mutex()
     {   
-        int _result = pthread_mutex_destroy (&m_mutex);
-		if (_result < 0)
-		{
+        if (pthread_mutex_destroy (&mutex_) < 0)
 			printf("destroy lock errror\n");
-		}
-
     }   
 
-    inline void lock ()
+    inline void lock()
     {   
-        int _result = pthread_mutex_lock (&m_mutex);
-		if (_result < 0)
-		{
+        if (pthread_mutex_lock (&mutex_) < 0)
 			printf("lock errror\n");
-		}
-
     }   
 
-    inline void unlock ()
+    inline void unlock()
     {   
-        int _result = pthread_mutex_unlock (&m_mutex);
-		if (_result < 0)
-		{
+        if (pthread_mutex_unlock (&mutex_) < 0)
 			printf("unlock errror\n");
-		}
-
     }   
 
 private:
 
-    pthread_mutex_t m_mutex;
+    pthread_mutex_t mutex_;
 };
-
 
 /*
 *
 * Implement a scope mutex
 */
-class CGuard
+class ScopeGuard
 {
 	public:
-		inline CGuard(CMutex& mutex) : m_mutex(mutex)
+		inline ScopeGuard(Mutex& mutex) : mutex_(mutex)
 		{
-			m_mutex.lock();
+			mutex_.lock();
 		}
-		inline ~CGuard()
+		inline ~ScopeGuard()
 		{
-			m_mutex.unlock();
+			mutex_.unlock();
 		}
 	private:
-		CMutex&	m_mutex;
+		Mutex&	mutex_;
 };

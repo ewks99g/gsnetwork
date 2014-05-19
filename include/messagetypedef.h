@@ -16,5 +16,5 @@ struct SSquareTestInfo
 	int width;
 };
 
-typedef CMessageMonoInfoTemplate<SSquareTestInfo> CMessageSquareMsg;
-typedef CMessageFlexInfoTemplate<SSquareTestInfo,30> CMessageMultiSquareMsg;
+typedef MessageMonoInfoTemplate<SSquareTestInfo> CMessageSquareMsg;
+typedef MessageFlexInfoTemplate<SSquareTestInfo,30> CMessageMultiSquareMsg;

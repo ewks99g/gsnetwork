@@ -5,7 +5,8 @@
 *  Email:  	wang70bin@163.com
 *  CreateTime: 2014/04/28
 ******************************************************************/
-#pragma once
+#ifndef __INCLUDE_MSG_H_
+#define __INCLUDE_MSG_H_
 #pragma pack(1)
 
 #include "networkdefine.h"
@@ -26,51 +27,53 @@ struct SMsgMetaData
  * Define the message type which only contain one send-content
  * */
 template<class TDataInfoType>
-class CMessageMonoInfoTemplate
+class MessageMonoInfoTemplate
 {
 	public:
-		void copyData(const TDataInfoType* copydata)
+		void copy_data(const TDataInfoType* data)
 		{
-			memcpy(&m_data,copydata,sizeof(TDataInfoType));
+			memcpy(&data_,data,sizeof(TDataInfoType));
 		}
-		const void* getDataPtr() const
+		const void* get_data_ptr() const
 		{
-			return (void*)(m_data);
+			return (void*)(data_);
 		}
-		int32 getDataLen() const
+		int get_data_len() const
 		{
 			return sizeof(TDataInfoType);
 		}
 	private:
-		TDataInfoType	m_data;
+		TDataInfoType	data_;
 };
 
 /*
  * Define the message type which can contain multi-send-content
  * */
-template<class TDataInfoType,int32 MaxScaleNum>
-class CMessageFlexInfoTemplate
+template<class TDataInfoType,int MaxScaleNum>
+class MessageFlexInfoTemplate
 {
 	public:
 		void resetData()
 		{
-			m_nNumber = 0; 
+			count_ = 0; 
 		}
 		void pushData(const TDataInfoType* copydata)
 		{
-			memcpy(&m_vData[m_nNumber++],copydata,sizeof(TDataInfoType));
+			memcpy(&data_[count_++],copydata,sizeof(TDataInfoType));
 		}
 		const void* getDataPtr() const
 		{
-			return (void*)(&m_vData[0]);
+			return (void*)(&data_[0]);
 		}
 		int32 getDataLen() const
 		{
-			return m_nNumber > 0 ? sizeof(TDataInfoType) * m_nNumber : 0;
+			return count_ > 0 ? sizeof(TDataInfoType) * count_ : 0;
 		}
 	private:
-		int32			m_nNumber;				//
-		TDataInfoType	m_vData[MaxScaleNum];
+		int				count_;			//
+		TDataInfoType	data_[MaxScaleNum];
 };
 
 #pragma pcak()
+
+#endif

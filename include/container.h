@@ -5,136 +5,55 @@
 *  Email:  	wang70bin@163.com
 *  CreateTime: 2014/05/05
 ******************************************************************/
-#pragma once
-
+#ifndef __INCLUDE_CONTAINER_H_
+#define __INCLUDE_CONTAINER_H_
 
 template<class T, int size>
-class CCircleQueue
+class CircleQueue
 {
-	public:	CCircleQueue()	
-	{	
-		m_size = size;	
-		m_head = 0;	
-		m_tail = 0;	
-		m_nPopPos = 0;
-		m_nPushPos = 0;
-		m_array = new T[size];		
-		for (int __i = 0; __i < m_size; __i++)	
+	public:
+		CircleQueue()
 		{	
-			m_array[__i] = NULL;
+			cache_size_ = size;
+			head_ = 0;
+			tail_ = 0;	
+			data_cache_ = new T[size];
 		}
-	};
-	~CCircleQueue()
-	{
-	};		
-	T pop()
-	{
-		m_nPopPos = (m_head + 1) % m_size;
-		m_temp = m_array[m_nPopPos];
-		if (!m_temp)	
-		{	
-			return NULL;
-		}			
-		m_array[m_nPopPos] = NULL;	
-		m_head = m_nPopPos;		
-		return m_temp;
-	};	
-	bool push(T obj)
-	{	
-		m_nPushPos = (m_tail + 1) % m_size;	
-		if (m_array[m_nPushPos] != NULL)	
-		{	
-			return false;
-		}
-		m_array[m_nPushPos] = obj;
-		m_tail = m_nPushPos;	
-		return true;
-		};	
-		bool isFull()	
+
+		~CircleQueue()
 		{
-			return ((m_tail + 1) % m_size) == m_head;
-		}	
-		bool isEmpty()
+			delete []data_cache_;
+		}
+
+		void pop(T& value)
+		{
+			int tmp_pos = (head_ + 1) % cache_size_;
+			memcpy(&value,&data_cache_[tmp_pos],sizeof(T));
+			head_ = tmp_pos;
+		}
+
+		void push(T& value)
 		{	
-			return m_tail == m_head;	
+			int tmp_pos = (tail_ + 1) % cache_size_;	
+			memcpy(&data_cache_[push_pos_],&value,sizeof(T));
+			tail_ = tmp_pos;
+		}
+
+		bool is_full() const
+		{
+			return ((tail_ + 1) % cache_size_) == head_;
+		}
+
+		bool is_empty() const
+		{	
+			return tail_ == head_;	
 		}
 		
-		private:	T*	m_array;		
-		int m_size;	
-		int m_head;		
-		int m_tail;		
-		T   m_temp;
-		int m_nPopPos;	
-		int m_nPushPos;
-};
-
-template <typename T,int size>
-class blockQueue
-{
-public:
-    blockQueue()
-    {
-        m_initSize = size;
-        
-        initQueue();
-    }
-    virtual ~blockQueue(){}
-    
-private:
-    bool push(T* obj)
-    {
-        if (!m_objQueue.isFull())
-        {
-            m_objQueue.push(obj);
-            return true;;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    T* pop()
-    {
-        if (!m_objQueue.isEmpty())
-        {
-            return m_objQueue.pop();
-        }
-        return NULL;
-    }
-    
-public:
-    T* allocate()
-    {
-        return pop();
-    }
-    bool free(T* obj)
-    {
-        if (obj == NULL)
-            return false;
-        
-        return push(obj);
-    }
-
-protected:
-    void initQueue()
-    {
-        char* _blockBuff = new char[m_initSize * sizeof(T)];
-        
-        for (int _i = 0; _i < m_initSize; _i++)
-        {
-            T* _tmpValue = new (&_blockBuff[_i*sizeof(T)])T;
-            
-            push(_tmpValue);
-        }
-        
-    }
-    
-private:
-//    std::queue<T*> ;
-    CCircleQueue<T*,size> m_objQueue;
-    int m_initSize;
-  
+	private:	
+		T*	data_cache_;
+		int cache_size_;
+		int head_;
+		int tail_;
 };
 
 #endif
