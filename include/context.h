@@ -5,24 +5,24 @@
 *  Email:  	wang70bin@163.com
 *  CreateTime: 2014/04/28
 ******************************************************************/
-#pragma once
+#ifndef __INCLUDE_CONTEXT_H_
+#define __INCLUDE_CONTEXT_H_
+
 #include "epoll.h"
 #include "thread.h"
 #include "ipcbase.h"
 
-class CMultiplexContext
+class MultiplexContext
 {
 	public:
-		CMultiplexContext();
-		virtual ~CMultiplexContext();
+		MultiplexContext();
+		virtual ~MultiplexContext();
 	public:
-//		bool addAcceptor(const char* ipstring,uint16 port);
-//		bool addConnctor(const char* ipstring,uint16 port);
-//		bool addFifo(const char* ipcstring);
-		bool addNetNode(CIoEvent* object,int32 eventflag);
-		bool rmvNetNode(CIoEvent* object);
-		bool startRun();
+		bool add_net_node(IoEvent* object,int32 eventflag);
+		bool rmv_net_node(IoEvent* object);
+		bool start_run();
 	private:
-		CEpoll		m_poll;
+		Epoll		poll_;
 };
 
+#endif

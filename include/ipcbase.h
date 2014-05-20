@@ -3,41 +3,41 @@
 #include "ioevent.h"
 #include "context.h"
 
-class CIpcBase
+class IpcBase
 {
 	public:
-		CIpcBase();
-		virtual ~CIpcBase();
+		IpcBase();
+		virtual ~IpcBase();
 };
 
 //template<class TMsgHandler>
-class CTcpConnector : public CIoEvent
+class TcpConnector : public IoEvent
 {
 	public:
-		CTcpConnector(CMultiplexContext* pcontext);
-		~CTcpConnector();
+		TcpConnector(MultiplexContext* pcontext);
+		~TcpConnector();
 	public:
 		bool open(const char* ipstring,uint16 port);
 		bool sendData(const char* data,uint32 len);
 	public:
-		virtual void inEvent();
-		virtual void outEvent();
-		virtual void errorEvent();
-		virtual void timeEvent();
+		virtual void in_event();
+		virtual void out_event();
+		virtual void error_event();
+		virtual void time_event();
 	private:
 		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];
 };
 
-class CTcpAcceptor : public CIoEvent
+class TcpAcceptor : public IoEvent
 {
 	public:
-		CTcpAcceptor(CMultiplexContext* pcontext);
-		~CTcpAcceptor();
+		TcpAcceptor(MultiplexContext* pcontext);
+		~TcpAcceptor();
 	public:
 		bool open(const char* ipstring,uint16 port);
 	public:
-		virtual void inEvent();
-		virtual void outEvent();
-		virtual void errorEvent();
-		virtual void timeEvent();
+		virtual void in_event();
+		virtual void out_event();
+		virtual void error_event();
+		virtual void time_event();
 };

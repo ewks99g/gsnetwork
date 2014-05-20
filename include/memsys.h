@@ -5,7 +5,8 @@
  *  Email:  	wang70bin@163.com
  *  CreateTime: 2014/4/15  
  ******************************************************************/
-#pragma once
+#ifndef __INCLUDE_MEMSYS_H_
+#define __INCLUDE_MEMSYS_H_
 
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +34,7 @@ class MemAllocator
 			ScopeGuard scope_gurad(mutex_);
 
 			if (!ptr_data_list_){
-				__reAlloc(init_size_);
+				_realloc(init_size_);
 			}
 
 			TAllocType* ret_ptr = &ptr_data_list_->nodedata.curNode;
@@ -47,32 +48,32 @@ class MemAllocator
 
 			memset(nodedata,0,sizeof(TAllocType));
 			
-			TNodeInfo* _nodeInfo = (TNodeInfo*)nodedata;
-			_nodeInfo->uNodeData.pNextNode = ptr_data_list_;
+			TNodeInfo* ptr_node_info = (TNodeInfo*)nodedata;
+			ptr_node_info->uNodeData.pNextNode = ptr_data_list_;
 			ptr_data_list_ = (TNodeInfo*)nodedata;
 		}
 	private:
 		void __init_mem()
 		{
 			if (!ptr_data_list_){
-				__reAlloc(init_size_);
+				_realloc(init_size_);
 			}
 		}
-		void __reAlloc(int allosize)
+		void _realloc(int allosize)
 		{
-			void* _ptrData = malloc(allosize * sizeof(TNodeInfo));
-			if (!_ptrData)
+			void* ptr_data = malloc(allosize * sizeof(TNodeInfo));
+			if (!ptr_data)
 				return;
 
-			memset(_ptrData,0,sizeof(TNodeInfo) * allosize);
+			memset(ptr_data,0,sizeof(TNodeInfo) * allosize);
 			for (int i = 0; i < allosize; i++) {
-				TNodeInfo* _nodePtr = (TNodeInfo*)((char*)_ptrData + sizeof(TNodeInfo) * i);
+				TNodeInfo* node_ptr = (TNodeInfo*)((char*)ptr_data + sizeof(TNodeInfo) * i);
 				if (ptr_data_list_) {
-					_nodePtr->nodedata.pNextNode = ptr_data_list_;
-					ptr_data_list_ = _nodePtr;
+					node_ptr->nodedata.pNextNode = ptr_data_list_;
+					ptr_data_list_ = node_ptr;
 				}
 				else {
-					ptr_data_list_ = _nodePtr;	
+					ptr_data_list_ = node_ptr;	
 				}
 			}
 		}
@@ -89,3 +90,4 @@ class MemAllocator
 		MutexType	mutex_;
 };
 
+#endif

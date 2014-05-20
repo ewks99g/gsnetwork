@@ -7,27 +7,27 @@
  *******************************************************************/
 #include "epoll.h"
 
-CEpoll::CEpoll()
+Epoll::Epoll()
 {
-   m_nEpollHandler = epoll_create(MAX_EPOLL_HINT_FILE_SIZE);
-   if (m_nEpollHandler < 0)
+   epoll_handler_ = epoll_create(MAX_EPOLL_HINT_FILE_SIZE);
+   if (epoll_handler_ < 0)
    {
       output_error("Start Epoll Instance");
    }
 }
 
-CEpoll::~CEpoll()
+Epoll::~Epoll()
 {
 
 }
 
-bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag)
+bool Epoll::add_handler(THandler handler,IoEvent* ioevent,int32 eventflag)
 {
 	epoll_event _event;
 	_event.events = eventflag;
 	_event.data.ptr = ioevent;
 
-	int32 _result = epoll_ctl(m_nEpollHandler, EPOLL_CTL_ADD, handler, &_event);
+	int32 _result = epoll_ctl(epoll_handler_, EPOLL_CTL_ADD, handler, &_event);
 	if (_result < 0)
 	{
 		output_error("Epoll Add Handler");
@@ -36,12 +36,12 @@ bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag)
 	return true;
 }
 
-bool CEpoll::rmvHandler(THandler handler)
+bool Epoll::rmv_handler(THandler handler)
 {
 	epoll_event _event;
 	memset(&_event,0,sizeof(epoll_event));
 
-	int32 _result = epoll_ctl(m_nEpollHandler, EPOLL_CTL_DEL, handler, &_event);
+	int32 _result = epoll_ctl(epoll_handler_, EPOLL_CTL_DEL, handler, &_event);
     if (_result < 0)
     {
         output_error("Epoll Add Handler");
@@ -51,40 +51,40 @@ bool CEpoll::rmvHandler(THandler handler)
    return true;
 }
 
-bool CEpoll::start()
+bool Epoll::start()
 {
-	m_worker.start(CEpoll::workerRoutine,this);
+	worker_.start(Epoll::worker_routine,this);
 }
 
-void CEpoll::loop()
+void Epoll::loop()
 {
 	while (true)
 	{
-		int32 _eventCnt = epoll_wait(m_nEpollHandler,m_vEventCache,MAX_EPOLL_NETWORK_EVENT_SIZE,-1);
+		int32 _eventCnt = epoll_wait(epoll_handler_,event_cache_,MAX_EPOLL_NETWORK_EVENT_SIZE,-1);
 		for(int32 _i =0;_i < _eventCnt; ++_i)
 		{
-			CIoEvent* _ioEvent = ((CIoEvent*)m_vEventCache[_i].data.ptr);
+			IoEvent* _ioEvent = ((IoEvent*)event_cache_[_i].data.ptr);
 			if (!_ioEvent)
 				continue;
 			
 			printf("rcvb evnt\n");
-			if (m_vEventCache[_i].events & (EPOLLERR | EPOLLHUP))     
+			if (event_cache_[_i].events & (EPOLLERR | EPOLLHUP))     
 			{
-				 _ioEvent->errorEvent(); 
+				 _ioEvent->error_event(); 
 			}
 
-			if (m_vEventCache[_i].events & EPOLLIN)
+			if (event_cache_[_i].events & EPOLLIN)
 			{
-				_ioEvent->inEvent();
+				_ioEvent->in_event();
 			}
 		}
 	}
 }
 
-void CEpoll::workerRoutine(void* arg)
+void Epoll::worker_routine(void* arg)
 {
 	if (arg)
 	{
-		((CEpoll*)arg)->loop();
+		((Epoll*)arg)->loop();
 	}
 }

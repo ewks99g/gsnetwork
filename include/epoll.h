@@ -1,25 +1,32 @@
-#pragma once
+/*
+ * Implement one epoll component
+ *
+ * */
+#ifndef __INCLUDE_EPOLL_H_
+#define __INCLUDE_EPOLL_H_
+
 #include "networkdefine.h"
 #include "err.h"
 #include "ioevent.h"
 #include "thread.h"
 
-class CEpoll 
+class Epoll 
 {
 	public:
-		CEpoll();
-		~CEpoll();
+		Epoll();
+		~Epoll();
 	public:
 		bool start();
 		void loop();
-		bool addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag);
-		bool rmvHandler(THandler handler);
+		bool add_handler(THandler handler,IoEvent* ioevent,int32 eventflag);
+		bool rmv_handler(THandler handler);
 
 		 //  Main worker thread routine.        
-		 static void workerRoutine (void* arg);
+		 static void worker_routine (void* arg);
 	private:
-		THandler 		m_nEpollHandler;
-		epoll_event		m_vEventCache[MAX_EPOLL_NETWORK_EVENT_SIZE];
+		THandler 		epoll_handler_;
+		epoll_event		event_cache_[MAX_EPOLL_NETWORK_EVENT_SIZE];
 
-		CThread			m_worker;
+		Thread			worker_;
 };
+#endif

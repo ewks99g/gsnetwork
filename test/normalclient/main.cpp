@@ -3,8 +3,8 @@
 
 int main()
 {
-	CMultiplexContext* _pCxt = new CMultiplexContext();
-	CTcpConnector* _pConnector = new CTcpConnector(_pCxt);
+	MultiplexContext* _pCxt = new MultiplexContext();
+	TcpConnector* _pConnector = new TcpConnector(_pCxt);
 	_pConnector->open("127.0.0.1",9999);
 
 	int _data = 4;
@@ -12,7 +12,7 @@ int main()
 
 //	_pCxt->addNetNode(_pAcceptor);
 //
-	_pCxt->startRun();
+	_pCxt->start_run();
 
 	while (1)
 	sleep(1);

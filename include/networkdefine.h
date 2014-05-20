@@ -42,11 +42,11 @@ typedef int32 THandler;
 ///
 #define MAX_CONNCTOR_RCV_BUFF_SIZE 2048
 
-enum ENetworkMsgType
+enum NetworkMsgType
 {
-	ENMT_NONE,
-	ENMT_TEST_MSG,			//test msg
-	ENMT_COUNT
+	NMT_NONE,
+	NMT_TEST_MSG,			//test msg
+	NMT_COUNT
 };
 
 

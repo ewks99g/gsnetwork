@@ -13,11 +13,11 @@
 
 typedef void (thread_fn) (void*);
 
-class CThread
+class Thread
 {
 	public:
-		CThread();
-		~CThread();
+		Thread();
+		~Thread();
 	public:
 		int32		start(thread_fn* tfn,void* arg);
 		int32		stop();
@@ -25,11 +25,11 @@ class CThread
 		/*
 		 * This static method can be used to separate user's passed routine
 		 * */
-	   static void *threadRoutine (void *arg);
+	   static void *thread_routine (void *arg);
 	private:
-		pthread_t	m_nThreadId;
+		pthread_t	threadid_;
 
 	public:
-		thread_fn*	m_fThreadRoutine;
-		void*		m_pArg;
+		thread_fn*	thread_routine_;
+		void*		ptr_arg_;
 };

@@ -9,26 +9,26 @@
 #include "thread.h"
 #include "err.h"
 
-CThread::CThread()
+Thread::Thread()
 {
 }
 
-CThread::~CThread()
+Thread::~Thread()
 {
 }
 
-void* CThread::threadRoutine (void *arg)
+void* Thread::thread_routine (void *arg)
 {
-	CThread* _self = (CThread*)arg;
-	_self->m_fThreadRoutine(_self->m_pArg);
+	Thread* _self = (Thread*)arg;
+	_self->thread_routine_(_self->ptr_arg_);
 }
 
-int32 CThread::start(thread_fn* tfn,void* arg)
+int32 Thread::start(thread_fn* tfn,void* arg)
 {
-	m_fThreadRoutine = tfn;
-	m_pArg = arg;
+	thread_routine_ = tfn;
+	ptr_arg_ = arg;
 
-	 int32 _result = pthread_create (&m_nThreadId, NULL, CThread::threadRoutine, this);
+	 int32 _result = pthread_create(&threadid_, NULL, Thread::thread_routine, this);
 	 if (_result < 0)
 	 {
 	 	output_error("Create Thread");
@@ -38,7 +38,7 @@ int32 CThread::start(thread_fn* tfn,void* arg)
 	 return 0;
 }
 
-int32 CThread::stop()
+int32 Thread::stop()
 {
 	return 0;
 }

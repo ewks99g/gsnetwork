@@ -8,41 +8,41 @@
 
 #include "networkdefine.h"
 
-class CMultiplexContext;
-class CIoEvent
+class MultiplexContext;
+class IoEvent
 {
 	public:
-		CIoEvent(CMultiplexContext* pcontext) {m_pContext = pcontext;}
-		~CIoEvent() {}
+		IoEvent(MultiplexContext* pcontext) {context_ = pcontext;}
+		~IoEvent() {}
 
 	public:
 		/*
   		 * This method is used to handle the input event from event listener,i.e. epoll.
   		 * */
-  		virtual void inEvent() = 0;
+  		virtual void in_event() = 0;
 
 		/*
   		 * This method is used to handle the error event from event listener,i.e. epoll.
   		 * */
-  		virtual void errorEvent() = 0;
+  		virtual void error_event() = 0;
   		
   		/*
   		 *This method is used to handler the output event from event listener,i.e. epoll.
   		 * */
-  		virtual	void outEvent() = 0;
+  		virtual	void out_event() = 0;
   	
   		/*
   		 *This method is used to handler the timeout event from event listener,i.e. epoll.
   		 * */
-  		virtual	void timeEvent() = 0;
+  		virtual	void time_event() = 0;
   	
   		/*
   		 * This method is used to get the handler associated with event
   		 * */
-  		THandler handle() {return m_nHandler;}
+  		THandler handle() {return event_handler_;}
 	protected:
-		THandler				m_nHandler;
-		struct sockaddr_in      m_uAddress; 
+		THandler				event_handler_;
+		struct sockaddr_in      address_; 
 
-		CMultiplexContext*		m_pContext;
+		MultiplexContext*		context_;
 };

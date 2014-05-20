@@ -3,13 +3,13 @@
 
 int main()
 {
-	CMultiplexContext* _pCxt = new CMultiplexContext();
-	CTcpAcceptor* _pAcceptor = new CTcpAcceptor(_pCxt);
+	MultiplexContext* _pCxt = new MultiplexContext();
+	TcpAcceptor* _pAcceptor = new TcpAcceptor(_pCxt);
 	_pAcceptor->open("127.0.0.1",9999);
 
 //	_pCxt->addNetNode(_pAcceptor);
 //
-	_pCxt->startRun();
+	_pCxt->start_run();
 
 	while (1)
 	sleep(1);

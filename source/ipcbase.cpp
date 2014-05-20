@@ -8,48 +8,48 @@
 #include "ipcbase.h"
 #include "err.h"
 
-CIpcBase::CIpcBase()
+IpcBase::IpcBase()
 {
 }
 
-CIpcBase::~CIpcBase()
+IpcBase::~IpcBase()
 {
 }
 
 /*****************************************************************/
-CTcpConnector::CTcpConnector(CMultiplexContext* pcontext) : CIoEvent(pcontext)
+TcpConnector::TcpConnector(MultiplexContext* pcontext) : IoEvent(pcontext)
 {
-	memset(&m_uAddress,0,sizeof(sockaddr_in));
+	memset(&address_,0,sizeof(sockaddr_in));
 }
 
-CTcpConnector::~CTcpConnector()
+TcpConnector::~TcpConnector()
 {
 }
 
-bool CTcpConnector::open(const char* ipstring,uint16 port)
+bool TcpConnector::open(const char* ipstring,uint16 port)
 {
-	m_uAddress.sin_family = AF_INET;
-	m_uAddress.sin_port = htons(port);
-	if(inet_aton(ipstring,&m_uAddress.sin_addr) == 0)
+	address_.sin_family = AF_INET;
+	address_.sin_port = htons(port);
+	if(inet_aton(ipstring,&address_.sin_addr) == 0)
 	{
 		output_error("Convert number-and-dots notation to number of network byte order");
 		return false;
 	}
 
-	m_nHandler = socket(PF_INET,SOCK_STREAM,0);
-	if (m_nHandler < 0)
+	event_handler_ = socket(PF_INET,SOCK_STREAM,0);
+	if (event_handler_ < 0)
 	{
 		output_error("Create Socket");
 		return false;
 	}
 
-	if (connect(m_nHandler,(struct sockaddr*)&m_uAddress, sizeof(struct sockaddr_in)) < 0)
+	if (connect(event_handler_,(struct sockaddr*)&address_, sizeof(struct sockaddr_in)) < 0)
 	{
 		output_error("Can not connect the target server");
 		return false;
 	}
 	
-	if (!m_pContext->addNetNode(this,EPOLLIN))
+	if (!context_->add_net_node(this,EPOLLIN))
 	{
 		output_error("Can not connect the target server");
         return false;
@@ -59,14 +59,14 @@ bool CTcpConnector::open(const char* ipstring,uint16 port)
 	return true;
 }	
 
-void CTcpConnector::inEvent()
+void TcpConnector::in_event()
 {
 	printf("rcv data\n");
 }
 
-void CTcpConnector::outEvent()
+void TcpConnector::out_event()
 {
-	int32 _rcvLen = read(m_nHandler,&m_vRcvBuff[0],MAX_CONNCTOR_RCV_BUFF_SIZE);
+	int32 _rcvLen = read(event_handler_,&m_vRcvBuff[0],MAX_CONNCTOR_RCV_BUFF_SIZE);
 	
 	if (_rcvLen > 0)
 	{
@@ -75,31 +75,31 @@ void CTcpConnector::outEvent()
 	}
 	else 
 	{
-		if (!m_pContext->rmvNetNode(this))
+		if (!context_->rmv_net_node(this))
 		{
 			output_error("Can not rmv the connect event");
 		}	
 	}
 }
 
-void CTcpConnector::errorEvent()
+void TcpConnector::error_event()
 {
 	printf("error event");
-	if (!m_pContext->rmvNetNode(this))
+	if (!context_->rmv_net_node(this))
 	{
 		output_error("Can not rmv the connect event");
 	}
 }
 
-void CTcpConnector::timeEvent()
+void TcpConnector::time_event()
 {
 
 }
-bool CTcpConnector::sendData(const char* data,uint32 len)
+bool TcpConnector::sendData(const char* data,uint32 len)
 {
 	if (data && len > 0)
 	{
-		int32 _sndLen = send(m_nHandler,data,len,0);
+		int32 _sndLen = send(event_handler_,data,len,0);
 		if (_sndLen < len)
 		{
 			output_error("Send data error");
@@ -109,44 +109,44 @@ bool CTcpConnector::sendData(const char* data,uint32 len)
 	return true;
 }
 /**********************************************************************************************/
-CTcpAcceptor::CTcpAcceptor(CMultiplexContext* pcontext) : CIoEvent(pcontext) 
+TcpAcceptor::TcpAcceptor(MultiplexContext* pcontext) : IoEvent(pcontext) 
 {
 }
 
-CTcpAcceptor::~CTcpAcceptor()
+TcpAcceptor::~TcpAcceptor()
 {
 }
 
-bool CTcpAcceptor::open(const char* ipstring ,uint16 port)
+bool TcpAcceptor::open(const char* ipstring ,uint16 port)
 {
-	m_uAddress.sin_family = AF_INET;
-    m_uAddress.sin_port = htons(port);
-    if(inet_aton(ipstring,&m_uAddress.sin_addr) == 0)
+	address_.sin_family = AF_INET;
+    address_.sin_port = htons(port);
+    if(inet_aton(ipstring,&address_.sin_addr) == 0)
     {
         output_error("Convert number-and-dots notation to number of network byte order");
         return false;
     }
 
-    m_nHandler = socket(PF_INET,SOCK_STREAM,0);
-    if (m_nHandler < 0)
+    event_handler_ = socket(PF_INET,SOCK_STREAM,0);
+    if (event_handler_ < 0)
     {
         output_error("Create Socket");
         return false;
     }
 
-    if (bind(m_nHandler,(struct sockaddr*)&m_uAddress, sizeof(struct sockaddr_in)) < 0)
+    if (bind(event_handler_,(struct sockaddr*)&address_, sizeof(struct sockaddr_in)) < 0)
     {
         output_error("Can not connect the target server");
         return false;
     }
 
-	if (listen(m_nHandler,MAX_INNER_PORT_LISTEN_BACK_LOG) < 0)
+	if (listen(event_handler_,MAX_INNER_PORT_LISTEN_BACK_LOG) < 0)
 	{
 		output_error("Can not listen on this socket");
 		return false;
 	}
 
-	if (!m_pContext->addNetNode(this,EPOLLIN))
+	if (!context_->add_net_node(this,EPOLLIN))
 	{
 		output_error("Can not add this node to multiplex way");
         return false;
@@ -155,30 +155,30 @@ bool CTcpAcceptor::open(const char* ipstring ,uint16 port)
     return true;
 }
 
-void CTcpAcceptor::inEvent()
+void TcpAcceptor::in_event()
 {
 	THandler _rcvHandle = -1;
 	struct sockaddr_in _remoteAddr;
 	memset(&_remoteAddr,0,sizeof(struct sockaddr_in ));
 	socklen_t _addrLen = sizeof(struct sockaddr_in);
 
-	if (accept(m_nHandler,(struct sockaddr*)&_remoteAddr,&_addrLen) < 0)
+	if (accept(event_handler_,(struct sockaddr*)&_remoteAddr,&_addrLen) < 0)
 	{
 		output_error("Can not accept the comming connection request");
 	}
 	printf("Accept one comming request\n");
 }
 
-void CTcpAcceptor::outEvent()
+void TcpAcceptor::out_event()
 {
 
 }
 
-void CTcpAcceptor::timeEvent()
+void TcpAcceptor::time_event()
 {
 
 }
-void CTcpAcceptor::errorEvent()
+void TcpAcceptor::error_event()
 {
 	printf("rcbv error event\n");
 }

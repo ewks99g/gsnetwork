@@ -7,51 +7,35 @@
 ******************************************************************/
 #include "context.h"
 
-CMultiplexContext::CMultiplexContext()
+MultiplexContext::MultiplexContext()
 {
 
 }
 
-CMultiplexContext::~CMultiplexContext()
+MultiplexContext::~MultiplexContext()
 {
 
 }
 
-bool CMultiplexContext::startRun()
+bool MultiplexContext::start_run()
 {
-	m_poll.start();
+	poll_.start();
 }
 
-bool CMultiplexContext::addNetNode(CIoEvent* object,int32 eventflag)
+bool MultiplexContext::add_net_node(IoEvent* object,int32 eventflag)
 {	
-	if (!m_poll.addHandler(object->handle(),object,eventflag))
+	if (!poll_.add_handler(object->handle(),object,eventflag))
 	{
 		return false;
 	}
 	return true;
 }
 
-bool CMultiplexContext::rmvNetNode(CIoEvent* object)
+bool MultiplexContext::rmv_net_node(IoEvent* object)
 {	
-	if (!m_poll.rmvHandler(object->handle()))
+	if (!poll_.rmv_handler(object->handle()))
 	{
 		return false;
 	}
 	return true;
 }
-
-
-//bool CMultiplexContext::addAcceptor(const char* ipstring,uint16 port)
-//{
-//	
-//}
-//
-//bool CMultiplexContext::addConnctor(const char* ipstring,uint16 port)
-//{
-//
-//}
-//
-//bool CMultiplexContext::addFifo(const char* ipcstring)
-//{
-//
-//}
