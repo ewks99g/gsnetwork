@@ -176,7 +176,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS = zmqserver zmqclient zmqbroker normalserver normalclient memtest cgiscript cgippscript
+SUBDIRS = zmqserver zmqclient zmqbroker normalserver normalclient memtest cgiscript cgippscript rawweb
 all: all-recursive
 
 .SUFFIXES:

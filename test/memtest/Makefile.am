@@ -1,3 +1,4 @@
+AUTOMAKE_OPTIONS=foreign
 bin_PROGRAMS=memtest
 memtest_SOURCES=main.cpp
 INCLUDES=-I../../include -I../../zmqware -I/usr/local/include -I/usr/include 

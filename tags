@@ -1,0 +1,438 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CCircleQueue	./include/container.h	/^	public:	CCircleQueue()	$/;"	f	class:CCircleQueue	access:public	signature:()
+CCircleQueue	./include/container.h	/^class CCircleQueue$/;"	c
+CCircleQueue::CCircleQueue	./include/container.h	/^	public:	CCircleQueue()	$/;"	f	class:CCircleQueue	access:public	signature:()
+CCircleQueue::isEmpty	./include/container.h	/^		bool isEmpty()$/;"	f	class:CCircleQueue	access:public	signature:()
+CCircleQueue::isFull	./include/container.h	/^		bool isFull()	$/;"	f	class:CCircleQueue	access:public	signature:()
+CCircleQueue::m_array	./include/container.h	/^		private:	T*	m_array;		$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_head	./include/container.h	/^		int m_head;		$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_nPopPos	./include/container.h	/^		int m_nPopPos;	$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_nPushPos	./include/container.h	/^		int m_nPushPos;$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_size	./include/container.h	/^		int m_size;	$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_tail	./include/container.h	/^		int m_tail;		$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::m_temp	./include/container.h	/^		T   m_temp;$/;"	m	class:CCircleQueue	access:private
+CCircleQueue::pop	./include/container.h	/^	T pop()$/;"	f	class:CCircleQueue	access:public	signature:()
+CCircleQueue::push	./include/container.h	/^	bool push(T obj)$/;"	f	class:CCircleQueue	access:public	signature:(T obj)
+CCircleQueue::~CCircleQueue	./include/container.h	/^	~CCircleQueue()$/;"	f	class:CCircleQueue	access:public	signature:()
+CEpoll	./include/epoll.h	/^		CEpoll();$/;"	p	class:CEpoll	access:public	signature:()
+CEpoll	./include/epoll.h	/^class CEpoll $/;"	c
+CEpoll	./source/epoll.cpp	/^CEpoll::CEpoll()$/;"	f	class:CEpoll	signature:()
+CEpoll::CEpoll	./include/epoll.h	/^		CEpoll();$/;"	p	class:CEpoll	access:public	signature:()
+CEpoll::CEpoll	./source/epoll.cpp	/^CEpoll::CEpoll()$/;"	f	class:CEpoll	signature:()
+CEpoll::addHandler	./include/epoll.h	/^		bool addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag);$/;"	p	class:CEpoll	access:public	signature:(THandler handler,CIoEvent* ioevent,int32 eventflag)
+CEpoll::addHandler	./source/epoll.cpp	/^bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag)$/;"	f	class:CEpoll	signature:(THandler handler,CIoEvent* ioevent,int32 eventflag)
+CEpoll::loop	./include/epoll.h	/^		void loop();$/;"	p	class:CEpoll	access:public	signature:()
+CEpoll::loop	./source/epoll.cpp	/^void CEpoll::loop()$/;"	f	class:CEpoll	signature:()
+CEpoll::m_nEpollHandler	./include/epoll.h	/^		THandler 		m_nEpollHandler;$/;"	m	class:CEpoll	access:private
+CEpoll::m_vEventCache	./include/epoll.h	/^		epoll_event		m_vEventCache[MAX_EPOLL_NETWORK_EVENT_SIZE];$/;"	m	class:CEpoll	access:private
+CEpoll::m_worker	./include/epoll.h	/^		CThread			m_worker;$/;"	m	class:CEpoll	access:private
+CEpoll::rmvHandler	./include/epoll.h	/^		bool rmvHandler(THandler handler);$/;"	p	class:CEpoll	access:public	signature:(THandler handler)
+CEpoll::rmvHandler	./source/epoll.cpp	/^bool CEpoll::rmvHandler(THandler handler)$/;"	f	class:CEpoll	signature:(THandler handler)
+CEpoll::start	./include/epoll.h	/^		bool start();$/;"	p	class:CEpoll	access:public	signature:()
+CEpoll::start	./source/epoll.cpp	/^bool CEpoll::start()$/;"	f	class:CEpoll	signature:()
+CEpoll::workerRoutine	./include/epoll.h	/^		 static void workerRoutine (void* arg);$/;"	p	class:CEpoll	access:public	signature:(void* arg)
+CEpoll::workerRoutine	./source/epoll.cpp	/^void CEpoll::workerRoutine(void* arg)$/;"	f	class:CEpoll	signature:(void* arg)
+CEpoll::~CEpoll	./include/epoll.h	/^		~CEpoll();$/;"	p	class:CEpoll	access:public	signature:()
+CEpoll::~CEpoll	./source/epoll.cpp	/^CEpoll::~CEpoll()$/;"	f	class:CEpoll	signature:()
+CGuard	./include/mutex.h	/^		inline CGuard(CMutex& mutex) : m_mutex(mutex)$/;"	f	class:CGuard	access:public	signature:(CMutex& mutex)
+CGuard	./include/mutex.h	/^class CGuard$/;"	c
+CGuard::CGuard	./include/mutex.h	/^		inline CGuard(CMutex& mutex) : m_mutex(mutex)$/;"	f	class:CGuard	access:public	signature:(CMutex& mutex)
+CGuard::m_mutex	./include/mutex.h	/^		CMutex&	m_mutex;$/;"	m	class:CGuard	access:private
+CGuard::~CGuard	./include/mutex.h	/^		inline ~CGuard()$/;"	f	class:CGuard	access:public	signature:()
+CIoEvent	./include/ioevent.h	/^		CIoEvent(CMultiplexContext* pcontext) {m_pContext = pcontext;}$/;"	f	class:CIoEvent	access:public	signature:(CMultiplexContext* pcontext)
+CIoEvent	./include/ioevent.h	/^class CIoEvent$/;"	c
+CIoEvent::CIoEvent	./include/ioevent.h	/^		CIoEvent(CMultiplexContext* pcontext) {m_pContext = pcontext;}$/;"	f	class:CIoEvent	access:public	signature:(CMultiplexContext* pcontext)
+CIoEvent::errorEvent	./include/ioevent.h	/^  		virtual void errorEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+CIoEvent::handle	./include/ioevent.h	/^  		THandler handle() {return m_nHandler;}$/;"	f	class:CIoEvent	access:public	signature:()
+CIoEvent::inEvent	./include/ioevent.h	/^  		virtual void inEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+CIoEvent::m_nHandler	./include/ioevent.h	/^		THandler				m_nHandler;$/;"	m	class:CIoEvent	access:protected
+CIoEvent::m_pContext	./include/ioevent.h	/^		CMultiplexContext*		m_pContext;$/;"	m	class:CIoEvent	access:protected
+CIoEvent::m_uAddress	./include/ioevent.h	/^		struct sockaddr_in      m_uAddress; $/;"	m	class:CIoEvent	typeref:struct:CIoEvent::sockaddr_in	access:protected
+CIoEvent::outEvent	./include/ioevent.h	/^  		virtual	void outEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+CIoEvent::timeEvent	./include/ioevent.h	/^  		virtual	void timeEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+CIoEvent::~CIoEvent	./include/ioevent.h	/^		~CIoEvent() {}$/;"	f	class:CIoEvent	access:public	signature:()
+CIpcBase	./include/ipcbase.h	/^		CIpcBase();$/;"	p	class:CIpcBase	access:public	signature:()
+CIpcBase	./include/ipcbase.h	/^class CIpcBase$/;"	c
+CIpcBase	./source/ipcbase.cpp	/^CIpcBase::CIpcBase()$/;"	f	class:CIpcBase	signature:()
+CIpcBase::CIpcBase	./include/ipcbase.h	/^		CIpcBase();$/;"	p	class:CIpcBase	access:public	signature:()
+CIpcBase::CIpcBase	./source/ipcbase.cpp	/^CIpcBase::CIpcBase()$/;"	f	class:CIpcBase	signature:()
+CIpcBase::~CIpcBase	./include/ipcbase.h	/^		virtual ~CIpcBase();$/;"	p	class:CIpcBase	access:public	signature:()
+CIpcBase::~CIpcBase	./source/ipcbase.cpp	/^CIpcBase::~CIpcBase()$/;"	f	class:CIpcBase	signature:()
+CMemAllocator	./include/memsys.h	/^		CMemAllocator()$/;"	f	class:CMemAllocator	access:public	signature:()
+CMemAllocator	./include/memsys.h	/^class CMemAllocator$/;"	c
+CMemAllocator::CMemAllocator	./include/memsys.h	/^		CMemAllocator()$/;"	f	class:CMemAllocator	access:public	signature:()
+CMemAllocator::TNodeInfo	./include/memsys.h	/^		struct TNodeInfo$/;"	s	class:CMemAllocator	access:private
+CMemAllocator::TNodeInfo::__anon1::curNode	./include/memsys.h	/^				TAllocType  curNode;$/;"	m	union:CMemAllocator::TNodeInfo::__anon1	access:public
+CMemAllocator::TNodeInfo::__anon1::pNextNode	./include/memsys.h	/^				TNodeInfo*  pNextNode;$/;"	m	union:CMemAllocator::TNodeInfo::__anon1	access:public
+CMemAllocator::TNodeInfo::uNodeData	./include/memsys.h	/^			}uNodeData;$/;"	m	struct:CMemAllocator::TNodeInfo	typeref:union:CMemAllocator::TNodeInfo::__anon1	access:public
+CMemAllocator::__initMem	./include/memsys.h	/^		void __initMem()$/;"	f	class:CMemAllocator	access:private	signature:()
+CMemAllocator::__reAlloc	./include/memsys.h	/^		void __reAlloc(int32 allocSize)$/;"	f	class:CMemAllocator	access:private	signature:(int32 allocSize)
+CMemAllocator::freeNode	./include/memsys.h	/^		void freeNode(TAllocType* nodeData)$/;"	f	class:CMemAllocator	access:public	signature:(TAllocType* nodeData)
+CMemAllocator::getFreeNode	./include/memsys.h	/^		TAllocType* getFreeNode()$/;"	f	class:CMemAllocator	access:public	signature:()
+CMemAllocator::m_mutex	./include/memsys.h	/^		MutexType	m_mutex;$/;"	m	class:CMemAllocator	access:private
+CMemAllocator::m_nInitSize	./include/memsys.h	/^		int32		m_nInitSize;$/;"	m	class:CMemAllocator	access:private
+CMemAllocator::m_pDataList	./include/memsys.h	/^		TNodeInfo*	m_pDataList;$/;"	m	class:CMemAllocator	access:private
+CMemAllocator::~CMemAllocator	./include/memsys.h	/^		virtual ~CMemAllocator()$/;"	f	class:CMemAllocator	access:public	signature:()
+CMessageFlexInfoTemplate	./include/msg.h	/^class CMessageFlexInfoTemplate$/;"	c
+CMessageFlexInfoTemplate::getDataLen	./include/msg.h	/^		int32 getDataLen() const$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:() const
+CMessageFlexInfoTemplate::getDataPtr	./include/msg.h	/^		const void* getDataPtr() const$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:() const
+CMessageFlexInfoTemplate::m_nNumber	./include/msg.h	/^		int32			m_nNumber;				\/\/$/;"	m	class:CMessageFlexInfoTemplate	access:private
+CMessageFlexInfoTemplate::m_vData	./include/msg.h	/^		TDataInfoType	m_vData[MaxScaleNum];$/;"	m	class:CMessageFlexInfoTemplate	access:private
+CMessageFlexInfoTemplate::pushData	./include/msg.h	/^		void pushData(const TDataInfoType* copydata)$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:(const TDataInfoType* copydata)
+CMessageFlexInfoTemplate::resetData	./include/msg.h	/^		void resetData()$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:()
+CMessageMonoInfoTemplate	./include/msg.h	/^class CMessageMonoInfoTemplate$/;"	c
+CMessageMonoInfoTemplate::copyData	./include/msg.h	/^		void copyData(const TDataInfoType* copydata)$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:(const TDataInfoType* copydata)
+CMessageMonoInfoTemplate::getDataLen	./include/msg.h	/^		int32 getDataLen() const$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:() const
+CMessageMonoInfoTemplate::getDataPtr	./include/msg.h	/^		const void* getDataPtr() const$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:() const
+CMessageMonoInfoTemplate::m_data	./include/msg.h	/^		TDataInfoType	m_data;$/;"	m	class:CMessageMonoInfoTemplate	access:private
+CMessageMultiSquareMsg	./include/messagetypedef.h	/^typedef CMessageFlexInfoTemplate<SSquareTestInfo,30> CMessageMultiSquareMsg;$/;"	t
+CMessageSquareMsg	./include/messagetypedef.h	/^typedef CMessageMonoInfoTemplate<SSquareTestInfo> CMessageSquareMsg;$/;"	t
+CMultiplexContext	./include/context.h	/^		CMultiplexContext();$/;"	p	class:CMultiplexContext	access:public	signature:()
+CMultiplexContext	./include/context.h	/^class CMultiplexContext$/;"	c
+CMultiplexContext	./include/ioevent.h	/^class CMultiplexContext;$/;"	x
+CMultiplexContext	./source/context.cpp	/^CMultiplexContext::CMultiplexContext()$/;"	f	class:CMultiplexContext	signature:()
+CMultiplexContext::CMultiplexContext	./include/context.h	/^		CMultiplexContext();$/;"	p	class:CMultiplexContext	access:public	signature:()
+CMultiplexContext::CMultiplexContext	./source/context.cpp	/^CMultiplexContext::CMultiplexContext()$/;"	f	class:CMultiplexContext	signature:()
+CMultiplexContext::addNetNode	./include/context.h	/^		bool addNetNode(CIoEvent* object,int32 eventflag);$/;"	p	class:CMultiplexContext	access:public	signature:(CIoEvent* object,int32 eventflag)
+CMultiplexContext::addNetNode	./source/context.cpp	/^bool CMultiplexContext::addNetNode(CIoEvent* object,int32 eventflag)$/;"	f	class:CMultiplexContext	signature:(CIoEvent* object,int32 eventflag)
+CMultiplexContext::m_poll	./include/context.h	/^		CEpoll		m_poll;$/;"	m	class:CMultiplexContext	access:private
+CMultiplexContext::rmvNetNode	./include/context.h	/^		bool rmvNetNode(CIoEvent* object);$/;"	p	class:CMultiplexContext	access:public	signature:(CIoEvent* object)
+CMultiplexContext::rmvNetNode	./source/context.cpp	/^bool CMultiplexContext::rmvNetNode(CIoEvent* object)$/;"	f	class:CMultiplexContext	signature:(CIoEvent* object)
+CMultiplexContext::startRun	./include/context.h	/^		bool startRun();$/;"	p	class:CMultiplexContext	access:public	signature:()
+CMultiplexContext::startRun	./source/context.cpp	/^bool CMultiplexContext::startRun()$/;"	f	class:CMultiplexContext	signature:()
+CMultiplexContext::~CMultiplexContext	./include/context.h	/^		virtual ~CMultiplexContext();$/;"	p	class:CMultiplexContext	access:public	signature:()
+CMultiplexContext::~CMultiplexContext	./source/context.cpp	/^CMultiplexContext::~CMultiplexContext()$/;"	f	class:CMultiplexContext	signature:()
+CMutex	./include/mutex.h	/^    inline CMutex ()$/;"	f	class:CMutex	access:public	signature:()
+CMutex	./include/mutex.h	/^class CMutex$/;"	c
+CMutex::CMutex	./include/mutex.h	/^    inline CMutex ()$/;"	f	class:CMutex	access:public	signature:()
+CMutex::lock	./include/mutex.h	/^    inline void lock ()$/;"	f	class:CMutex	access:public	signature:()
+CMutex::m_mutex	./include/mutex.h	/^    pthread_mutex_t m_mutex;$/;"	m	class:CMutex	access:private
+CMutex::unlock	./include/mutex.h	/^    inline void unlock ()$/;"	f	class:CMutex	access:public	signature:()
+CMutex::~CMutex	./include/mutex.h	/^    inline ~CMutex ()$/;"	f	class:CMutex	access:public	signature:()
+CObject	./include/object.h	/^	CObject(){}$/;"	f	class:CObject	access:public	signature:()
+CObject	./include/object.h	/^class CObject$/;"	c
+CObject::CObject	./include/object.h	/^	CObject(){}$/;"	f	class:CObject	access:public	signature:()
+CObject::~CObject	./include/object.h	/^	virtual ~CObject() {}$/;"	f	class:CObject	access:public	signature:()
+CStream	./include/stream.h	/^		CStream();$/;"	p	class:CStream	access:public	signature:()
+CStream	./include/stream.h	/^class CStream$/;"	c
+CStream	./source/stream.cpp	/^CStream::CStream()$/;"	f	class:CStream	signature:()
+CStream::CStream	./include/stream.h	/^		CStream();$/;"	p	class:CStream	access:public	signature:()
+CStream::CStream	./source/stream.cpp	/^CStream::CStream()$/;"	f	class:CStream	signature:()
+CStream::m_bIsReadingHead	./include/stream.h	/^		bool	m_bIsReadingHead;				\/\/reading head or not$/;"	m	class:CStream	access:private
+CStream::m_nMsgBuffOffset	./include/stream.h	/^		int32	m_nMsgBuffOffset;				\/\/msg buffset$/;"	m	class:CStream	access:private
+CStream::m_nNeedBytes	./include/stream.h	/^		int32	m_nNeedBytes;					\/\/needed bytes for next reading$/;"	m	class:CStream	access:private
+CStream::m_nRestBytes	./include/stream.h	/^		int32	m_nRestBytes;					\/\/rest data in readed buff$/;"	m	class:CStream	access:private
+CStream::m_vRcvBuff	./include/stream.h	/^		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];$/;"	m	class:CStream	access:private
+CStream::readRawData	./include/stream.h	/^		void readRawData(char* data,int32 datalen);$/;"	p	class:CStream	access:public	signature:(char* data,int32 datalen)
+CStream::readRawData	./source/stream.cpp	/^void CStream::readRawData(char* data,int32 datalen)$/;"	f	class:CStream	signature:(char* data,int32 datalen)
+CStream::~CStream	./include/stream.h	/^		~CStream();$/;"	p	class:CStream	access:public	signature:()
+CStream::~CStream	./source/stream.cpp	/^CStream::~CStream()$/;"	f	class:CStream	signature:()
+CTcpAcceptor	./include/ipcbase.h	/^		CTcpAcceptor(CMultiplexContext* pcontext);$/;"	p	class:CTcpAcceptor	access:public	signature:(CMultiplexContext* pcontext)
+CTcpAcceptor	./include/ipcbase.h	/^class CTcpAcceptor : public CIoEvent$/;"	c	inherits:CIoEvent
+CTcpAcceptor	./source/ipcbase.cpp	/^CTcpAcceptor::CTcpAcceptor(CMultiplexContext* pcontext) : CIoEvent(pcontext) $/;"	f	class:CTcpAcceptor	signature:(CMultiplexContext* pcontext)
+CTcpAcceptor::CTcpAcceptor	./include/ipcbase.h	/^		CTcpAcceptor(CMultiplexContext* pcontext);$/;"	p	class:CTcpAcceptor	access:public	signature:(CMultiplexContext* pcontext)
+CTcpAcceptor::CTcpAcceptor	./source/ipcbase.cpp	/^CTcpAcceptor::CTcpAcceptor(CMultiplexContext* pcontext) : CIoEvent(pcontext) $/;"	f	class:CTcpAcceptor	signature:(CMultiplexContext* pcontext)
+CTcpAcceptor::errorEvent	./include/ipcbase.h	/^		virtual void errorEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+CTcpAcceptor::errorEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::errorEvent()$/;"	f	class:CTcpAcceptor	signature:()
+CTcpAcceptor::inEvent	./include/ipcbase.h	/^		virtual void inEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+CTcpAcceptor::inEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::inEvent()$/;"	f	class:CTcpAcceptor	signature:()
+CTcpAcceptor::open	./include/ipcbase.h	/^		bool open(const char* ipstring,uint16 port);$/;"	p	class:CTcpAcceptor	access:public	signature:(const char* ipstring,uint16 port)
+CTcpAcceptor::open	./source/ipcbase.cpp	/^bool CTcpAcceptor::open(const char* ipstring ,uint16 port)$/;"	f	class:CTcpAcceptor	signature:(const char* ipstring ,uint16 port)
+CTcpAcceptor::outEvent	./include/ipcbase.h	/^		virtual void outEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+CTcpAcceptor::outEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::outEvent()$/;"	f	class:CTcpAcceptor	signature:()
+CTcpAcceptor::timeEvent	./include/ipcbase.h	/^		virtual void timeEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+CTcpAcceptor::timeEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::timeEvent()$/;"	f	class:CTcpAcceptor	signature:()
+CTcpAcceptor::~CTcpAcceptor	./include/ipcbase.h	/^		~CTcpAcceptor();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+CTcpAcceptor::~CTcpAcceptor	./source/ipcbase.cpp	/^CTcpAcceptor::~CTcpAcceptor()$/;"	f	class:CTcpAcceptor	signature:()
+CTcpConnector	./include/ipcbase.h	/^		CTcpConnector(CMultiplexContext* pcontext);$/;"	p	class:CTcpConnector	access:public	signature:(CMultiplexContext* pcontext)
+CTcpConnector	./include/ipcbase.h	/^class CTcpConnector : public CIoEvent$/;"	c	inherits:CIoEvent
+CTcpConnector	./source/ipcbase.cpp	/^CTcpConnector::CTcpConnector(CMultiplexContext* pcontext) : CIoEvent(pcontext)$/;"	f	class:CTcpConnector	signature:(CMultiplexContext* pcontext)
+CTcpConnector::CTcpConnector	./include/ipcbase.h	/^		CTcpConnector(CMultiplexContext* pcontext);$/;"	p	class:CTcpConnector	access:public	signature:(CMultiplexContext* pcontext)
+CTcpConnector::CTcpConnector	./source/ipcbase.cpp	/^CTcpConnector::CTcpConnector(CMultiplexContext* pcontext) : CIoEvent(pcontext)$/;"	f	class:CTcpConnector	signature:(CMultiplexContext* pcontext)
+CTcpConnector::errorEvent	./include/ipcbase.h	/^		virtual void errorEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+CTcpConnector::errorEvent	./source/ipcbase.cpp	/^void CTcpConnector::errorEvent()$/;"	f	class:CTcpConnector	signature:()
+CTcpConnector::inEvent	./include/ipcbase.h	/^		virtual void inEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+CTcpConnector::inEvent	./source/ipcbase.cpp	/^void CTcpConnector::inEvent()$/;"	f	class:CTcpConnector	signature:()
+CTcpConnector::m_vRcvBuff	./include/ipcbase.h	/^		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];$/;"	m	class:CTcpConnector	access:private
+CTcpConnector::open	./include/ipcbase.h	/^		bool open(const char* ipstring,uint16 port);$/;"	p	class:CTcpConnector	access:public	signature:(const char* ipstring,uint16 port)
+CTcpConnector::open	./source/ipcbase.cpp	/^bool CTcpConnector::open(const char* ipstring,uint16 port)$/;"	f	class:CTcpConnector	signature:(const char* ipstring,uint16 port)
+CTcpConnector::outEvent	./include/ipcbase.h	/^		virtual void outEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+CTcpConnector::outEvent	./source/ipcbase.cpp	/^void CTcpConnector::outEvent()$/;"	f	class:CTcpConnector	signature:()
+CTcpConnector::sendData	./include/ipcbase.h	/^		bool sendData(const char* data,uint32 len);$/;"	p	class:CTcpConnector	access:public	signature:(const char* data,uint32 len)
+CTcpConnector::sendData	./source/ipcbase.cpp	/^bool CTcpConnector::sendData(const char* data,uint32 len)$/;"	f	class:CTcpConnector	signature:(const char* data,uint32 len)
+CTcpConnector::timeEvent	./include/ipcbase.h	/^		virtual void timeEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+CTcpConnector::timeEvent	./source/ipcbase.cpp	/^void CTcpConnector::timeEvent()$/;"	f	class:CTcpConnector	signature:()
+CTcpConnector::~CTcpConnector	./include/ipcbase.h	/^		~CTcpConnector();$/;"	p	class:CTcpConnector	access:public	signature:()
+CTcpConnector::~CTcpConnector	./source/ipcbase.cpp	/^CTcpConnector::~CTcpConnector()$/;"	f	class:CTcpConnector	signature:()
+CThread	./include/thread.h	/^		CThread();$/;"	p	class:CThread	access:public	signature:()
+CThread	./include/thread.h	/^class CThread$/;"	c
+CThread	./source/thread.cpp	/^CThread::CThread()$/;"	f	class:CThread	signature:()
+CThread::CThread	./include/thread.h	/^		CThread();$/;"	p	class:CThread	access:public	signature:()
+CThread::CThread	./source/thread.cpp	/^CThread::CThread()$/;"	f	class:CThread	signature:()
+CThread::m_fThreadRoutine	./include/thread.h	/^		thread_fn*	m_fThreadRoutine;$/;"	m	class:CThread	access:public
+CThread::m_nThreadId	./include/thread.h	/^		pthread_t	m_nThreadId;$/;"	m	class:CThread	access:private
+CThread::m_pArg	./include/thread.h	/^		void*		m_pArg;$/;"	m	class:CThread	access:public
+CThread::start	./include/thread.h	/^		int32		start(thread_fn* tfn,void* arg);$/;"	p	class:CThread	access:public	signature:(thread_fn* tfn,void* arg)
+CThread::start	./source/thread.cpp	/^int32 CThread::start(thread_fn* tfn,void* arg)$/;"	f	class:CThread	signature:(thread_fn* tfn,void* arg)
+CThread::stop	./include/thread.h	/^		int32		stop();$/;"	p	class:CThread	access:public	signature:()
+CThread::stop	./source/thread.cpp	/^int32 CThread::stop()$/;"	f	class:CThread	signature:()
+CThread::threadRoutine	./include/thread.h	/^	   static void *threadRoutine (void *arg);$/;"	p	class:CThread	access:public	signature:(void *arg)
+CThread::threadRoutine	./source/thread.cpp	/^void* CThread::threadRoutine (void *arg)$/;"	f	class:CThread	signature:(void *arg)
+CThread::~CThread	./include/thread.h	/^		~CThread();$/;"	p	class:CThread	access:public	signature:()
+CThread::~CThread	./source/thread.cpp	/^CThread::~CThread()$/;"	f	class:CThread	signature:()
+CZmqWrapper	./zmqware/zmqwrap.cpp	/^CZmqWrapper::CZmqWrapper(int threadnum) : m_context(threadnum)$/;"	f	class:CZmqWrapper	signature:(int threadnum)
+CZmqWrapper	./zmqware/zmqwrap.h	/^	explicit CZmqWrapper(int threadnum);$/;"	p	class:CZmqWrapper	access:public	signature:(int threadnum)
+CZmqWrapper	./zmqware/zmqwrap.h	/^class CZmqWrapper$/;"	c
+CZmqWrapper::CZmqWrapper	./zmqware/zmqwrap.cpp	/^CZmqWrapper::CZmqWrapper(int threadnum) : m_context(threadnum)$/;"	f	class:CZmqWrapper	signature:(int threadnum)
+CZmqWrapper::CZmqWrapper	./zmqware/zmqwrap.h	/^	explicit CZmqWrapper(int threadnum);$/;"	p	class:CZmqWrapper	access:public	signature:(int threadnum)
+CZmqWrapper::addBindNode	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addBindNode(std::string ipcstring)$/;"	f	class:CZmqWrapper	signature:(std::string ipcstring)
+CZmqWrapper::addBindNode	./zmqware/zmqwrap.h	/^	bool	addBindNode(std::string ipcstring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string ipcstring)
+CZmqWrapper::addConNode	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addConNode(std::string ipcstring)$/;"	f	class:CZmqWrapper	signature:(std::string ipcstring)
+CZmqWrapper::addConNode	./zmqware/zmqwrap.h	/^	bool	addConNode(std::string ipcstring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string ipcstring)
+CZmqWrapper::addDevice	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addDevice(std::string srcstring,std::string dststring)$/;"	f	class:CZmqWrapper	signature:(std::string srcstring,std::string dststring)
+CZmqWrapper::addDevice	./zmqware/zmqwrap.h	/^	bool    addDevice(std::string srcstring,std::string dststring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string srcstring,std::string dststring)
+CZmqWrapper::init	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::init()$/;"	f	class:CZmqWrapper	signature:()
+CZmqWrapper::init	./zmqware/zmqwrap.h	/^	bool	init();$/;"	p	class:CZmqWrapper	access:public	signature:()
+CZmqWrapper::m_context	./zmqware/zmqwrap.h	/^	zmq::context_t				m_context;$/;"	m	class:CZmqWrapper	access:private
+CZmqWrapper::m_nFreePollIndex	./zmqware/zmqwrap.h	/^	int							m_nFreePollIndex;$/;"	m	class:CZmqWrapper	access:private
+CZmqWrapper::m_vBindSocket	./zmqware/zmqwrap.h	/^	std::list<zmq::socket_t>	m_vBindSocket;$/;"	m	class:CZmqWrapper	access:private
+CZmqWrapper::m_vConnSocket	./zmqware/zmqwrap.h	/^	std::list<void*>			m_vConnSocket;$/;"	m	class:CZmqWrapper	access:private
+CZmqWrapper::m_vPollItem	./zmqware/zmqwrap.h	/^	zmq::pollitem_t				m_vPollItem[MAX_ZMQ_POLL_ITEM_NUMBER];$/;"	m	class:CZmqWrapper	access:private
+CZmqWrapper::run	./zmqware/zmqwrap.cpp	/^void CZmqWrapper::run()$/;"	f	class:CZmqWrapper	signature:()
+CZmqWrapper::run	./zmqware/zmqwrap.cpp	/^void CZmqWrapper::run(TMsgHandler* msghandler)$/;"	f	class:CZmqWrapper	signature:(TMsgHandler* msghandler)
+CZmqWrapper::run	./zmqware/zmqwrap.h	/^	void	run();$/;"	p	class:CZmqWrapper	access:public	signature:()
+CZmqWrapper::run	./zmqware/zmqwrap.h	/^	void	run(TMsgHandler* msghandler);$/;"	p	class:CZmqWrapper	access:public	signature:(TMsgHandler* msghandler)
+CZmqWrapper::~CZmqWrapper	./zmqware/zmqwrap.cpp	/^CZmqWrapper::~CZmqWrapper()$/;"	f	class:CZmqWrapper	signature:()
+CZmqWrapper::~CZmqWrapper	./zmqware/zmqwrap.h	/^	~CZmqWrapper();$/;"	p	class:CZmqWrapper	access:public	signature:()
+ENMT_COUNT	./include/networkdefine.h	/^	ENMT_COUNT$/;"	e	enum:ENetworkMsgType
+ENMT_NONE	./include/networkdefine.h	/^	ENMT_NONE,$/;"	e	enum:ENetworkMsgType
+ENMT_TEST_MSG	./include/networkdefine.h	/^	ENMT_TEST_MSG,			\/\/test msg$/;"	e	enum:ENetworkMsgType
+ENetworkMsgType	./include/networkdefine.h	/^enum ENetworkMsgType$/;"	g
+HAVE_ARPA_INET_H	./config.h	5;"	d
+HAVE_FCNTL_H	./config.h	8;"	d
+HAVE_INTTYPES_H	./config.h	11;"	d
+HAVE_MALLOC	./config.h	15;"	d
+HAVE_MEMORY_H	./config.h	18;"	d
+HAVE_MEMSET	./config.h	21;"	d
+HAVE_NETDB_H	./config.h	24;"	d
+HAVE_NETINET_IN_H	./config.h	27;"	d
+HAVE_STDBOOL_H	./config.h	30;"	d
+HAVE_STDINT_H	./config.h	33;"	d
+HAVE_STDLIB_H	./config.h	36;"	d
+HAVE_STRINGS_H	./config.h	39;"	d
+HAVE_STRING_H	./config.h	42;"	d
+HAVE_SYS_SOCKET_H	./config.h	45;"	d
+HAVE_SYS_STAT_H	./config.h	48;"	d
+HAVE_SYS_TYPES_H	./config.h	51;"	d
+HAVE_UNISTD_H	./config.h	54;"	d
+HAVE__BOOL	./config.h	57;"	d
+MAX_CONNCTOR_RCV_BUFF_SIZE	./include/networkdefine.h	43;"	d
+MAX_EPOLL_HINT_FILE_SIZE	./include/networkdefine.h	33;"	d
+MAX_EPOLL_NETWORK_EVENT_SIZE	./include/networkdefine.h	36;"	d
+MAX_INNER_PORT_LISTEN_BACK_LOG	./include/networkdefine.h	39;"	d
+MAX_OUTER_PORT_LISTEN_BACK_LOG	./include/networkdefine.h	40;"	d
+MAX_ZMQ_POLL_ITEM_NUMBER	./zmqware/zmqwrap.h	13;"	d
+MAX_ZMQ_THREAD_NUMBER	./zmqware/zmqwrap.h	12;"	d
+PACKAGE	./config.h	60;"	d
+PACKAGE_BUGREPORT	./config.h	63;"	d
+PACKAGE_NAME	./config.h	66;"	d
+PACKAGE_STRING	./config.h	69;"	d
+PACKAGE_TARNAME	./config.h	72;"	d
+PACKAGE_VERSION	./config.h	75;"	d
+SMsgMetaData	./include/msg.h	/^struct SMsgMetaData$/;"	s
+SMsgMetaData::data	./include/msg.h	/^	char	data[0];$/;"	m	struct:SMsgMetaData	access:public
+SMsgMetaData::dataLen	./include/msg.h	/^	uint16	dataLen;$/;"	m	struct:SMsgMetaData	access:public
+SMsgMetaData::msgType	./include/msg.h	/^	uint16	msgType;$/;"	m	struct:SMsgMetaData	access:public
+SSquareTestInfo	./include/messagetypedef.h	/^struct SSquareTestInfo$/;"	s
+SSquareTestInfo::len	./include/messagetypedef.h	/^	int len;$/;"	m	struct:SSquareTestInfo	access:public
+SSquareTestInfo::width	./include/messagetypedef.h	/^	int width;$/;"	m	struct:SSquareTestInfo	access:public
+STDC_HEADERS	./config.h	78;"	d
+THandler	./include/networkdefine.h	/^typedef int32 THandler;$/;"	t
+TNodeInfo	./include/memsys.h	/^		struct TNodeInfo$/;"	s	class:CMemAllocator	access:private
+VERSION	./config.h	81;"	d
+__NETWORK_DEFINE_H__	./include/networkdefine.h	8;"	d
+__initMem	./include/memsys.h	/^		void __initMem()$/;"	f	class:CMemAllocator	access:private	signature:()
+__reAlloc	./include/memsys.h	/^		void __reAlloc(int32 allocSize)$/;"	f	class:CMemAllocator	access:private	signature:(int32 allocSize)
+addBindNode	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addBindNode(std::string ipcstring)$/;"	f	class:CZmqWrapper	signature:(std::string ipcstring)
+addBindNode	./zmqware/zmqwrap.h	/^	bool	addBindNode(std::string ipcstring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string ipcstring)
+addConNode	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addConNode(std::string ipcstring)$/;"	f	class:CZmqWrapper	signature:(std::string ipcstring)
+addConNode	./zmqware/zmqwrap.h	/^	bool	addConNode(std::string ipcstring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string ipcstring)
+addDevice	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::addDevice(std::string srcstring,std::string dststring)$/;"	f	class:CZmqWrapper	signature:(std::string srcstring,std::string dststring)
+addDevice	./zmqware/zmqwrap.h	/^	bool    addDevice(std::string srcstring,std::string dststring);$/;"	p	class:CZmqWrapper	access:public	signature:(std::string srcstring,std::string dststring)
+addHandler	./include/epoll.h	/^		bool addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag);$/;"	p	class:CEpoll	access:public	signature:(THandler handler,CIoEvent* ioevent,int32 eventflag)
+addHandler	./source/epoll.cpp	/^bool CEpoll::addHandler(THandler handler,CIoEvent* ioevent,int32 eventflag)$/;"	f	class:CEpoll	signature:(THandler handler,CIoEvent* ioevent,int32 eventflag)
+addNetNode	./include/context.h	/^		bool addNetNode(CIoEvent* object,int32 eventflag);$/;"	p	class:CMultiplexContext	access:public	signature:(CIoEvent* object,int32 eventflag)
+addNetNode	./source/context.cpp	/^bool CMultiplexContext::addNetNode(CIoEvent* object,int32 eventflag)$/;"	f	class:CMultiplexContext	signature:(CIoEvent* object,int32 eventflag)
+allocate	./include/container.h	/^    T* allocate()$/;"	f	class:blockQueue	access:public	signature:()
+blockQueue	./include/container.h	/^    blockQueue()$/;"	f	class:blockQueue	access:public	signature:()
+blockQueue	./include/container.h	/^class blockQueue$/;"	c
+blockQueue::allocate	./include/container.h	/^    T* allocate()$/;"	f	class:blockQueue	access:public	signature:()
+blockQueue::blockQueue	./include/container.h	/^    blockQueue()$/;"	f	class:blockQueue	access:public	signature:()
+blockQueue::free	./include/container.h	/^    bool free(T* obj)$/;"	f	class:blockQueue	access:public	signature:(T* obj)
+blockQueue::initQueue	./include/container.h	/^    void initQueue()$/;"	f	class:blockQueue	access:protected	signature:()
+blockQueue::m_initSize	./include/container.h	/^    int m_initSize;$/;"	m	class:blockQueue	access:private
+blockQueue::m_objQueue	./include/container.h	/^    CCircleQueue<T*,size> m_objQueue;$/;"	m	class:blockQueue	access:private
+blockQueue::pop	./include/container.h	/^    T* pop()$/;"	f	class:blockQueue	access:private	signature:()
+blockQueue::push	./include/container.h	/^    bool push(T* obj)$/;"	f	class:blockQueue	access:private	signature:(T* obj)
+blockQueue::~blockQueue	./include/container.h	/^    virtual ~blockQueue(){}$/;"	f	class:blockQueue	access:public	signature:()
+copyData	./include/msg.h	/^		void copyData(const TDataInfoType* copydata)$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:(const TDataInfoType* copydata)
+curNode	./include/memsys.h	/^				TAllocType  curNode;$/;"	m	union:CMemAllocator::TNodeInfo::__anon1	access:public
+data	./include/msg.h	/^	char	data[0];$/;"	m	struct:SMsgMetaData	access:public
+dataLen	./include/msg.h	/^	uint16	dataLen;$/;"	m	struct:SMsgMetaData	access:public
+errorEvent	./include/ioevent.h	/^  		virtual void errorEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+errorEvent	./include/ipcbase.h	/^		virtual void errorEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+errorEvent	./include/ipcbase.h	/^		virtual void errorEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+errorEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::errorEvent()$/;"	f	class:CTcpAcceptor	signature:()
+errorEvent	./source/ipcbase.cpp	/^void CTcpConnector::errorEvent()$/;"	f	class:CTcpConnector	signature:()
+free	./include/container.h	/^    bool free(T* obj)$/;"	f	class:blockQueue	access:public	signature:(T* obj)
+freeNode	./include/memsys.h	/^		void freeNode(TAllocType* nodeData)$/;"	f	class:CMemAllocator	access:public	signature:(TAllocType* nodeData)
+getDataLen	./include/msg.h	/^		int32 getDataLen() const$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:() const
+getDataLen	./include/msg.h	/^		int32 getDataLen() const$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:() const
+getDataPtr	./include/msg.h	/^		const void* getDataPtr() const$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:() const
+getDataPtr	./include/msg.h	/^		const void* getDataPtr() const$/;"	f	class:CMessageMonoInfoTemplate	access:public	signature:() const
+getFreeNode	./include/memsys.h	/^		TAllocType* getFreeNode()$/;"	f	class:CMemAllocator	access:public	signature:()
+handle	./include/ioevent.h	/^  		THandler handle() {return m_nHandler;}$/;"	f	class:CIoEvent	access:public	signature:()
+inEvent	./include/ioevent.h	/^  		virtual void inEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+inEvent	./include/ipcbase.h	/^		virtual void inEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+inEvent	./include/ipcbase.h	/^		virtual void inEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+inEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::inEvent()$/;"	f	class:CTcpAcceptor	signature:()
+inEvent	./source/ipcbase.cpp	/^void CTcpConnector::inEvent()$/;"	f	class:CTcpConnector	signature:()
+init	./zmqware/zmqwrap.cpp	/^bool CZmqWrapper::init()$/;"	f	class:CZmqWrapper	signature:()
+init	./zmqware/zmqwrap.h	/^	bool	init();$/;"	p	class:CZmqWrapper	access:public	signature:()
+initQueue	./include/container.h	/^    void initQueue()$/;"	f	class:blockQueue	access:protected	signature:()
+int16	./include/typedef.h	/^typedef short int16;$/;"	t
+int32	./include/typedef.h	/^typedef int int32;$/;"	t
+int8	./include/typedef.h	/^typedef char int8;$/;"	t
+isEmpty	./include/container.h	/^		bool isEmpty()$/;"	f	class:CCircleQueue	access:public	signature:()
+isFull	./include/container.h	/^		bool isFull()	$/;"	f	class:CCircleQueue	access:public	signature:()
+len	./include/messagetypedef.h	/^	int len;$/;"	m	struct:SSquareTestInfo	access:public
+lock	./include/mutex.h	/^    inline void lock ()$/;"	f	class:CMutex	access:public	signature:()
+loop	./include/epoll.h	/^		void loop();$/;"	p	class:CEpoll	access:public	signature:()
+loop	./source/epoll.cpp	/^void CEpoll::loop()$/;"	f	class:CEpoll	signature:()
+m_array	./include/container.h	/^		private:	T*	m_array;		$/;"	m	class:CCircleQueue	access:private
+m_bIsReadingHead	./include/stream.h	/^		bool	m_bIsReadingHead;				\/\/reading head or not$/;"	m	class:CStream	access:private
+m_context	./zmqware/zmqwrap.h	/^	zmq::context_t				m_context;$/;"	m	class:CZmqWrapper	access:private
+m_data	./include/msg.h	/^		TDataInfoType	m_data;$/;"	m	class:CMessageMonoInfoTemplate	access:private
+m_fThreadRoutine	./include/thread.h	/^		thread_fn*	m_fThreadRoutine;$/;"	m	class:CThread	access:public
+m_head	./include/container.h	/^		int m_head;		$/;"	m	class:CCircleQueue	access:private
+m_initSize	./include/container.h	/^    int m_initSize;$/;"	m	class:blockQueue	access:private
+m_mutex	./include/memsys.h	/^		MutexType	m_mutex;$/;"	m	class:CMemAllocator	access:private
+m_mutex	./include/mutex.h	/^		CMutex&	m_mutex;$/;"	m	class:CGuard	access:private
+m_mutex	./include/mutex.h	/^    pthread_mutex_t m_mutex;$/;"	m	class:CMutex	access:private
+m_nEpollHandler	./include/epoll.h	/^		THandler 		m_nEpollHandler;$/;"	m	class:CEpoll	access:private
+m_nFreePollIndex	./zmqware/zmqwrap.h	/^	int							m_nFreePollIndex;$/;"	m	class:CZmqWrapper	access:private
+m_nHandler	./include/ioevent.h	/^		THandler				m_nHandler;$/;"	m	class:CIoEvent	access:protected
+m_nInitSize	./include/memsys.h	/^		int32		m_nInitSize;$/;"	m	class:CMemAllocator	access:private
+m_nMsgBuffOffset	./include/stream.h	/^		int32	m_nMsgBuffOffset;				\/\/msg buffset$/;"	m	class:CStream	access:private
+m_nNeedBytes	./include/stream.h	/^		int32	m_nNeedBytes;					\/\/needed bytes for next reading$/;"	m	class:CStream	access:private
+m_nNumber	./include/msg.h	/^		int32			m_nNumber;				\/\/$/;"	m	class:CMessageFlexInfoTemplate	access:private
+m_nPopPos	./include/container.h	/^		int m_nPopPos;	$/;"	m	class:CCircleQueue	access:private
+m_nPushPos	./include/container.h	/^		int m_nPushPos;$/;"	m	class:CCircleQueue	access:private
+m_nRestBytes	./include/stream.h	/^		int32	m_nRestBytes;					\/\/rest data in readed buff$/;"	m	class:CStream	access:private
+m_nThreadId	./include/thread.h	/^		pthread_t	m_nThreadId;$/;"	m	class:CThread	access:private
+m_objQueue	./include/container.h	/^    CCircleQueue<T*,size> m_objQueue;$/;"	m	class:blockQueue	access:private
+m_pArg	./include/thread.h	/^		void*		m_pArg;$/;"	m	class:CThread	access:public
+m_pContext	./include/ioevent.h	/^		CMultiplexContext*		m_pContext;$/;"	m	class:CIoEvent	access:protected
+m_pDataList	./include/memsys.h	/^		TNodeInfo*	m_pDataList;$/;"	m	class:CMemAllocator	access:private
+m_poll	./include/context.h	/^		CEpoll		m_poll;$/;"	m	class:CMultiplexContext	access:private
+m_size	./include/container.h	/^		int m_size;	$/;"	m	class:CCircleQueue	access:private
+m_tail	./include/container.h	/^		int m_tail;		$/;"	m	class:CCircleQueue	access:private
+m_temp	./include/container.h	/^		T   m_temp;$/;"	m	class:CCircleQueue	access:private
+m_uAddress	./include/ioevent.h	/^		struct sockaddr_in      m_uAddress; $/;"	m	class:CIoEvent	typeref:struct:CIoEvent::sockaddr_in	access:protected
+m_vBindSocket	./zmqware/zmqwrap.h	/^	std::list<zmq::socket_t>	m_vBindSocket;$/;"	m	class:CZmqWrapper	access:private
+m_vConnSocket	./zmqware/zmqwrap.h	/^	std::list<void*>			m_vConnSocket;$/;"	m	class:CZmqWrapper	access:private
+m_vData	./include/msg.h	/^		TDataInfoType	m_vData[MaxScaleNum];$/;"	m	class:CMessageFlexInfoTemplate	access:private
+m_vEventCache	./include/epoll.h	/^		epoll_event		m_vEventCache[MAX_EPOLL_NETWORK_EVENT_SIZE];$/;"	m	class:CEpoll	access:private
+m_vPollItem	./zmqware/zmqwrap.h	/^	zmq::pollitem_t				m_vPollItem[MAX_ZMQ_POLL_ITEM_NUMBER];$/;"	m	class:CZmqWrapper	access:private
+m_vRcvBuff	./include/ipcbase.h	/^		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];$/;"	m	class:CTcpConnector	access:private
+m_vRcvBuff	./include/stream.h	/^		char	m_vRcvBuff[MAX_CONNCTOR_RCV_BUFF_SIZE];$/;"	m	class:CStream	access:private
+m_worker	./include/epoll.h	/^		CThread			m_worker;$/;"	m	class:CEpoll	access:private
+main	./test/memtest/main.cpp	/^main()$/;"	f	signature:()
+main	./test/normalclient/main.cpp	/^int main()$/;"	f	signature:()
+main	./test/normalserver/main.cpp	/^int main()$/;"	f	signature:()
+main	./test/zmqbroker/main.cpp	/^int main(int argc,char* argv[])$/;"	f	signature:(int argc,char* argv[])
+main	./test/zmqclient/main.cpp	/^int main(int argc, char* argv[])$/;"	f	signature:(int argc, char* argv[])
+main	./test/zmqserver/main.cpp	/^int main(int argc,char* argv[])$/;"	f	signature:(int argc,char* argv[])
+msgType	./include/msg.h	/^	uint16	msgType;$/;"	m	struct:SMsgMetaData	access:public
+open	./include/ipcbase.h	/^		bool open(const char* ipstring,uint16 port);$/;"	p	class:CTcpAcceptor	access:public	signature:(const char* ipstring,uint16 port)
+open	./include/ipcbase.h	/^		bool open(const char* ipstring,uint16 port);$/;"	p	class:CTcpConnector	access:public	signature:(const char* ipstring,uint16 port)
+open	./source/ipcbase.cpp	/^bool CTcpAcceptor::open(const char* ipstring ,uint16 port)$/;"	f	class:CTcpAcceptor	signature:(const char* ipstring ,uint16 port)
+open	./source/ipcbase.cpp	/^bool CTcpConnector::open(const char* ipstring,uint16 port)$/;"	f	class:CTcpConnector	signature:(const char* ipstring,uint16 port)
+outEvent	./include/ioevent.h	/^  		virtual	void outEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+outEvent	./include/ipcbase.h	/^		virtual void outEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+outEvent	./include/ipcbase.h	/^		virtual void outEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+outEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::outEvent()$/;"	f	class:CTcpAcceptor	signature:()
+outEvent	./source/ipcbase.cpp	/^void CTcpConnector::outEvent()$/;"	f	class:CTcpConnector	signature:()
+output_debug	./include/err.h	15;"	d
+output_error	./include/err.h	10;"	d
+pNextNode	./include/memsys.h	/^				TNodeInfo*  pNextNode;$/;"	m	union:CMemAllocator::TNodeInfo::__anon1	access:public
+pop	./include/container.h	/^	T pop()$/;"	f	class:CCircleQueue	access:public	signature:()
+pop	./include/container.h	/^    T* pop()$/;"	f	class:blockQueue	access:private	signature:()
+push	./include/container.h	/^	bool push(T obj)$/;"	f	class:CCircleQueue	access:public	signature:(T obj)
+push	./include/container.h	/^    bool push(T* obj)$/;"	f	class:blockQueue	access:private	signature:(T* obj)
+pushData	./include/msg.h	/^		void pushData(const TDataInfoType* copydata)$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:(const TDataInfoType* copydata)
+readRawData	./include/stream.h	/^		void readRawData(char* data,int32 datalen);$/;"	p	class:CStream	access:public	signature:(char* data,int32 datalen)
+readRawData	./source/stream.cpp	/^void CStream::readRawData(char* data,int32 datalen)$/;"	f	class:CStream	signature:(char* data,int32 datalen)
+resetData	./include/msg.h	/^		void resetData()$/;"	f	class:CMessageFlexInfoTemplate	access:public	signature:()
+rmvHandler	./include/epoll.h	/^		bool rmvHandler(THandler handler);$/;"	p	class:CEpoll	access:public	signature:(THandler handler)
+rmvHandler	./source/epoll.cpp	/^bool CEpoll::rmvHandler(THandler handler)$/;"	f	class:CEpoll	signature:(THandler handler)
+rmvNetNode	./include/context.h	/^		bool rmvNetNode(CIoEvent* object);$/;"	p	class:CMultiplexContext	access:public	signature:(CIoEvent* object)
+rmvNetNode	./source/context.cpp	/^bool CMultiplexContext::rmvNetNode(CIoEvent* object)$/;"	f	class:CMultiplexContext	signature:(CIoEvent* object)
+run	./zmqware/zmqwrap.cpp	/^void CZmqWrapper::run()$/;"	f	class:CZmqWrapper	signature:()
+run	./zmqware/zmqwrap.cpp	/^void CZmqWrapper::run(TMsgHandler* msghandler)$/;"	f	class:CZmqWrapper	signature:(TMsgHandler* msghandler)
+run	./zmqware/zmqwrap.h	/^	void	run();$/;"	p	class:CZmqWrapper	access:public	signature:()
+run	./zmqware/zmqwrap.h	/^	void	run(TMsgHandler* msghandler);$/;"	p	class:CZmqWrapper	access:public	signature:(TMsgHandler* msghandler)
+sendData	./include/ipcbase.h	/^		bool sendData(const char* data,uint32 len);$/;"	p	class:CTcpConnector	access:public	signature:(const char* data,uint32 len)
+sendData	./source/ipcbase.cpp	/^bool CTcpConnector::sendData(const char* data,uint32 len)$/;"	f	class:CTcpConnector	signature:(const char* data,uint32 len)
+start	./include/epoll.h	/^		bool start();$/;"	p	class:CEpoll	access:public	signature:()
+start	./include/thread.h	/^		int32		start(thread_fn* tfn,void* arg);$/;"	p	class:CThread	access:public	signature:(thread_fn* tfn,void* arg)
+start	./source/epoll.cpp	/^bool CEpoll::start()$/;"	f	class:CEpoll	signature:()
+start	./source/thread.cpp	/^int32 CThread::start(thread_fn* tfn,void* arg)$/;"	f	class:CThread	signature:(thread_fn* tfn,void* arg)
+startRun	./include/context.h	/^		bool startRun();$/;"	p	class:CMultiplexContext	access:public	signature:()
+startRun	./source/context.cpp	/^bool CMultiplexContext::startRun()$/;"	f	class:CMultiplexContext	signature:()
+stop	./include/thread.h	/^		int32		stop();$/;"	p	class:CThread	access:public	signature:()
+stop	./source/thread.cpp	/^int32 CThread::stop()$/;"	f	class:CThread	signature:()
+threadRoutine	./include/thread.h	/^	   static void *threadRoutine (void *arg);$/;"	p	class:CThread	access:public	signature:(void *arg)
+threadRoutine	./source/thread.cpp	/^void* CThread::threadRoutine (void *arg)$/;"	f	class:CThread	signature:(void *arg)
+thread_fn	./include/thread.h	/^typedef void (thread_fn) (void*);$/;"	t
+timeEvent	./include/ioevent.h	/^  		virtual	void timeEvent() = 0;$/;"	p	class:CIoEvent	access:public	signature:()
+timeEvent	./include/ipcbase.h	/^		virtual void timeEvent();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+timeEvent	./include/ipcbase.h	/^		virtual void timeEvent();$/;"	p	class:CTcpConnector	access:public	signature:()
+timeEvent	./source/ipcbase.cpp	/^void CTcpAcceptor::timeEvent()$/;"	f	class:CTcpAcceptor	signature:()
+timeEvent	./source/ipcbase.cpp	/^void CTcpConnector::timeEvent()$/;"	f	class:CTcpConnector	signature:()
+uNodeData	./include/memsys.h	/^			}uNodeData;$/;"	m	struct:CMemAllocator::TNodeInfo	typeref:union:CMemAllocator::TNodeInfo::__anon1	access:public
+uint16	./include/typedef.h	/^typedef unsigned short uint16;$/;"	t
+uint32	./include/typedef.h	/^typedef unsigned int  uint32;$/;"	t
+uint8	./include/typedef.h	/^typedef unsigned char uint8;$/;"	t
+unlock	./include/mutex.h	/^    inline void unlock ()$/;"	f	class:CMutex	access:public	signature:()
+width	./include/messagetypedef.h	/^	int width;$/;"	m	struct:SSquareTestInfo	access:public
+workerRoutine	./include/epoll.h	/^		 static void workerRoutine (void* arg);$/;"	p	class:CEpoll	access:public	signature:(void* arg)
+workerRoutine	./source/epoll.cpp	/^void CEpoll::workerRoutine(void* arg)$/;"	f	class:CEpoll	signature:(void* arg)
+~CCircleQueue	./include/container.h	/^	~CCircleQueue()$/;"	f	class:CCircleQueue	access:public	signature:()
+~CEpoll	./include/epoll.h	/^		~CEpoll();$/;"	p	class:CEpoll	access:public	signature:()
+~CEpoll	./source/epoll.cpp	/^CEpoll::~CEpoll()$/;"	f	class:CEpoll	signature:()
+~CGuard	./include/mutex.h	/^		inline ~CGuard()$/;"	f	class:CGuard	access:public	signature:()
+~CIoEvent	./include/ioevent.h	/^		~CIoEvent() {}$/;"	f	class:CIoEvent	access:public	signature:()
+~CIpcBase	./include/ipcbase.h	/^		virtual ~CIpcBase();$/;"	p	class:CIpcBase	access:public	signature:()
+~CIpcBase	./source/ipcbase.cpp	/^CIpcBase::~CIpcBase()$/;"	f	class:CIpcBase	signature:()
+~CMemAllocator	./include/memsys.h	/^		virtual ~CMemAllocator()$/;"	f	class:CMemAllocator	access:public	signature:()
+~CMultiplexContext	./include/context.h	/^		virtual ~CMultiplexContext();$/;"	p	class:CMultiplexContext	access:public	signature:()
+~CMultiplexContext	./source/context.cpp	/^CMultiplexContext::~CMultiplexContext()$/;"	f	class:CMultiplexContext	signature:()
+~CMutex	./include/mutex.h	/^    inline ~CMutex ()$/;"	f	class:CMutex	access:public	signature:()
+~CObject	./include/object.h	/^	virtual ~CObject() {}$/;"	f	class:CObject	access:public	signature:()
+~CStream	./include/stream.h	/^		~CStream();$/;"	p	class:CStream	access:public	signature:()
+~CStream	./source/stream.cpp	/^CStream::~CStream()$/;"	f	class:CStream	signature:()
+~CTcpAcceptor	./include/ipcbase.h	/^		~CTcpAcceptor();$/;"	p	class:CTcpAcceptor	access:public	signature:()
+~CTcpAcceptor	./source/ipcbase.cpp	/^CTcpAcceptor::~CTcpAcceptor()$/;"	f	class:CTcpAcceptor	signature:()
+~CTcpConnector	./include/ipcbase.h	/^		~CTcpConnector();$/;"	p	class:CTcpConnector	access:public	signature:()
+~CTcpConnector	./source/ipcbase.cpp	/^CTcpConnector::~CTcpConnector()$/;"	f	class:CTcpConnector	signature:()
+~CThread	./include/thread.h	/^		~CThread();$/;"	p	class:CThread	access:public	signature:()
+~CThread	./source/thread.cpp	/^CThread::~CThread()$/;"	f	class:CThread	signature:()
+~CZmqWrapper	./zmqware/zmqwrap.cpp	/^CZmqWrapper::~CZmqWrapper()$/;"	f	class:CZmqWrapper	signature:()
+~CZmqWrapper	./zmqware/zmqwrap.h	/^	~CZmqWrapper();$/;"	p	class:CZmqWrapper	access:public	signature:()
+~blockQueue	./include/container.h	/^    virtual ~blockQueue(){}$/;"	f	class:blockQueue	access:public	signature:()

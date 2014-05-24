@@ -29,4 +29,5 @@ AC_PROG_MAKE_SET
 
 AC_OUTPUT(Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile 
 			test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile 
-			test/cgiscript/Makefile test/cgippscript/Makefile)
+			test/cgiscript/Makefile test/cgippscript/Makefile
+			test/rawweb/Makefile)

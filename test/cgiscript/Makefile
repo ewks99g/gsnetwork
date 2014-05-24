@@ -153,6 +153,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
+AUTOMAKE_OPTIONS = foreign
 cgiserver_SOURCES = main.cpp
 INCLUDES = -I/usr/local/include -I/usr/include 
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib -lpthread -lfcgi -lmysqlclient
