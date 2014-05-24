@@ -41,8 +41,7 @@ bool Epoll::rmv_handler(THandler handler)
 	epoll_event _event;
 	memset(&_event,0,sizeof(epoll_event));
 
-	int32 _result = epoll_ctl(epoll_handler_, EPOLL_CTL_DEL, handler, &_event);
-    if (_result < 0)
+	if (epoll_ctl(epoll_handler_, EPOLL_CTL_DEL, handler, &_event < 0))
     {
         output_error("Epoll Add Handler");
  	    return false;

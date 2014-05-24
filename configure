@@ -5470,7 +5470,7 @@ $as_echo "no" >&6; }
 fi
 
 
-ac_config_files="$ac_config_files Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile"
+ac_config_files="$ac_config_files Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile test/cgiscript/Makefile test/cgippscript/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -6118,6 +6118,8 @@ do
     "test/normalserver/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalserver/Makefile" ;;
     "test/normalclient/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalclient/Makefile" ;;
     "test/memtest/Makefile") CONFIG_FILES="$CONFIG_FILES test/memtest/Makefile" ;;
+    "test/cgiscript/Makefile") CONFIG_FILES="$CONFIG_FILES test/cgiscript/Makefile" ;;
+    "test/cgippscript/Makefile") CONFIG_FILES="$CONFIG_FILES test/cgippscript/Makefile" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
