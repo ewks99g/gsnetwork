@@ -27,7 +27,17 @@
 #include <sys/epoll.h> 
 #include <string.h> 
 #include "typedef.h" 
+//////////////////////////////////////////////////////////////////////
+#define MAX_HTTP_LINE_SIZE 2049
 
+#define MAX_HTTP_FIELD_VALUE_LEN 255
+struct HttpKeyValue
+{
+	const char *key;
+	char	    value[MAX_HTTP_FIELD_VALUE_LEN];
+};
+#define MAX_HTTP_FIELD_PAIR_NUM 5
+/////////////////////////////////////////////////////////////////////
 class HttpServer
 {
 	public:
@@ -50,9 +60,18 @@ class HttpHandler
 	public:
 		void start_handle();
 		void set_argument(int fd,struct sockaddr_in& addr);
+
+		int set_http_field(const char* key,const char* value);
+		char* get_http_field(const char* key);
 	private:
-		int http_fd_;
+		void _clear_data();
+	private:
+		int					http_fd_;
 		struct sockaddr_in	remote_addr_;
+		FILE*				sock_file_;
+		char				http_line_[MAX_HTTP_LINE_SIZE];
+
+		HttpKeyValue		http_arg_info_[MAX_HTTP_FIELD_PAIR_NUM];
 };
 /////////////////////////////////////////////////////////////
 
