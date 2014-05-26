@@ -8,6 +8,8 @@
 #include <pthread.h>
 #include <assert.h>
 #include "httpserver.h"
+#include "httpscript.h"
+
 HttpServer::HttpServer()
 {}
 
@@ -48,7 +50,7 @@ void HttpServer::process()
 		int requestfd = accept(listenfd_,(struct sockaddr *)&req_addr,&addr_len);
 		if (requestfd > 0) {
 			HttpHandler* http_handler = new HttpHandler();
-			http_handler->set_argument(requestfd,req_addr);
+			http_handler->set_conn_info(requestfd,req_addr);
 
 			pthread_t thread_id;
 			if (pthread_create(&thread_id, NULL, &http_thread_routine, http_handler) < 0)
@@ -63,7 +65,7 @@ void HttpServer::process()
 HttpHandler::HttpHandler() : http_fd_(0)
 {
 	memset(&remote_addr_,0,sizeof(struct sockaddr_in));
-	memset(&http_line_[0],0,MAX_HTTP_LINE_SIZE);
+	memset(&http_option_data_[0],0,MAX_HTTP_LINE_SIZE);
 	memset(&http_arg_info_[0],0,sizeof(http_arg_info_));
 }
 
@@ -71,7 +73,7 @@ HttpHandler::~HttpHandler()
 {
 }
 
-void HttpHandler::set_argument(int fd,struct sockaddr_in& addr)
+void HttpHandler::set_conn_info(int fd,struct sockaddr_in& addr)
 {
 	http_fd_ = fd;
 	memcpy(&remote_addr_,&addr,sizeof(struct sockaddr_in));
@@ -85,11 +87,13 @@ void HttpHandler::start_handle()
 	if (NULL == sock_file_)
 		_clear_data();
 
-	while (fgets(http_line_,MAX_HTTP_LINE_SIZE,sock_file_)) {
-		printf("%s\n",http_line_);
-		memset(&http_line_[0],0,MAX_HTTP_LINE_SIZE);
-	}
 	
+
+	while (fgets(http_option_data_,MAX_HTTP_LINE_SIZE,sock_file_)) {
+		printf("%s\n",http_option_data_);
+		memset(&http_option_data_[0],0,MAX_HTTP_LINE_SIZE);
+	}
+
 	_clear_data();
 	printf("exit thread\n");
 }
@@ -104,6 +108,23 @@ void HttpHandler::_clear_data()
 	delete this;
 }
 
+int HttpHandler::_read_request()
+{
+	char http_method[MAX_HTTP_METHOD_LEN];
+	memset(&http_method[0],0,sizeof(http_method));
+
+	char http_method_data[MAX_HTTP_FIELD_VALUE_LEN];
+	memset(&http_method_data[0],0,sizeof(http_method_data));
+
+	if (fgets(http_request_,MAX_HTTP_LINE_SIZE,sock_file_)) {
+		if (sscanf(http_request_,"%s%s",http_method,http_method_data) < 2)
+			return -1;
+		else
+			return 0;
+	}
+	else
+		return -1;
+}
 int HttpHandler::set_http_field(const char* key,const char* value)
 {
 	for (int i = 0; i < MAX_HTTP_FIELD_PAIR_NUM; i++) {

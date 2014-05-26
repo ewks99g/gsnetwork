@@ -29,6 +29,7 @@
 #include "typedef.h" 
 //////////////////////////////////////////////////////////////////////
 #define MAX_HTTP_LINE_SIZE 2049
+#define MAX_HTTP_METHOD_LEN 10
 
 #define MAX_HTTP_FIELD_VALUE_LEN 255
 struct HttpKeyValue
@@ -37,6 +38,15 @@ struct HttpKeyValue
 	char	    value[MAX_HTTP_FIELD_VALUE_LEN];
 };
 #define MAX_HTTP_FIELD_PAIR_NUM 5
+
+/*
+ * The routine of http server spawned thread 
+ * */
+void* http_thread_routine(void* argument);
+
+/*
+ *The function of user interface
+ * */
 /////////////////////////////////////////////////////////////////////
 class HttpServer
 {
@@ -59,22 +69,33 @@ class HttpHandler
 		~HttpHandler();
 	public:
 		void start_handle();
-		void set_argument(int fd,struct sockaddr_in& addr);
+		void set_conn_info(int fd,struct sockaddr_in& addr);
 
 		int set_http_field(const char* key,const char* value);
 		char* get_http_field(const char* key);
 	private:
+		int _read_requst();
 		void _clear_data();
 	private:
 		int					http_fd_;
 		struct sockaddr_in	remote_addr_;
 		FILE*				sock_file_;
-		char				http_line_[MAX_HTTP_LINE_SIZE];
+		char				http_option_data_[MAX_HTTP_LINE_SIZE];
+		char				http_request_[MAX_HTTP_LINE_SIZE];
 
 		HttpKeyValue		http_arg_info_[MAX_HTTP_FIELD_PAIR_NUM];
+
+		HttpDataEntry		http_data_accessor_;
 };
 /////////////////////////////////////////////////////////////
-
-void* http_thread_routine(void* argument);
+class HttpDataEntry
+{
+	public:
+		HttpDataEntry() {}
+		~HttpDataEntry() {}
+	public:
+		const char* getValue(const char* key);
+};
+////////////////////////////////////////////////////////////
 
 #endif
