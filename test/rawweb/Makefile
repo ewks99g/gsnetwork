@@ -75,12 +75,12 @@ AUTOMAKE = ${SHELL} /home/wangbin/workpath/github/gsnetwork/missing --run automa
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -g
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -g
 CYGPATH_W = echo
 DEFS = -DLINUX 
 DEPDIR = .deps

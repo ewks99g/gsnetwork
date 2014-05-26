@@ -14,8 +14,8 @@ int main()
 		path_name = getenv("SCRIPT_NAME"); 
 		query_string = getenv("QUERY_STRING"); 
 		uri = getenv("REQUEST_URI"); 
-	//	printf("FastCGI Hello! %s:%s",path_name,query_string);
-		printf("FastCGI Hello! %s",uri);
+		printf("FastCGI Hello! %s:%s",path_name,query_string);
+//		printf("FastCGI Hello! %s",uri);
 	}
 	return 0;
 }

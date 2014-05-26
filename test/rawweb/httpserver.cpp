@@ -81,15 +81,23 @@ void HttpHandler::set_conn_info(int fd,struct sockaddr_in& addr)
 
 void HttpHandler::start_handle()
 {
-	printf("start handler http");
+	printf("start handler http\n");
 	
 	sock_file_ = fdopen(http_fd_,"a+");
 	if (NULL == sock_file_)
 		_clear_data();
 
+	//read first line of HTTP METHOD
+	_read_request();
 	
-
-	while (fgets(http_option_data_,MAX_HTTP_LINE_SIZE,sock_file_)) {
+	//read option
+	for (int i = 0; i < MAX_HTTP_FIELD_PAIR_NUM; i++) {
+		if (http_arg_info_[i].key)
+			printf("%s\t:\t%s\n",http_arg_info_[i].key,http_arg_info_[i].value);
+	}
+	
+	//read till \r\n,empty line
+	while (fgets(http_option_data_,MAX_HTTP_LINE_SIZE,sock_file_) && strcmp(http_option_data_,"\r\n") == 0) {
 		printf("%s\n",http_option_data_);
 		memset(&http_option_data_[0],0,MAX_HTTP_LINE_SIZE);
 	}
@@ -113,17 +121,42 @@ int HttpHandler::_read_request()
 	char http_method[MAX_HTTP_METHOD_LEN];
 	memset(&http_method[0],0,sizeof(http_method));
 
-	char http_method_data[MAX_HTTP_FIELD_VALUE_LEN];
-	memset(&http_method_data[0],0,sizeof(http_method_data));
-
+	char http_uri[MAX_HTTP_FIELD_VALUE_LEN];
+	memset(&http_uri[0],0,sizeof(http_uri));
+	
 	if (fgets(http_request_,MAX_HTTP_LINE_SIZE,sock_file_)) {
-		if (sscanf(http_request_,"%s%s",http_method,http_method_data) < 2)
-			return -1;
-		else
-			return 0;
+		if (sscanf(http_request_,"%s%s",http_method,http_uri) == 2) {
+			if (strcasecmp(http_request_,"GET") == 0 || strcasecmp(http_request_,"POST")) {
+				set_http_field("REQUEST_METHOD",http_method);
+				set_http_field("REQUEST_URI",http_uri);
+				_split_uri(http_uri,'?'); //file_name?query_string
+				return 0;
+			}
+		}
 	}
-	else
-		return -1;
+
+	return -1;
+}
+int HttpHandler::_split_uri(const char* httpuri,const char spliter)
+{
+	char file_name[MAX_HTTP_FIELD_VALUE_LEN];
+	memset(&file_name[0],0,sizeof(file_name));
+
+	char query_string[MAX_HTTP_FIELD_VALUE_LEN];
+	memset(&query_string[0],0,sizeof(query_string));
+	
+	const char* ptr = httpuri;
+	while (*(++ptr) != '\0') {
+		if (*ptr == spliter)
+			break;
+	}
+
+	strncpy(file_name,httpuri,ptr - httpuri);
+	ptr++;
+	strcpy(query_string,ptr);
+
+	set_http_field("SCRIPT_NAME",file_name);
+	set_http_field("QUERY_STRING ",query_string);
 }
 int HttpHandler::set_http_field(const char* key,const char* value)
 {
@@ -158,4 +191,3 @@ void* http_thread_routine(void* argument)
 	}
 }
 //////////////////////////////////////////////////////////////////////
-

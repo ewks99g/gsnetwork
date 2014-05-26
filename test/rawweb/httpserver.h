@@ -37,7 +37,7 @@ struct HttpKeyValue
 	const char *key;
 	char	    value[MAX_HTTP_FIELD_VALUE_LEN];
 };
-#define MAX_HTTP_FIELD_PAIR_NUM 5
+#define MAX_HTTP_FIELD_PAIR_NUM 10
 
 /*
  * The routine of http server spawned thread 
@@ -60,6 +60,15 @@ class HttpServer
 		struct sockaddr_in      address_;
 		int						listenfd_;
 };
+/////////////////////////////////////////////////////////////
+class HttpDataEntry
+{
+	public:
+		HttpDataEntry() {}
+		~HttpDataEntry() {}
+	public:
+		const char* getValue(const char* key) const;
+};
 
 //////////////////////////////////////////////////////////////
 class HttpHandler
@@ -74,7 +83,8 @@ class HttpHandler
 		int set_http_field(const char* key,const char* value);
 		char* get_http_field(const char* key);
 	private:
-		int _read_requst();
+		int _read_request();
+		int _split_uri(const char* httpuri,const char spliter);
 		void _clear_data();
 	private:
 		int					http_fd_;
@@ -86,15 +96,6 @@ class HttpHandler
 		HttpKeyValue		http_arg_info_[MAX_HTTP_FIELD_PAIR_NUM];
 
 		HttpDataEntry		http_data_accessor_;
-};
-/////////////////////////////////////////////////////////////
-class HttpDataEntry
-{
-	public:
-		HttpDataEntry() {}
-		~HttpDataEntry() {}
-	public:
-		const char* getValue(const char* key);
 };
 ////////////////////////////////////////////////////////////
 
