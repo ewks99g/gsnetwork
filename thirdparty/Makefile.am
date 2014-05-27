@@ -1,0 +1,3 @@
+#AUTOMAKE_OPTIONS=foreign
+SUBDIRS=json pugixml zlib
+#EXTRA_DIST=TESTREADME.md

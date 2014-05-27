@@ -3,7 +3,6 @@
 
 C_PREREQ([2.63])
 AC_INIT([gsnetwork], [1.0], [wang70bin@163.com])
-AC_CONFIG_SRCDIR([include/ipcbase.h])
 AM_INIT_AUTOMAKE(gsnetwork, 1.0)
 
 # Checks for programs.
@@ -11,23 +10,35 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
-
+AC_CHECK_LIB([pthread],[pthread_create],["finded, dummy,do nothing"],[echo "Can not find pthread_create"])
 # Checks for header files.
-AC_CONFIG_HEADERS([config.h])
-AC_CHECK_HEADERS([arpa/inet.h fcntl.h netdb.h netinet/in.h stdlib.h string.h sys/socket.h unistd.h])
-
+AC_CHECK_HEADERS(errno.h arpa/inet.h netinet/tcp.h netinet/in.h stddef.h \
+					stdlib.h string.h sys/socket.h sys/time.h time.h unistd.h limits.h)
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
 
+#Only use static lib
 AC_PROG_RANLIB
+#if use dynamic lib,need define belows
+#AC_PROG_LIBTOOL
 
 # Checks for library functions.
-AC_FUNC_MALLOC
-AC_CHECK_FUNCS([memset])
 
-AC_PROG_MAKE_SET
-
-AC_OUTPUT(Makefile source/Makefile zmqware/Makefile test/Makefile test/zmqserver/Makefile 
-			test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile 
-			test/cgiscript/Makefile test/cgippscript/Makefile
-			test/rawweb/Makefile)
+AC_OUTPUT(Makefile source/Makefile 
+			module/Makefile
+			module/zmqware/Makefile
+			module/mysqlware/Makefile
+			module/mongoware/Makefile
+			test/Makefile
+			test/zmqserver/Makefile 
+			test/zmqbroker/Makefile
+			test/zmqclient/Makefile 
+			test/normalserver/Makefile 
+			test/normalclient/Makefile 
+			test/memtest/Makefile 
+			test/cgiscript/Makefile
+			test/cgippscript/Makefile
+			test/rawweb/Makefile
+			thirdparty/Makefile
+			thirdparty/json/Makefile
+			thirdparty/pugixml/Makefile
+			thirdparty/zlib/Makefile)

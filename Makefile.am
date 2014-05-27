@@ -1,2 +1,2 @@
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS=source zmqware test
+SUBDIRS=source module test thirdparty 
