@@ -41,4 +41,5 @@ AC_OUTPUT(Makefile source/Makefile
 			thirdparty/Makefile
 			thirdparty/json/Makefile
 			thirdparty/pugixml/Makefile
+			thirdparty/luatinker/Makefile
 			thirdparty/zlib/Makefile)

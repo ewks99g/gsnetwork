@@ -1,0 +1,14 @@
+Official Mongo C++ Driver
+
+Mongo (from "humongous") is a high-performance, open source,
+schema-free, document-oriented database. A common name in the
+"NOSQL" community.
+
+WWW: http://www.mongodb.org/
+
+
+The MongoDB cxx Driver is part of the server distribution, however if you
+don't want the entire server distribution then this file contains just the 
+driver part.
+
+

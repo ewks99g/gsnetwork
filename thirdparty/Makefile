@@ -175,7 +175,7 @@ top_builddir = ..
 top_srcdir = ..
 
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS = json pugixml zlib
+SUBDIRS = json pugixml zlib luatinker
 all: all-recursive
 
 .SUFFIXES:

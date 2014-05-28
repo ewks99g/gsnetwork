@@ -33,7 +33,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 subdir = module/mongoware
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -158,7 +158,7 @@ top_builddir = ../..
 top_srcdir = ../..
 noinst_LIBRARIES = libmongoware.a
 libmongoware_a_SOURCES = mongodef.h mongo.h mongo.cpp
-INCLUDES = -I/usr/local/include -I/usr/include
+INCLUDES = -I/usr/local/include -I/usr/include -I./mongoinclude
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib
 all: all-am
 
