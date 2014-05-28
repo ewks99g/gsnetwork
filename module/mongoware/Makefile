@@ -46,7 +46,8 @@ AR = ar
 ARFLAGS = cru
 libmongoware_a_AR = $(AR) $(ARFLAGS)
 libmongoware_a_LIBADD =
-am_libmongoware_a_OBJECTS = mongo.$(OBJEXT)
+am_libmongoware_a_OBJECTS = dbconnection.$(OBJEXT) \
+	connectionpool.$(OBJEXT)
 libmongoware_a_OBJECTS = $(am_libmongoware_a_OBJECTS)
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -157,7 +158,7 @@ top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
 noinst_LIBRARIES = libmongoware.a
-libmongoware_a_SOURCES = mongodef.h mongo.h mongo.cpp
+libmongoware_a_SOURCES = mongodef.h dbconnection.cpp dbconnection.h connectionpool.h connectionpool.cpp
 INCLUDES = -I/usr/local/include -I/usr/include -I./mongoinclude
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib
 all: all-am
@@ -208,7 +209,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/mongo.Po
+include ./$(DEPDIR)/connectionpool.Po
+include ./$(DEPDIR)/dbconnection.Po
 
 .cpp.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
