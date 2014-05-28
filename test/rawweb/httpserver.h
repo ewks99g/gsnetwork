@@ -96,6 +96,9 @@ class HttpHandler
 		HttpKeyValue		http_arg_info_[MAX_HTTP_FIELD_PAIR_NUM];
 
 		HttpDataEntry		http_data_accessor_;
+
+		int					handle_in_pipe_[2];
+		int					handle_out_pipe_[2];
 };
 ////////////////////////////////////////////////////////////
 

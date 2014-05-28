@@ -101,7 +101,54 @@ void HttpHandler::start_handle()
 		printf("%s\n",http_option_data_);
 		memset(&http_option_data_[0],0,MAX_HTTP_LINE_SIZE);
 	}
+		
+	if (pipe(handle_in_pipe_) < 0 || pipe(handle_out_pipe_) < 0)
+		_clear_data();
+	
+	int pid = fork();
+	if (pid < 0)
+		_clear_data();
 
+	if (pid == 0) {
+		//
+		close(handle_in_pipe_[0]);
+		close(handle_out_pipe_[1]);
+		dup2(handle_in_pipe_[1],0);		//associate wr-pipe with stdout
+		dup2(handle_out_pipe_[0],1);	//associate rd-pipe with stdin
+
+		//set up env
+		char env_buff[MAX_HTTP_FIELD_VALUE_LEN];
+		for (int i = 0; i < MAX_HTTP_FIELD_PAIR_NUM; i++) {
+			if (http_arg_info_[i].key) {
+				memset(&env_buff[0],0,sizeof(env_buff));
+				sprintf(env_buff,"%s=%s",http_arg_info_[i].key,http_arg_info_[i].value);
+				putenv(&env_buff[0]);
+
+				fprintf(stderr,"get env %s\t%s",http_arg_info_[i].key,getenv(http_arg_info_[i].key));
+			}
+		}
+
+		execl("cgi.sh","test",NULL);
+		//start new process
+	}
+	else if (pid > 0 ) {
+		close(handle_in_pipe_[1]);
+		close(handle_out_pipe_[0]);
+
+		//handle data
+		//only for read
+		char rdchar;
+		while (read(handle_in_pipe_[0],&rdchar,1))
+			fwrite(&rdchar,1,1,sock_file_);
+		
+		//release fd
+		close(handle_in_pipe_[0]);
+		close(handle_out_pipe_[1]);
+
+		//waiting for child process exit
+		int status = 0;
+		waitpid(pid, &status, 0);
+	}
 	_clear_data();
 	printf("exit thread\n");
 }

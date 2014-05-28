@@ -1,1 +1,3 @@
-SUBDIRS=zmqware mysqlware mongoware
+SUBDIRS=zmqware \
+mongoware
+#mysqlware	
