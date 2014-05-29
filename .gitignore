@@ -1,0 +1,8 @@
+*.o
+*.a
+*.swp
+.deps*
+autom4te.cache/
+config.h.in~
+config.log
+ctags*
