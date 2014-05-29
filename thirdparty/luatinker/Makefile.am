@@ -1,4 +1,4 @@
-noinst_LIBRARIES=libluatinker.a
+lib_LIBRARIES=libluatinker.a
 libluatinker_a_SOURCES=inc/lapi.h\
 						inc/lcode.h\
 						inc/ldo.h \
