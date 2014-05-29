@@ -113,8 +113,8 @@ void HttpHandler::start_handle()
 		//
 		close(handle_in_pipe_[0]);
 		close(handle_out_pipe_[1]);
-		dup2(handle_in_pipe_[1],0);		//associate wr-pipe with stdout
-		dup2(handle_out_pipe_[0],1);	//associate rd-pipe with stdin
+		dup2(handle_in_pipe_[1],1);		//associate wr-pipe with stdout
+		dup2(handle_out_pipe_[0],0);	//associate rd-pipe with stdin
 
 		//set up env
 		char env_buff[MAX_HTTP_FIELD_VALUE_LEN];
@@ -124,12 +124,11 @@ void HttpHandler::start_handle()
 				sprintf(env_buff,"%s=%s",http_arg_info_[i].key,http_arg_info_[i].value);
 				putenv(&env_buff[0]);
 
-				fprintf(stderr,"get env %s\t%s",http_arg_info_[i].key,getenv(http_arg_info_[i].key));
+			//	fprintf(stderr,"get env %s\t%s",http_arg_info_[i].key,getenv(http_arg_info_[i].key));
 			}
 		}
-
-		execl("cgi.sh","test",NULL);
-		//start new process
+		if (execl("./cgi.sh","test",NULL) < 0)
+			printf("can not load exe file,please check the excute previlege");
 	}
 	else if (pid > 0 ) {
 		close(handle_in_pipe_[1]);
@@ -148,9 +147,9 @@ void HttpHandler::start_handle()
 		//waiting for child process exit
 		int status = 0;
 		waitpid(pid, &status, 0);
+
+		_clear_data();
 	}
-	_clear_data();
-	printf("exit thread\n");
 }
 
 void HttpHandler::_clear_data()

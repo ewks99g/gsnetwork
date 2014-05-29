@@ -1,13 +1,9 @@
 /*******************************************************************
 *  Copyright(c) 2000-2013 linghegu
 *  All rights reserved.
-*  Author:  pengpeng
 *  CreateTime: 2014/05/28
  ******************************************************************/
 #include "dbconnection.h"
-
-using namespace bson;
-using namespace mongo;
 
 DBConnection::DBConnection(bool autoreconn,int wrtimeoutsec)  : DBClientConnection(autoreconn,0,wrtimeoutsec)
 {
