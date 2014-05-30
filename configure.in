@@ -28,6 +28,7 @@ AC_OUTPUT(Makefile source/Makefile
 			module/zmqware/Makefile
 			module/mysqlware/Makefile
 			module/mongoware/Makefile
+			module/luaware/Makefile
 			test/Makefile
 			test/zmqserver/Makefile 
 			test/zmqbroker/Makefile

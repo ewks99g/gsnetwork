@@ -174,7 +174,8 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 SUBDIRS = zmqware \
-mongoware
+mongoware \
+luaware
 
 all: all-recursive
 

@@ -14,7 +14,7 @@ LuaInstance::LuaInstance()
 
 LuaInstance::~LuaInstance()
 {
-	lua_close(m_pLuaState);
+	lua_close(lua_state_);
 }
 
 bool LuaInstance::init()

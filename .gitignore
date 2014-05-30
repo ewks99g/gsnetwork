@@ -2,7 +2,11 @@
 *.a
 *.swp
 .deps*
+.gitignore
 autom4te.cache/
 config.h.in~
 config.log
 ctags*
+
+##scons file
+.sconf_temp

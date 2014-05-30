@@ -1,3 +1,4 @@
 SUBDIRS=zmqware \
-mongoware
+mongoware \
+luaware
 #mysqlware	
