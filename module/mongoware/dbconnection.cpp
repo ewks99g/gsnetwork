@@ -130,8 +130,8 @@ void DBConnection::find(const char* ns,const mongo::BSONObj& condition,std::vect
 	if (number <= 0)
 		return;
 
-	mongo::Query empty_query;
-	std::auto_ptr<mongo::DBClientCursor> cursor = query(ns, empty_query);
+	mongo::Query query_condition(condition);
+	std::auto_ptr<mongo::DBClientCursor> cursor = query(ns, query_condition);
 	
 	int rd_count = 0;
 	while (cursor.get() != NULL && cursor->more() && rd_count < number) {

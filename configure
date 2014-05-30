@@ -4936,7 +4936,7 @@ fi
 
 # Checks for library functions.
 
-ac_config_files="$ac_config_files Makefile source/Makefile module/Makefile module/zmqware/Makefile module/mysqlware/Makefile module/mongoware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile test/cgiscript/Makefile test/cgippscript/Makefile test/rawweb/Makefile thirdparty/Makefile thirdparty/json/Makefile thirdparty/pugixml/Makefile thirdparty/luatinker/Makefile thirdparty/zlib/Makefile"
+ac_config_files="$ac_config_files Makefile source/Makefile module/Makefile module/zmqware/Makefile module/mysqlware/Makefile module/mongoware/Makefile test/Makefile test/zmqserver/Makefile test/zmqbroker/Makefile test/zmqclient/Makefile test/normalserver/Makefile test/normalclient/Makefile test/memtest/Makefile test/mongotest/Makefile test/cgiscript/Makefile test/cgippscript/Makefile test/rawweb/Makefile thirdparty/Makefile thirdparty/json/Makefile thirdparty/pugixml/Makefile thirdparty/luatinker/Makefile thirdparty/zlib/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5601,6 +5601,7 @@ do
     "test/normalserver/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalserver/Makefile" ;;
     "test/normalclient/Makefile") CONFIG_FILES="$CONFIG_FILES test/normalclient/Makefile" ;;
     "test/memtest/Makefile") CONFIG_FILES="$CONFIG_FILES test/memtest/Makefile" ;;
+    "test/mongotest/Makefile") CONFIG_FILES="$CONFIG_FILES test/mongotest/Makefile" ;;
     "test/cgiscript/Makefile") CONFIG_FILES="$CONFIG_FILES test/cgiscript/Makefile" ;;
     "test/cgippscript/Makefile") CONFIG_FILES="$CONFIG_FILES test/cgippscript/Makefile" ;;
     "test/rawweb/Makefile") CONFIG_FILES="$CONFIG_FILES test/rawweb/Makefile" ;;

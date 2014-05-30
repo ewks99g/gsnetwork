@@ -10,7 +10,12 @@
 int
 main(int argc,char** argv)
 {
+	if (argc < 3)
+	{
+		return 1;
+	}
+	
 	HttpServer _server;
-	if (_server.start("192.168.1.4",8001))
+	if (_server.start(argv[1],atoi(argv[2])))
 		_server.process();
 }
