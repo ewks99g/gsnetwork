@@ -21,7 +21,17 @@ class LuaInstance
 		LuaInstance();
 		~LuaInstance();
 	public:
+
+		/*
+		 * init the lua enviroment,includeing io,math etc.
+		 * */
 		bool init();
+
+		/*
+		 *We only need to load file of head-file of lua environment
+		 *The other lua file can load by useing "require"
+		 * */
+		bool load_lua_head_file(const char* filename);
 	private:
 		lua_State*	lua_state_;
 };
