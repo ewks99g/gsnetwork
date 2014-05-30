@@ -221,9 +221,8 @@ int HttpHandler::set_http_field(const char* key,const char* value)
 char* HttpHandler::get_http_field(const char* key)
 {
 	for (int i = 0; i < MAX_HTTP_FIELD_PAIR_NUM; i++) {
-		if (http_arg_info_[i].key != 0 && strcmp(http_arg_info_[i].key,key) == 0) {
+		if (http_arg_info_[i].key != 0 && strcmp(http_arg_info_[i].key,key) == 0)
 			return &http_arg_info_[i].value[0];
-		}
 	}
 	return NULL;
 }
