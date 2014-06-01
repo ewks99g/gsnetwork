@@ -1,11 +1,12 @@
 *.o
 *.a
+*.so
 *.swp
 .deps*
 .gitignore
 autom4te.cache/
 config.h.in~
-config.log
+*.log
 ctags*
 
 ##scons file
