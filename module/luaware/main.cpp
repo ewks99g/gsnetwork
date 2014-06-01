@@ -1,12 +1,34 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "luainstance.h"
+#include <dlfcn.h>
+extern "C"
+{
+	int luaopen_mytestlib(lua_State* L);
+};
 
 int
 main()
 {
 	LuaInstance lua_instance;
 	lua_instance.init();
+	
+//	void* dl_handle = dlopen("luaclib/mytestlib.so",RTLD_LAZY);
+//	if (dlopen == NULL) {
+//		printf("Can not load dl\n");
+//		return 1;
+//	}
+	
+//	int (*lua_addr)(lua_State*) = 0;
+//	*(void **) (&lua_addr) = dlsym(dl_handle,"luaopen_mytestlib");
+	//luaopen_mytestlib(NULL);
+//	if (lua_addr) { printf("symbol add %x\n",lua_addr); lua_addr(0);}
+//	else printf("Can not find symbol\n");
+
+
+//	return 0;
+
+
 
 //	if (!lua_instance.load_lua_head_file("./lua_entry.lua"))
 	if (!lua_instance.load_lua_head_file("./luascript/game_math.lua"))

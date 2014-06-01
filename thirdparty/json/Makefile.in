@@ -190,9 +190,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign thirdparty/json/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu thirdparty/json/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign thirdparty/json/Makefile
+	  $(AUTOMAKE) --gnu thirdparty/json/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

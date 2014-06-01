@@ -39,7 +39,6 @@ static luaL_Reg mylibs[] = {
 //4. 需要强调的是，所有需要用到"xxx"的代码，不论C还是Lua，都必须保持一致，这是Lua的约定，
 //   否则将无法调用。
 extern "C"
-//__declspec(dllexport)
 int luaopen_mytestlib(lua_State* L) 
 {
     const char* libName = "mytestlib";
