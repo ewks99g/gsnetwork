@@ -36,6 +36,7 @@ AC_OUTPUT(Makefile source/Makefile
 			test/normalserver/Makefile 
 			test/normalclient/Makefile 
 			test/memtest/Makefile 
+			test/templatetest/Makefile 
 			test/mongotest/Makefile 
 			test/cgiscript/Makefile
 			test/cgippscript/Makefile

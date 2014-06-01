@@ -1,5 +1,5 @@
-noinst_LIBRARIES=libluaware.a
-libluaware_a_SOURCES=luainstance.cpp  luainstance.h
-INCLUDES=-I/usr/local/include -I/usr/include -I../../thirdparty/luatinker/inc
-LDADD=-L/usr/local/lib -L/usr/lib -L/lib
-DEFS=-DLINUX
+bin_PROGRAMS=luatest
+luatest_SOURCES=main.cpp luainstance.cpp luabinder.cpp luafuncsrc.cpp
+INCLUDES=-I/usr/local/include -I/usr/include
+LDADD=-L/usr/local/lib -L/usr/lib -L/lib -llua -ldl
+DEFS=-DLINUX -Wl -E
