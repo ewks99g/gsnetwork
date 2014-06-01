@@ -2,10 +2,6 @@
 #include <stdio.h>
 #include "luainstance.h"
 #include <dlfcn.h>
-extern "C"
-{
-	int luaopen_mytestlib(lua_State* L);
-};
 
 int
 main()
@@ -30,8 +26,8 @@ main()
 
 
 
-//	if (!lua_instance.load_lua_head_file("./lua_entry.lua"))
-	if (!lua_instance.load_lua_head_file("./luascript/game_math.lua"))
+	if (!lua_instance.load_lua_head_file("./lua_entry.lua"))
+//	if (!lua_instance.load_lua_head_file("./luascript/game_math.lua"))
 		return 0;
 
 	lua_instance.register_lua_func();
