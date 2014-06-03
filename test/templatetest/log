@@ -1,0 +1,362 @@
+
+templatetest:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000400640 <_start>:
+_start():
+  400640:	31 ed                	xor    %ebp,%ebp
+  400642:	49 89 d1             	mov    %rdx,%r9
+  400645:	5e                   	pop    %rsi
+  400646:	48 89 e2             	mov    %rsp,%rdx
+  400649:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  40064d:	50                   	push   %rax
+  40064e:	54                   	push   %rsp
+  40064f:	49 c7 c0 e0 07 40 00 	mov    $0x4007e0,%r8
+  400656:	48 c7 c1 f0 07 40 00 	mov    $0x4007f0,%rcx
+  40065d:	48 c7 c7 60 07 40 00 	mov    $0x400760,%rdi
+  400664:	e8 9f ff ff ff       	callq  400608 <__libc_start_main@plt>
+  400669:	f4                   	hlt    
+  40066a:	90                   	nop
+  40066b:	90                   	nop
+
+000000000040066c <call_gmon_start>:
+call_gmon_start():
+  40066c:	48 83 ec 08          	sub    $0x8,%rsp
+  400670:	48 8b 05 f1 06 20 00 	mov    0x2006f1(%rip),%rax        # 600d68 <_DYNAMIC+0x1c0>
+  400677:	48 85 c0             	test   %rax,%rax
+  40067a:	74 02                	je     40067e <call_gmon_start+0x12>
+  40067c:	ff d0                	callq  *%rax
+  40067e:	48 83 c4 08          	add    $0x8,%rsp
+  400682:	c3                   	retq   
+  400683:	90                   	nop
+  400684:	90                   	nop
+  400685:	90                   	nop
+  400686:	90                   	nop
+  400687:	90                   	nop
+  400688:	90                   	nop
+  400689:	90                   	nop
+  40068a:	90                   	nop
+  40068b:	90                   	nop
+  40068c:	90                   	nop
+  40068d:	90                   	nop
+  40068e:	90                   	nop
+  40068f:	90                   	nop
+
+0000000000400690 <__do_global_dtors_aux>:
+__do_global_dtors_aux():
+  400690:	55                   	push   %rbp
+  400691:	48 89 e5             	mov    %rsp,%rbp
+  400694:	53                   	push   %rbx
+  400695:	48 83 ec 08          	sub    $0x8,%rsp
+  400699:	80 3d 78 07 20 00 00 	cmpb   $0x0,0x200778(%rip)        # 600e18 <completed.6349>
+  4006a0:	75 4b                	jne    4006ed <__do_global_dtors_aux+0x5d>
+  4006a2:	bb 98 0b 60 00       	mov    $0x600b98,%ebx
+  4006a7:	48 8b 05 72 07 20 00 	mov    0x200772(%rip),%rax        # 600e20 <dtor_idx.6351>
+  4006ae:	48 81 eb 90 0b 60 00 	sub    $0x600b90,%rbx
+  4006b5:	48 c1 fb 03          	sar    $0x3,%rbx
+  4006b9:	48 83 eb 01          	sub    $0x1,%rbx
+  4006bd:	48 39 d8             	cmp    %rbx,%rax
+  4006c0:	73 24                	jae    4006e6 <__do_global_dtors_aux+0x56>
+  4006c2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  4006c8:	48 83 c0 01          	add    $0x1,%rax
+  4006cc:	48 89 05 4d 07 20 00 	mov    %rax,0x20074d(%rip)        # 600e20 <dtor_idx.6351>
+  4006d3:	ff 14 c5 90 0b 60 00 	callq  *0x600b90(,%rax,8)
+  4006da:	48 8b 05 3f 07 20 00 	mov    0x20073f(%rip),%rax        # 600e20 <dtor_idx.6351>
+  4006e1:	48 39 d8             	cmp    %rbx,%rax
+  4006e4:	72 e2                	jb     4006c8 <__do_global_dtors_aux+0x38>
+  4006e6:	c6 05 2b 07 20 00 01 	movb   $0x1,0x20072b(%rip)        # 600e18 <completed.6349>
+  4006ed:	48 83 c4 08          	add    $0x8,%rsp
+  4006f1:	5b                   	pop    %rbx
+  4006f2:	c9                   	leaveq 
+  4006f3:	c3                   	retq   
+  4006f4:	66 66 66 2e 0f 1f 84 	data32 data32 nopw %cs:0x0(%rax,%rax,1)
+  4006fb:	00 00 00 00 00 
+
+0000000000400700 <frame_dummy>:
+frame_dummy():
+  400700:	48 83 3d 98 04 20 00 	cmpq   $0x0,0x200498(%rip)        # 600ba0 <__JCR_END__>
+  400707:	00 
+  400708:	55                   	push   %rbp
+  400709:	48 89 e5             	mov    %rsp,%rbp
+  40070c:	74 12                	je     400720 <frame_dummy+0x20>
+  40070e:	b8 00 00 00 00       	mov    $0x0,%eax
+  400713:	48 85 c0             	test   %rax,%rax
+  400716:	74 08                	je     400720 <frame_dummy+0x20>
+  400718:	bf a0 0b 60 00       	mov    $0x600ba0,%edi
+  40071d:	c9                   	leaveq 
+  40071e:	ff e0                	jmpq   *%rax
+  400720:	c9                   	leaveq 
+  400721:	c3                   	retq   
+  400722:	90                   	nop
+  400723:	90                   	nop
+  400724:	90                   	nop
+  400725:	90                   	nop
+  400726:	90                   	nop
+  400727:	90                   	nop
+  400728:	90                   	nop
+  400729:	90                   	nop
+  40072a:	90                   	nop
+  40072b:	90                   	nop
+  40072c:	90                   	nop
+  40072d:	90                   	nop
+  40072e:	90                   	nop
+  40072f:	90                   	nop
+
+0000000000400730 <_Z7add_numi>:
+add_num():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:25
+}
+
+void add_num(int val)
+{
+	val = val + 30;
+}
+  400730:	f3 c3                	repz retq 
+_Z7add_numi():
+  400732:	66 66 66 66 66 2e 0f 	data32 data32 data32 data32 nopw %cs:0x0(%rax,%rax,1)
+  400739:	1f 84 00 00 00 00 00 
+
+0000000000400740 <_Z24test_static_function_memv>:
+_Z24test_static_function_memv():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:19
+	test_function_static_mem = 10;
+	
+//	static int test_function_static_mem = 10;
+//	test_function_static_mem += 2;
+
+	printf("static mem %d\n",test_function_static_mem);
+  400740:	be 0a 00 00 00       	mov    $0xa,%esi
+  400745:	bf f0 08 40 00       	mov    $0x4008f0,%edi
+  40074a:	31 c0                	xor    %eax,%eax
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:14
+#include <stdio.h>
+
+void test_static_function_mem()
+{
+	static int test_function_static_mem;
+	test_function_static_mem = 10;
+  40074c:	c7 05 d2 06 20 00 0a 	movl   $0xa,0x2006d2(%rip)        # 600e28 <_ZZ24test_static_function_memvE24test_function_static_mem>
+  400753:	00 00 00 
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:19
+	
+//	static int test_function_static_mem = 10;
+//	test_function_static_mem += 2;
+
+	printf("static mem %d\n",test_function_static_mem);
+  400756:	e9 7d fe ff ff       	jmpq   4005d8 <printf@plt>
+  40075b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+0000000000400760 <main>:
+main():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:29
+	val = val + 30;
+}
+
+int
+main()
+{
+  400760:	48 83 ec 08          	sub    $0x8,%rsp
+_ZN14FatherTemplateIiE6dofuncEv():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/test.inl:17
+{
+	public:
+		FatherTemplate(Typename value)  {value_ = value;}
+		virtual ~FatherTemplate(){}
+
+		void dofunc() {printf("test template dofunc\n");}
+  400764:	bf ff 08 40 00       	mov    $0x4008ff,%edi
+  400769:	e8 7a fe ff ff       	callq  4005e8 <puts@plt>
+_ZN11IntTemplateILi30EE6dofuncEv():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/test.inl:30
+{
+	public:
+		IntTemplate() {value_ = value;}
+		virtual ~IntTemplate(){}
+
+		void dofunc() {printf("test template dofunc\n");}
+  40076e:	bf ff 08 40 00       	mov    $0x4008ff,%edi
+  400773:	e8 70 fe ff ff       	callq  4005e8 <puts@plt>
+main():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:39
+	_inttemplate.dofunc();
+	
+	//do not pass type through<>
+	template_func(30,&add_num);
+
+	test_static_function_mem();
+  400778:	e8 c3 ff ff ff       	callq  400740 <_Z24test_static_function_memv>
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:40
+	test_static_function_mem();
+  40077d:	e8 be ff ff ff       	callq  400740 <_Z24test_static_function_memv>
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:41
+}
+  400782:	31 c0                	xor    %eax,%eax
+  400784:	48 83 c4 08          	add    $0x8,%rsp
+  400788:	c3                   	retq   
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/main.cpp:40
+	
+	//do not pass type through<>
+	template_func(30,&add_num);
+
+	test_static_function_mem();
+	test_static_function_mem();
+  400789:	48 89 c7             	mov    %rax,%rdi
+  40078c:	e8 97 fe ff ff       	callq  400628 <_Unwind_Resume@plt>
+  400791:	eb f6                	jmp    400789 <main+0x29>
+  400793:	90                   	nop
+  400794:	90                   	nop
+  400795:	90                   	nop
+  400796:	90                   	nop
+  400797:	90                   	nop
+  400798:	90                   	nop
+  400799:	90                   	nop
+  40079a:	90                   	nop
+  40079b:	90                   	nop
+  40079c:	90                   	nop
+  40079d:	90                   	nop
+  40079e:	90                   	nop
+  40079f:	90                   	nop
+
+00000000004007a0 <_ZN14FatherTemplateIiED1Ev>:
+~FatherTemplate():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/test.inl:15
+template<typename Typename>
+class FatherTemplate
+{
+	public:
+		FatherTemplate(Typename value)  {value_ = value;}
+		virtual ~FatherTemplate(){}
+  4007a0:	48 c7 07 30 09 40 00 	movq   $0x400930,(%rdi)
+  4007a7:	c3                   	retq   
+_ZN14FatherTemplateIiED1Ev():
+  4007a8:	90                   	nop
+  4007a9:	90                   	nop
+  4007aa:	90                   	nop
+  4007ab:	90                   	nop
+  4007ac:	90                   	nop
+  4007ad:	90                   	nop
+  4007ae:	90                   	nop
+  4007af:	90                   	nop
+
+00000000004007b0 <_ZN11IntTemplateILi30EED1Ev>:
+~IntTemplate():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/test.inl:28
+template<int value>
+class IntTemplate
+{
+	public:
+		IntTemplate() {value_ = value;}
+		virtual ~IntTemplate(){}
+  4007b0:	48 c7 07 90 09 40 00 	movq   $0x400990,(%rdi)
+  4007b7:	c3                   	retq   
+_ZN11IntTemplateILi30EED2Ev():
+  4007b8:	90                   	nop
+  4007b9:	90                   	nop
+  4007ba:	90                   	nop
+  4007bb:	90                   	nop
+  4007bc:	90                   	nop
+  4007bd:	90                   	nop
+  4007be:	90                   	nop
+  4007bf:	90                   	nop
+
+00000000004007c0 <_ZN11IntTemplateILi30EED0Ev>:
+~IntTemplate():
+  4007c0:	48 c7 07 90 09 40 00 	movq   $0x400990,(%rdi)
+  4007c7:	e9 2c fe ff ff       	jmpq   4005f8 <_ZdlPv@plt>
+_ZN11IntTemplateILi30EED0Ev():
+  4007cc:	90                   	nop
+  4007cd:	90                   	nop
+  4007ce:	90                   	nop
+  4007cf:	90                   	nop
+
+00000000004007d0 <_ZN14FatherTemplateIiED0Ev>:
+~FatherTemplate():
+/home/wangbin/workpath/github/gsnetwork/test/templatetest/test.inl:15
+template<typename Typename>
+class FatherTemplate
+{
+	public:
+		FatherTemplate(Typename value)  {value_ = value;}
+		virtual ~FatherTemplate(){}
+  4007d0:	48 c7 07 30 09 40 00 	movq   $0x400930,(%rdi)
+  4007d7:	e9 1c fe ff ff       	jmpq   4005f8 <_ZdlPv@plt>
+_ZN14FatherTemplateIiED0Ev():
+  4007dc:	90                   	nop
+  4007dd:	90                   	nop
+  4007de:	90                   	nop
+  4007df:	90                   	nop
+
+00000000004007e0 <__libc_csu_fini>:
+__libc_csu_fini():
+  4007e0:	f3 c3                	repz retq 
+  4007e2:	66 66 66 66 66 2e 0f 	data32 data32 data32 data32 nopw %cs:0x0(%rax,%rax,1)
+  4007e9:	1f 84 00 00 00 00 00 
+
+00000000004007f0 <__libc_csu_init>:
+__libc_csu_init():
+  4007f0:	48 89 6c 24 d8       	mov    %rbp,-0x28(%rsp)
+  4007f5:	4c 89 64 24 e0       	mov    %r12,-0x20(%rsp)
+  4007fa:	48 8d 2d 7b 03 20 00 	lea    0x20037b(%rip),%rbp        # 600b7c <__init_array_end>
+  400801:	4c 8d 25 74 03 20 00 	lea    0x200374(%rip),%r12        # 600b7c <__init_array_end>
+  400808:	4c 89 6c 24 e8       	mov    %r13,-0x18(%rsp)
+  40080d:	4c 89 74 24 f0       	mov    %r14,-0x10(%rsp)
+  400812:	4c 89 7c 24 f8       	mov    %r15,-0x8(%rsp)
+  400817:	48 89 5c 24 d0       	mov    %rbx,-0x30(%rsp)
+  40081c:	48 83 ec 38          	sub    $0x38,%rsp
+  400820:	4c 29 e5             	sub    %r12,%rbp
+  400823:	41 89 fd             	mov    %edi,%r13d
+  400826:	49 89 f6             	mov    %rsi,%r14
+  400829:	48 c1 fd 03          	sar    $0x3,%rbp
+  40082d:	49 89 d7             	mov    %rdx,%r15
+  400830:	e8 7b fd ff ff       	callq  4005b0 <_init>
+  400835:	48 85 ed             	test   %rbp,%rbp
+  400838:	74 1c                	je     400856 <__libc_csu_init+0x66>
+  40083a:	31 db                	xor    %ebx,%ebx
+  40083c:	0f 1f 40 00          	nopl   0x0(%rax)
+  400840:	4c 89 fa             	mov    %r15,%rdx
+  400843:	4c 89 f6             	mov    %r14,%rsi
+  400846:	44 89 ef             	mov    %r13d,%edi
+  400849:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  40084d:	48 83 c3 01          	add    $0x1,%rbx
+  400851:	48 39 eb             	cmp    %rbp,%rbx
+  400854:	72 ea                	jb     400840 <__libc_csu_init+0x50>
+  400856:	48 8b 5c 24 08       	mov    0x8(%rsp),%rbx
+  40085b:	48 8b 6c 24 10       	mov    0x10(%rsp),%rbp
+  400860:	4c 8b 64 24 18       	mov    0x18(%rsp),%r12
+  400865:	4c 8b 6c 24 20       	mov    0x20(%rsp),%r13
+  40086a:	4c 8b 74 24 28       	mov    0x28(%rsp),%r14
+  40086f:	4c 8b 7c 24 30       	mov    0x30(%rsp),%r15
+  400874:	48 83 c4 38          	add    $0x38,%rsp
+  400878:	c3                   	retq   
+  400879:	90                   	nop
+  40087a:	90                   	nop
+  40087b:	90                   	nop
+  40087c:	90                   	nop
+  40087d:	90                   	nop
+  40087e:	90                   	nop
+  40087f:	90                   	nop
+
+0000000000400880 <__do_global_ctors_aux>:
+__do_global_ctors_aux():
+  400880:	55                   	push   %rbp
+  400881:	48 89 e5             	mov    %rsp,%rbp
+  400884:	53                   	push   %rbx
+  400885:	48 83 ec 08          	sub    $0x8,%rsp
+  400889:	48 8b 05 f0 02 20 00 	mov    0x2002f0(%rip),%rax        # 600b80 <__CTOR_LIST__>
+  400890:	48 83 f8 ff          	cmp    $0xffffffffffffffff,%rax
+  400894:	74 19                	je     4008af <__do_global_ctors_aux+0x2f>
+  400896:	bb 80 0b 60 00       	mov    $0x600b80,%ebx
+  40089b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  4008a0:	48 83 eb 08          	sub    $0x8,%rbx
+  4008a4:	ff d0                	callq  *%rax
+  4008a6:	48 8b 03             	mov    (%rbx),%rax
+  4008a9:	48 83 f8 ff          	cmp    $0xffffffffffffffff,%rax
+  4008ad:	75 f1                	jne    4008a0 <__do_global_ctors_aux+0x20>
+  4008af:	48 83 c4 08          	add    $0x8,%rsp
+  4008b3:	5b                   	pop    %rbx
+  4008b4:	c9                   	leaveq 
+  4008b5:	c3                   	retq   
+  4008b6:	90                   	nop
+  4008b7:	90                   	nop
