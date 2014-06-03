@@ -56,17 +56,18 @@ class LuaInstance
 			lua_getglobal(lua_state_,varname);
 			return luabinder::read<RetT>(lua_state_,-1);
 		}
-		
+
 		template<typename T>
 		typename luabinder::LuaTypeTraits<T>::ValueType get_config_var(const char* table, const char* varname) const
 		{
 			lua_getglobal(lua_state_, table);
 			if (!lua_istable(lua_state_,-1))
 				return luabinder::LuaTypeTraits<T>::default_value;
-
-			int stack_size = lua_gettop(lua_state_);
-			for (int i = 0; i < stack_size; i++)
-				printf("The %d value's type is %d\n",i, lua_type(lua_state_, i));
+			
+			stack_dump();
+//			int stack_size = lua_gettop(lua_state_);
+//			for (int i = 0; i < stack_size; i++)
+//				printf("The %d value's type is %d\n",i, lua_type(lua_state_, i));
 
 			lua_getfield(lua_state_, -1, varname);
 			T temp_value = luabinder::read<T>(lua_state_,-1);
@@ -76,6 +77,8 @@ class LuaInstance
 		}
 
 		void lua_perror(int errcode)const;
+
+		void stack_dump()const;
 	private:
 		void _bind_func();
 	private:

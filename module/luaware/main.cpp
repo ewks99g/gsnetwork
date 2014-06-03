@@ -27,7 +27,6 @@ main()
 
 
 	if (!lua_instance.load_lua_head_file("./lua_entry.lua"))
-//	if (!lua_instance.load_lua_head_file("./luascript/game_math.lua"))
 		return 0;
 
 	lua_instance.register_lua_func();

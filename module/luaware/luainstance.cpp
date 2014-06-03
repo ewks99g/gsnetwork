@@ -74,6 +74,31 @@ void LuaInstance::lua_perror(int errcode)const
 			break;
 	}
 }
+
+void LuaInstance::stack_dump()const
+{
+	int i;
+	int top = lua_gettop(lua_state_);
+	for (i = 1; i <= top; i++) {  /* repeat for each level */
+		int t = lua_type(lua_state_, i);
+		switch (t) {
+			case LUA_TSTRING:  /* strings */
+			printf("`%s'", lua_tostring(lua_state_, i));
+            break;
+          case LUA_TBOOLEAN:  /* booleans */
+            printf(lua_toboolean(lua_state_, i) ? "true" : "false");
+            break;
+          case LUA_TNUMBER:  /* numbers */
+            printf("%g", lua_tonumber(lua_state_, i));
+            break;
+          default:  /* other values */
+            printf("%s", lua_typename(lua_state_, t));
+            break;
+        }
+        printf("\t");  /* put a separator */
+      }
+      printf("\n");  /* end the listing */
+}
 //////////////////////////////////////////////////////////////////////
 void *l_alloc (void *ud, void *ptr, size_t osize,size_t nsize) 
 {
