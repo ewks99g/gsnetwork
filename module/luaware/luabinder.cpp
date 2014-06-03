@@ -200,4 +200,10 @@ void pop(lua_State *L)
   lua_pop(L, 1);
 }
 
+template<>
+int LuaTypeTraits<int>::default_value = 0;
+
+template<>
+const char* LuaTypeTraits<const char*>::default_value = "\0";
+
 }

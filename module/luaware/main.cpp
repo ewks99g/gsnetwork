@@ -35,6 +35,8 @@ main()
 	//lua_instance.call<int>("getMaxLevNum","test",0);
 	printf("addNumber %d\n",lua_instance.call<int>("addNumber",10,20));
 	printf("G_width%d\n",lua_instance.get_var<int>("G_width"));
+	printf("config: %d\n",lua_instance.get_config_var<int>("game_monster_config","level"));
+	printf("config: %s\n",lua_instance.get_config_var<const char*>("game_monster_config","desc"));
 
 	 sleep(100000);
 }

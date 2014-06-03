@@ -24,6 +24,13 @@ namespace luabinder
 		 lua_pop(L, 1); 
 		 return t;
 	}
+
+	template<typename T>
+	struct LuaTypeTraits
+	{
+		typedef T ValueType;
+		static ValueType default_value;
+	};
 };
 
 #endif

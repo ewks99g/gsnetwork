@@ -11,7 +11,7 @@ package.path=package.path..";luascript/?.lua"
 ---------------------------------------------------------
 --include needed module
 require "game_math"
+require "game_config"
 
-addNumber(1,20)
 ---------------------------------------------------------
 --Rule: No more code

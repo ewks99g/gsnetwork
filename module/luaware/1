@@ -69,10 +69,8 @@ class LuaInstance
 				printf("The %d value's type is %d\n",i, lua_type(lua_state_, i));
 
 			lua_getfield(lua_state_, -1, varname);
-			T temp_value = luabinder::read<T>(lua_state_,-1);
+			T luabinder::read<T>(lua_state_,-1);
 		    lua_pop(lua_state_, 1);
-
-			return temp_value;
 		}
 
 		void lua_perror(int errcode)const;

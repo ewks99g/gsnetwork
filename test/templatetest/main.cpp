@@ -6,6 +6,18 @@
 *  CreateTime: 2014/05/31
 ******************************************************************/
 #include "test.inl"
+#include <stdio.h>
+
+void test_static_function_mem()
+{
+	static int test_function_static_mem;
+	test_function_static_mem = 10;
+	
+//	static int test_function_static_mem = 10;
+//	test_function_static_mem += 2;
+
+	printf("static mem %d\n",test_function_static_mem);
+}
 
 void add_num(int val)
 {
@@ -23,5 +35,8 @@ main()
 	
 	//do not pass type through<>
 	template_func(30,&add_num);
+
+	test_static_function_mem();
+	test_static_function_mem();
 }
 
