@@ -29,10 +29,10 @@ bool LuaInstance::init()
 
 	luaopen_base(lua_state_);
 	luaopen_table(lua_state_);
-	luaopen_string(lua_state_);
-	luaopen_debug(lua_state_);
-	luaopen_math(lua_state_);
 	luaL_openlibs(lua_state_);
+//	luaopen_string(lua_state_);
+//	luaopen_debug(lua_state_);
+//	luaopen_math(lua_state_);
 	return true;
 }
 
@@ -75,7 +75,7 @@ void LuaInstance::lua_perror(int errcode)const
 	}
 }
 
-void LuaInstance::stack_dump()const
+void LuaInstance::stack_dump(const char* tip)const
 {
 	int i;
 	int top = lua_gettop(lua_state_);
@@ -97,10 +97,27 @@ void LuaInstance::stack_dump()const
         }
         printf("\t");  /* put a separator */
       }
-      printf("\n");  /* end the listing */
+      printf("\n%s\n",tip);  /* end the listing */
+}
+
+void LuaInstance::traverse_table(int index) const
+{
+	printf("Cur top is %d\n",lua_gettop(lua_state_));
+	lua_pushnil(lua_state_);
+	printf("Cur top is %d\n",lua_gettop(lua_state_));
+//    while (lua_next(lua_state_,-1))
+    {
+    //    lua_pushvalue(lua_state_, -2);
+     //   const char* key = lua_tostring(lua_state_, -1);
+    //    const char* value = lua_tostring(lua_state_, -2);
+ 
+//        printf("%s => %s\n", key, value);
+ 
+  //      lua_pop(lua_state_, 2);
+    }
 }
 //////////////////////////////////////////////////////////////////////
-void *l_alloc (void *ud, void *ptr, size_t osize,size_t nsize) 
+void *l_alloc (void *ud, void *ptr, size_t osize,size_t nsize)
 {
     (void)ud;  (void)osize;  /* not used */
     if (nsize == 0) {

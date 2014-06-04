@@ -206,4 +206,7 @@ int LuaTypeTraits<int>::default_value = 0;
 template<>
 const char* LuaTypeTraits<const char*>::default_value = "\0";
 
+template<>
+float LuaTypeTraits<float>::default_value = 0.0f;
+
 }

@@ -47,6 +47,7 @@ class LuaInstance
 			if (ret > 0) printf("lua_pcall failed:%s\n",lua_tostring(lua_state_,-1));
 			if (ret < 0) printf("get func from failed:%s\n",lua_tostring(lua_state_,-1));
 			
+			stack_dump("ffffffff");
 			return luabinder::pop<RetT>(lua_state_);
 		}
 		
@@ -54,7 +55,8 @@ class LuaInstance
 		RetT get_var(const char* varname) const
 		{
 			lua_getglobal(lua_state_,varname);
-			return luabinder::read<RetT>(lua_state_,-1);
+			RetT var = luabinder::read<RetT>(lua_state_,-1);
+			return var;
 		}
 
 		template<typename T>
@@ -63,22 +65,24 @@ class LuaInstance
 			lua_getglobal(lua_state_, table);
 			if (!lua_istable(lua_state_,-1))
 				return luabinder::LuaTypeTraits<T>::default_value;
-			
-			stack_dump();
-//			int stack_size = lua_gettop(lua_state_);
-//			for (int i = 0; i < stack_size; i++)
-//				printf("The %d value's type is %d\n",i, lua_type(lua_state_, i));
 
 			lua_getfield(lua_state_, -1, varname);
 			T temp_value = luabinder::read<T>(lua_state_,-1);
-		    lua_pop(lua_state_, 1);
+		//    lua_pop(lua_state_,-1);
+		    //lua_pop(lua_state_, 1);
 
+			stack_dump("ccc");
 			return temp_value;
 		}
 
 		void lua_perror(int errcode)const;
 
-		void stack_dump()const;
+		lua_State* get_lua_env() const
+		{ return lua_state_;}
+
+		void stack_dump(const char* tip)const;
+
+		void traverse_table(int index) const;
 	private:
 		void _bind_func();
 	private:
