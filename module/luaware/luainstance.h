@@ -47,18 +47,10 @@ class LuaInstance
 			if (ret > 0) printf("lua_pcall failed:%s\n",lua_tostring(lua_state_,-1));
 			if (ret < 0) printf("get func from failed:%s\n",lua_tostring(lua_state_,-1));
 			
-			stack_dump("ffffffff");
 			return luabinder::pop<RetT>(lua_state_);
 		}
 		
-		template<typename RetT>
-		RetT get_var(const char* varname) const
-		{
-			lua_getglobal(lua_state_,varname);
-			RetT var = luabinder::read<RetT>(lua_state_,-1);
-			return var;
-		}
-
+		/*get lua's var that is sleeping in table*/
 		template<typename T>
 		typename luabinder::LuaTypeTraits<T>::ValueType get_config_var(const char* table, const char* varname) const
 		{
@@ -67,23 +59,30 @@ class LuaInstance
 				return luabinder::LuaTypeTraits<T>::default_value;
 
 			lua_getfield(lua_state_, -1, varname);
-			T temp_value = luabinder::read<T>(lua_state_,-1);
-		//    lua_pop(lua_state_,-1);
-		    //lua_pop(lua_state_, 1);
+			T temp_value = luabinder::pop<T>(lua_state_);
+		    lua_pop(lua_state_,1);
 
-			stack_dump("ccc");
 			return temp_value;
 		}
 
+		/*lua errror output*/
 		void lua_perror(int errcode)const;
-
-		lua_State* get_lua_env() const
-		{ return lua_state_;}
-
+		
+		/*guy,see function name*/
+		inline lua_State* get_lua_env() const { return lua_state_;}
+		
+		/*overview the stack between c/c++ and lua*/
 		void stack_dump(const char* tip)const;
 
-		void traverse_table(int index) const;
 	private:
+		/*In product,this function can not be used*/
+		template<typename RetT>
+		RetT get_var(const char* varname) const
+		{
+			lua_getglobal(lua_state_,varname);
+			return luabinder::pop<RetT>(lua_state_);
+		}
+
 		void _bind_func();
 	private:
 		lua_State*	lua_state_;

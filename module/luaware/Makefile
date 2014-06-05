@@ -45,7 +45,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_luatest_OBJECTS = main.$(OBJEXT) luainstance.$(OBJEXT) \
-	luabinder.$(OBJEXT) luafuncsrc.$(OBJEXT)
+	luabinder.$(OBJEXT)
 luatest_OBJECTS = $(am_luatest_OBJECTS)
 luatest_LDADD = $(LDADD)
 luatest_DEPENDENCIES =
@@ -153,7 +153,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-luatest_SOURCES = main.cpp luainstance.cpp luabinder.cpp luafuncsrc.cpp
+luatest_SOURCES = main.cpp luainstance.cpp luabinder.cpp
 INCLUDES = -I/usr/local/include -I/usr/include
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib -llua -ldl
 AM_LDFLAGS = -rdynamic #g++'s flag
@@ -239,7 +239,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/luabinder.Po
-include ./$(DEPDIR)/luafuncsrc.Po
 include ./$(DEPDIR)/luainstance.Po
 include ./$(DEPDIR)/main.Po
 
