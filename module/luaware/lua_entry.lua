@@ -6,12 +6,14 @@
 ---------------------------------------------------------
 
 --setup lua path
-package.path=package.path..";luascript/?.lua"
---package.cpath="luaclib/?.so" 
+package.path=package.path..";lualib/?.lua;luascript/?.lua"
+package.cpath="luaclib/?.so" 
 ---------------------------------------------------------
 --include needed module
 require "game_math"
 require "game_config"
+require "game_module_test"
+require "game_class_test"
 
 ---------------------------------------------------------
 --Rule: No more code

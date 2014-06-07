@@ -28,7 +28,7 @@ static luaL_Reg math_lib_name[] = {
 extern "C"
 int luaopen_game_math_lib(lua_State* L) 
 {
-    const char* libName = "game_math_lib";
+    const char* libName = "gamemathlib";
 	luaL_newlib(L,math_lib_name);
     return 1;
 }
