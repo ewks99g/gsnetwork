@@ -14,6 +14,7 @@ require "game_math"
 require "game_config"
 require "game_module_test"
 require "game_class_test"
+require "game_coroutine"
 
 ---------------------------------------------------------
 --Rule: No more code
