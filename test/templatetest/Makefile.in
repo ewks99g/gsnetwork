@@ -44,7 +44,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_templatetest_OBJECTS = main.$(OBJEXT)
+am_templatetest_OBJECTS = main.$(OBJEXT) test.$(OBJEXT)
 templatetest_OBJECTS = $(am_templatetest_OBJECTS)
 templatetest_LDADD = $(LDADD)
 templatetest_DEPENDENCIES =
@@ -57,6 +57,10 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(templatetest_SOURCES)
 DIST_SOURCES = $(templatetest_SOURCES)
 ETAGS = etags
@@ -153,7 +157,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
-templatetest_SOURCES = main.cpp test.inl
+templatetest_SOURCES = main.cpp test.inl head.h test.cpp
 INCLUDES = -I/usr/local/include -I/usr/include 
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib
 all: all-am
@@ -238,6 +242,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

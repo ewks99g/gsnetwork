@@ -4,11 +4,11 @@ libluatinker_a_SOURCES=inc/lapi.h\
 						inc/ldo.h \
 						inc/lgc.h \
 						inc/llimits.h \
-						inc/lobject.h  
+						inc/lobject.h \
 						inc/lparser.h\
 						inc/lstring.h\
 						inc/ltm.h\
-						inc/lua_tinker.h
+						inc/lua_tinker.h\
 						inc/lualib.h \
 						inc/lvm.h\
 						inc/ndk-print.h\
@@ -58,6 +58,6 @@ libluatinker_a_SOURCES=inc/lapi.h\
 						src/ltm.c \
 						src/luac.c \
 						src/lzio.c
-INCLUDES=-I/usr/local/include -I/usr/include 
+INCLUDES=-I/usr/local/include -I/usr/include -I./inc
 LDADD=-L/usr/local/lib -L/usr/lib -L/lib
 #DEFS=-DLINUX

@@ -68,13 +68,31 @@ AR = ar
 ARFLAGS = cru
 libluatinker_a_AR = $(AR) $(ARFLAGS)
 libluatinker_a_LIBADD =
-am_libluatinker_a_OBJECTS =
+am_libluatinker_a_OBJECTS = lbaselib.$(OBJEXT) ldebug.$(OBJEXT) \
+	lfunc.$(OBJEXT) liolib.$(OBJEXT) lmem.$(OBJEXT) \
+	lopcodes.$(OBJEXT) lstate.$(OBJEXT) ltable.$(OBJEXT) \
+	lua.$(OBJEXT) lundump.$(OBJEXT) ndk-print.$(OBJEXT) \
+	lapi.$(OBJEXT) lcode.$(OBJEXT) ldo.$(OBJEXT) lgc.$(OBJEXT) \
+	llex.$(OBJEXT) loadlib.$(OBJEXT) loslib.$(OBJEXT) \
+	lstring.$(OBJEXT) ltablib.$(OBJEXT) lua_tinker.$(OBJEXT) \
+	lvm.$(OBJEXT) print.$(OBJEXT) lauxlib.$(OBJEXT) \
+	ldblib.$(OBJEXT) ldump.$(OBJEXT) linit.$(OBJEXT) \
+	lmathlib.$(OBJEXT) lobject.$(OBJEXT) lparser.$(OBJEXT) \
+	lstrlib.$(OBJEXT) ltm.$(OBJEXT) luac.$(OBJEXT) lzio.$(OBJEXT)
 libluatinker_a_OBJECTS = $(am_libluatinker_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
 SOURCES = $(libluatinker_a_SOURCES)
 DIST_SOURCES = $(libluatinker_a_SOURCES)
 ETAGS = etags
@@ -176,13 +194,67 @@ libluatinker_a_SOURCES = inc/lapi.h\
 						inc/ldo.h \
 						inc/lgc.h \
 						inc/llimits.h \
-						inc/lobject.h  
+						inc/lobject.h \
+						inc/lparser.h\
+						inc/lstring.h\
+						inc/ltm.h\
+						inc/lua_tinker.h\
+						inc/lualib.h \
+						inc/lvm.h\
+						inc/ndk-print.h\
+						inc/lauxlib.h \
+						inc/ldebug.h\
+						inc/lfunc.h \
+						inc/llex.h \
+						inc/lmem.h \
+						inc/lopcodes.h\
+						inc/lstate.h  \
+						inc/ltable.h\
+						inc/lua.h \
+						inc/luaconf.h \
+						inc/lundump.h \
+						inc/lzio.h\
+						src/lbaselib.c \
+						src/ldebug.c \
+						src/lfunc.c \
+						src/liolib.c \
+						src/lmem.c \
+						src/lopcodes.c \
+						src/lstate.c \
+						src/ltable.c \
+						src/lua.c  \
+						src/lundump.c\
+						src/ndk-print.c\
+						src/lapi.c\
+						src/lcode.c\
+						src/ldo.c\
+						src/lgc.c\
+						src/llex.c\
+						src/loadlib.c\
+						src/loslib.c \
+						src/lstring.c\
+						src/ltablib.c\
+						src/lua_tinker.cpp\
+						src/lvm.c \
+						src/print.c\
+						src/lauxlib.c \
+						src/ldblib.c \
+						src/ldump.c \
+						src/linit.c\
+						src/lmathlib.c \
+						src/lobject.c \
+						src/lparser.c \
+						src/lstrlib.c \
+						src/ltm.c \
+						src/luac.c \
+						src/lzio.c
 
-INCLUDES = -I/usr/local/include -I/usr/include 
+INCLUDES = -I/usr/local/include -I/usr/include -I./inc
 LDADD = -L/usr/local/lib -L/usr/lib -L/lib
 all: all-am
 
 .SUFFIXES:
+.SUFFIXES: .c .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -192,9 +264,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign thirdparty/luatinker/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu thirdparty/luatinker/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign thirdparty/luatinker/Makefile
+	  $(AUTOMAKE) --gnu thirdparty/luatinker/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -255,6 +327,545 @@ mostlyclean-compile:
 
 distclean-compile:
 	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lapi.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lauxlib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lbaselib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lcode.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ldblib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ldebug.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ldo.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ldump.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lfunc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lgc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linit.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liolib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/llex.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lmathlib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lmem.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loadlib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lobject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lopcodes.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loslib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lparser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lstate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lstring.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lstrlib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltable.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltablib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ltm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lua.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lua_tinker.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/luac.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lundump.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lvm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lzio.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ndk-print.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print.Po@am__quote@
+
+.c.o:
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c $<
+
+.c.obj:
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+lbaselib.o: src/lbaselib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lbaselib.o -MD -MP -MF $(DEPDIR)/lbaselib.Tpo -c -o lbaselib.o `test -f 'src/lbaselib.c' || echo '$(srcdir)/'`src/lbaselib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lbaselib.Tpo $(DEPDIR)/lbaselib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lbaselib.c' object='lbaselib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lbaselib.o `test -f 'src/lbaselib.c' || echo '$(srcdir)/'`src/lbaselib.c
+
+lbaselib.obj: src/lbaselib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lbaselib.obj -MD -MP -MF $(DEPDIR)/lbaselib.Tpo -c -o lbaselib.obj `if test -f 'src/lbaselib.c'; then $(CYGPATH_W) 'src/lbaselib.c'; else $(CYGPATH_W) '$(srcdir)/src/lbaselib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lbaselib.Tpo $(DEPDIR)/lbaselib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lbaselib.c' object='lbaselib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lbaselib.obj `if test -f 'src/lbaselib.c'; then $(CYGPATH_W) 'src/lbaselib.c'; else $(CYGPATH_W) '$(srcdir)/src/lbaselib.c'; fi`
+
+ldebug.o: src/ldebug.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldebug.o -MD -MP -MF $(DEPDIR)/ldebug.Tpo -c -o ldebug.o `test -f 'src/ldebug.c' || echo '$(srcdir)/'`src/ldebug.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldebug.Tpo $(DEPDIR)/ldebug.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldebug.c' object='ldebug.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldebug.o `test -f 'src/ldebug.c' || echo '$(srcdir)/'`src/ldebug.c
+
+ldebug.obj: src/ldebug.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldebug.obj -MD -MP -MF $(DEPDIR)/ldebug.Tpo -c -o ldebug.obj `if test -f 'src/ldebug.c'; then $(CYGPATH_W) 'src/ldebug.c'; else $(CYGPATH_W) '$(srcdir)/src/ldebug.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldebug.Tpo $(DEPDIR)/ldebug.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldebug.c' object='ldebug.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldebug.obj `if test -f 'src/ldebug.c'; then $(CYGPATH_W) 'src/ldebug.c'; else $(CYGPATH_W) '$(srcdir)/src/ldebug.c'; fi`
+
+lfunc.o: src/lfunc.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lfunc.o -MD -MP -MF $(DEPDIR)/lfunc.Tpo -c -o lfunc.o `test -f 'src/lfunc.c' || echo '$(srcdir)/'`src/lfunc.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lfunc.Tpo $(DEPDIR)/lfunc.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lfunc.c' object='lfunc.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lfunc.o `test -f 'src/lfunc.c' || echo '$(srcdir)/'`src/lfunc.c
+
+lfunc.obj: src/lfunc.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lfunc.obj -MD -MP -MF $(DEPDIR)/lfunc.Tpo -c -o lfunc.obj `if test -f 'src/lfunc.c'; then $(CYGPATH_W) 'src/lfunc.c'; else $(CYGPATH_W) '$(srcdir)/src/lfunc.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lfunc.Tpo $(DEPDIR)/lfunc.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lfunc.c' object='lfunc.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lfunc.obj `if test -f 'src/lfunc.c'; then $(CYGPATH_W) 'src/lfunc.c'; else $(CYGPATH_W) '$(srcdir)/src/lfunc.c'; fi`
+
+liolib.o: src/liolib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT liolib.o -MD -MP -MF $(DEPDIR)/liolib.Tpo -c -o liolib.o `test -f 'src/liolib.c' || echo '$(srcdir)/'`src/liolib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/liolib.Tpo $(DEPDIR)/liolib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/liolib.c' object='liolib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o liolib.o `test -f 'src/liolib.c' || echo '$(srcdir)/'`src/liolib.c
+
+liolib.obj: src/liolib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT liolib.obj -MD -MP -MF $(DEPDIR)/liolib.Tpo -c -o liolib.obj `if test -f 'src/liolib.c'; then $(CYGPATH_W) 'src/liolib.c'; else $(CYGPATH_W) '$(srcdir)/src/liolib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/liolib.Tpo $(DEPDIR)/liolib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/liolib.c' object='liolib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o liolib.obj `if test -f 'src/liolib.c'; then $(CYGPATH_W) 'src/liolib.c'; else $(CYGPATH_W) '$(srcdir)/src/liolib.c'; fi`
+
+lmem.o: src/lmem.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lmem.o -MD -MP -MF $(DEPDIR)/lmem.Tpo -c -o lmem.o `test -f 'src/lmem.c' || echo '$(srcdir)/'`src/lmem.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lmem.Tpo $(DEPDIR)/lmem.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lmem.c' object='lmem.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lmem.o `test -f 'src/lmem.c' || echo '$(srcdir)/'`src/lmem.c
+
+lmem.obj: src/lmem.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lmem.obj -MD -MP -MF $(DEPDIR)/lmem.Tpo -c -o lmem.obj `if test -f 'src/lmem.c'; then $(CYGPATH_W) 'src/lmem.c'; else $(CYGPATH_W) '$(srcdir)/src/lmem.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lmem.Tpo $(DEPDIR)/lmem.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lmem.c' object='lmem.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lmem.obj `if test -f 'src/lmem.c'; then $(CYGPATH_W) 'src/lmem.c'; else $(CYGPATH_W) '$(srcdir)/src/lmem.c'; fi`
+
+lopcodes.o: src/lopcodes.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lopcodes.o -MD -MP -MF $(DEPDIR)/lopcodes.Tpo -c -o lopcodes.o `test -f 'src/lopcodes.c' || echo '$(srcdir)/'`src/lopcodes.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lopcodes.Tpo $(DEPDIR)/lopcodes.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lopcodes.c' object='lopcodes.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lopcodes.o `test -f 'src/lopcodes.c' || echo '$(srcdir)/'`src/lopcodes.c
+
+lopcodes.obj: src/lopcodes.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lopcodes.obj -MD -MP -MF $(DEPDIR)/lopcodes.Tpo -c -o lopcodes.obj `if test -f 'src/lopcodes.c'; then $(CYGPATH_W) 'src/lopcodes.c'; else $(CYGPATH_W) '$(srcdir)/src/lopcodes.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lopcodes.Tpo $(DEPDIR)/lopcodes.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lopcodes.c' object='lopcodes.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lopcodes.obj `if test -f 'src/lopcodes.c'; then $(CYGPATH_W) 'src/lopcodes.c'; else $(CYGPATH_W) '$(srcdir)/src/lopcodes.c'; fi`
+
+lstate.o: src/lstate.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstate.o -MD -MP -MF $(DEPDIR)/lstate.Tpo -c -o lstate.o `test -f 'src/lstate.c' || echo '$(srcdir)/'`src/lstate.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstate.Tpo $(DEPDIR)/lstate.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstate.c' object='lstate.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstate.o `test -f 'src/lstate.c' || echo '$(srcdir)/'`src/lstate.c
+
+lstate.obj: src/lstate.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstate.obj -MD -MP -MF $(DEPDIR)/lstate.Tpo -c -o lstate.obj `if test -f 'src/lstate.c'; then $(CYGPATH_W) 'src/lstate.c'; else $(CYGPATH_W) '$(srcdir)/src/lstate.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstate.Tpo $(DEPDIR)/lstate.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstate.c' object='lstate.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstate.obj `if test -f 'src/lstate.c'; then $(CYGPATH_W) 'src/lstate.c'; else $(CYGPATH_W) '$(srcdir)/src/lstate.c'; fi`
+
+ltable.o: src/ltable.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltable.o -MD -MP -MF $(DEPDIR)/ltable.Tpo -c -o ltable.o `test -f 'src/ltable.c' || echo '$(srcdir)/'`src/ltable.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltable.Tpo $(DEPDIR)/ltable.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltable.c' object='ltable.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltable.o `test -f 'src/ltable.c' || echo '$(srcdir)/'`src/ltable.c
+
+ltable.obj: src/ltable.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltable.obj -MD -MP -MF $(DEPDIR)/ltable.Tpo -c -o ltable.obj `if test -f 'src/ltable.c'; then $(CYGPATH_W) 'src/ltable.c'; else $(CYGPATH_W) '$(srcdir)/src/ltable.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltable.Tpo $(DEPDIR)/ltable.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltable.c' object='ltable.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltable.obj `if test -f 'src/ltable.c'; then $(CYGPATH_W) 'src/ltable.c'; else $(CYGPATH_W) '$(srcdir)/src/ltable.c'; fi`
+
+lua.o: src/lua.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lua.o -MD -MP -MF $(DEPDIR)/lua.Tpo -c -o lua.o `test -f 'src/lua.c' || echo '$(srcdir)/'`src/lua.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lua.Tpo $(DEPDIR)/lua.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lua.c' object='lua.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lua.o `test -f 'src/lua.c' || echo '$(srcdir)/'`src/lua.c
+
+lua.obj: src/lua.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lua.obj -MD -MP -MF $(DEPDIR)/lua.Tpo -c -o lua.obj `if test -f 'src/lua.c'; then $(CYGPATH_W) 'src/lua.c'; else $(CYGPATH_W) '$(srcdir)/src/lua.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lua.Tpo $(DEPDIR)/lua.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lua.c' object='lua.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lua.obj `if test -f 'src/lua.c'; then $(CYGPATH_W) 'src/lua.c'; else $(CYGPATH_W) '$(srcdir)/src/lua.c'; fi`
+
+lundump.o: src/lundump.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lundump.o -MD -MP -MF $(DEPDIR)/lundump.Tpo -c -o lundump.o `test -f 'src/lundump.c' || echo '$(srcdir)/'`src/lundump.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lundump.Tpo $(DEPDIR)/lundump.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lundump.c' object='lundump.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lundump.o `test -f 'src/lundump.c' || echo '$(srcdir)/'`src/lundump.c
+
+lundump.obj: src/lundump.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lundump.obj -MD -MP -MF $(DEPDIR)/lundump.Tpo -c -o lundump.obj `if test -f 'src/lundump.c'; then $(CYGPATH_W) 'src/lundump.c'; else $(CYGPATH_W) '$(srcdir)/src/lundump.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lundump.Tpo $(DEPDIR)/lundump.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lundump.c' object='lundump.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lundump.obj `if test -f 'src/lundump.c'; then $(CYGPATH_W) 'src/lundump.c'; else $(CYGPATH_W) '$(srcdir)/src/lundump.c'; fi`
+
+ndk-print.o: src/ndk-print.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ndk-print.o -MD -MP -MF $(DEPDIR)/ndk-print.Tpo -c -o ndk-print.o `test -f 'src/ndk-print.c' || echo '$(srcdir)/'`src/ndk-print.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ndk-print.Tpo $(DEPDIR)/ndk-print.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ndk-print.c' object='ndk-print.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ndk-print.o `test -f 'src/ndk-print.c' || echo '$(srcdir)/'`src/ndk-print.c
+
+ndk-print.obj: src/ndk-print.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ndk-print.obj -MD -MP -MF $(DEPDIR)/ndk-print.Tpo -c -o ndk-print.obj `if test -f 'src/ndk-print.c'; then $(CYGPATH_W) 'src/ndk-print.c'; else $(CYGPATH_W) '$(srcdir)/src/ndk-print.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ndk-print.Tpo $(DEPDIR)/ndk-print.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ndk-print.c' object='ndk-print.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ndk-print.obj `if test -f 'src/ndk-print.c'; then $(CYGPATH_W) 'src/ndk-print.c'; else $(CYGPATH_W) '$(srcdir)/src/ndk-print.c'; fi`
+
+lapi.o: src/lapi.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lapi.o -MD -MP -MF $(DEPDIR)/lapi.Tpo -c -o lapi.o `test -f 'src/lapi.c' || echo '$(srcdir)/'`src/lapi.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lapi.Tpo $(DEPDIR)/lapi.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lapi.c' object='lapi.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lapi.o `test -f 'src/lapi.c' || echo '$(srcdir)/'`src/lapi.c
+
+lapi.obj: src/lapi.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lapi.obj -MD -MP -MF $(DEPDIR)/lapi.Tpo -c -o lapi.obj `if test -f 'src/lapi.c'; then $(CYGPATH_W) 'src/lapi.c'; else $(CYGPATH_W) '$(srcdir)/src/lapi.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lapi.Tpo $(DEPDIR)/lapi.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lapi.c' object='lapi.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lapi.obj `if test -f 'src/lapi.c'; then $(CYGPATH_W) 'src/lapi.c'; else $(CYGPATH_W) '$(srcdir)/src/lapi.c'; fi`
+
+lcode.o: src/lcode.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lcode.o -MD -MP -MF $(DEPDIR)/lcode.Tpo -c -o lcode.o `test -f 'src/lcode.c' || echo '$(srcdir)/'`src/lcode.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lcode.Tpo $(DEPDIR)/lcode.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lcode.c' object='lcode.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lcode.o `test -f 'src/lcode.c' || echo '$(srcdir)/'`src/lcode.c
+
+lcode.obj: src/lcode.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lcode.obj -MD -MP -MF $(DEPDIR)/lcode.Tpo -c -o lcode.obj `if test -f 'src/lcode.c'; then $(CYGPATH_W) 'src/lcode.c'; else $(CYGPATH_W) '$(srcdir)/src/lcode.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lcode.Tpo $(DEPDIR)/lcode.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lcode.c' object='lcode.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lcode.obj `if test -f 'src/lcode.c'; then $(CYGPATH_W) 'src/lcode.c'; else $(CYGPATH_W) '$(srcdir)/src/lcode.c'; fi`
+
+ldo.o: src/ldo.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldo.o -MD -MP -MF $(DEPDIR)/ldo.Tpo -c -o ldo.o `test -f 'src/ldo.c' || echo '$(srcdir)/'`src/ldo.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldo.Tpo $(DEPDIR)/ldo.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldo.c' object='ldo.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldo.o `test -f 'src/ldo.c' || echo '$(srcdir)/'`src/ldo.c
+
+ldo.obj: src/ldo.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldo.obj -MD -MP -MF $(DEPDIR)/ldo.Tpo -c -o ldo.obj `if test -f 'src/ldo.c'; then $(CYGPATH_W) 'src/ldo.c'; else $(CYGPATH_W) '$(srcdir)/src/ldo.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldo.Tpo $(DEPDIR)/ldo.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldo.c' object='ldo.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldo.obj `if test -f 'src/ldo.c'; then $(CYGPATH_W) 'src/ldo.c'; else $(CYGPATH_W) '$(srcdir)/src/ldo.c'; fi`
+
+lgc.o: src/lgc.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lgc.o -MD -MP -MF $(DEPDIR)/lgc.Tpo -c -o lgc.o `test -f 'src/lgc.c' || echo '$(srcdir)/'`src/lgc.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lgc.Tpo $(DEPDIR)/lgc.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lgc.c' object='lgc.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lgc.o `test -f 'src/lgc.c' || echo '$(srcdir)/'`src/lgc.c
+
+lgc.obj: src/lgc.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lgc.obj -MD -MP -MF $(DEPDIR)/lgc.Tpo -c -o lgc.obj `if test -f 'src/lgc.c'; then $(CYGPATH_W) 'src/lgc.c'; else $(CYGPATH_W) '$(srcdir)/src/lgc.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lgc.Tpo $(DEPDIR)/lgc.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lgc.c' object='lgc.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lgc.obj `if test -f 'src/lgc.c'; then $(CYGPATH_W) 'src/lgc.c'; else $(CYGPATH_W) '$(srcdir)/src/lgc.c'; fi`
+
+llex.o: src/llex.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT llex.o -MD -MP -MF $(DEPDIR)/llex.Tpo -c -o llex.o `test -f 'src/llex.c' || echo '$(srcdir)/'`src/llex.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/llex.Tpo $(DEPDIR)/llex.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/llex.c' object='llex.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o llex.o `test -f 'src/llex.c' || echo '$(srcdir)/'`src/llex.c
+
+llex.obj: src/llex.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT llex.obj -MD -MP -MF $(DEPDIR)/llex.Tpo -c -o llex.obj `if test -f 'src/llex.c'; then $(CYGPATH_W) 'src/llex.c'; else $(CYGPATH_W) '$(srcdir)/src/llex.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/llex.Tpo $(DEPDIR)/llex.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/llex.c' object='llex.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o llex.obj `if test -f 'src/llex.c'; then $(CYGPATH_W) 'src/llex.c'; else $(CYGPATH_W) '$(srcdir)/src/llex.c'; fi`
+
+loadlib.o: src/loadlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT loadlib.o -MD -MP -MF $(DEPDIR)/loadlib.Tpo -c -o loadlib.o `test -f 'src/loadlib.c' || echo '$(srcdir)/'`src/loadlib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/loadlib.Tpo $(DEPDIR)/loadlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/loadlib.c' object='loadlib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o loadlib.o `test -f 'src/loadlib.c' || echo '$(srcdir)/'`src/loadlib.c
+
+loadlib.obj: src/loadlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT loadlib.obj -MD -MP -MF $(DEPDIR)/loadlib.Tpo -c -o loadlib.obj `if test -f 'src/loadlib.c'; then $(CYGPATH_W) 'src/loadlib.c'; else $(CYGPATH_W) '$(srcdir)/src/loadlib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/loadlib.Tpo $(DEPDIR)/loadlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/loadlib.c' object='loadlib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o loadlib.obj `if test -f 'src/loadlib.c'; then $(CYGPATH_W) 'src/loadlib.c'; else $(CYGPATH_W) '$(srcdir)/src/loadlib.c'; fi`
+
+loslib.o: src/loslib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT loslib.o -MD -MP -MF $(DEPDIR)/loslib.Tpo -c -o loslib.o `test -f 'src/loslib.c' || echo '$(srcdir)/'`src/loslib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/loslib.Tpo $(DEPDIR)/loslib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/loslib.c' object='loslib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o loslib.o `test -f 'src/loslib.c' || echo '$(srcdir)/'`src/loslib.c
+
+loslib.obj: src/loslib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT loslib.obj -MD -MP -MF $(DEPDIR)/loslib.Tpo -c -o loslib.obj `if test -f 'src/loslib.c'; then $(CYGPATH_W) 'src/loslib.c'; else $(CYGPATH_W) '$(srcdir)/src/loslib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/loslib.Tpo $(DEPDIR)/loslib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/loslib.c' object='loslib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o loslib.obj `if test -f 'src/loslib.c'; then $(CYGPATH_W) 'src/loslib.c'; else $(CYGPATH_W) '$(srcdir)/src/loslib.c'; fi`
+
+lstring.o: src/lstring.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstring.o -MD -MP -MF $(DEPDIR)/lstring.Tpo -c -o lstring.o `test -f 'src/lstring.c' || echo '$(srcdir)/'`src/lstring.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstring.Tpo $(DEPDIR)/lstring.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstring.c' object='lstring.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstring.o `test -f 'src/lstring.c' || echo '$(srcdir)/'`src/lstring.c
+
+lstring.obj: src/lstring.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstring.obj -MD -MP -MF $(DEPDIR)/lstring.Tpo -c -o lstring.obj `if test -f 'src/lstring.c'; then $(CYGPATH_W) 'src/lstring.c'; else $(CYGPATH_W) '$(srcdir)/src/lstring.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstring.Tpo $(DEPDIR)/lstring.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstring.c' object='lstring.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstring.obj `if test -f 'src/lstring.c'; then $(CYGPATH_W) 'src/lstring.c'; else $(CYGPATH_W) '$(srcdir)/src/lstring.c'; fi`
+
+ltablib.o: src/ltablib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltablib.o -MD -MP -MF $(DEPDIR)/ltablib.Tpo -c -o ltablib.o `test -f 'src/ltablib.c' || echo '$(srcdir)/'`src/ltablib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltablib.Tpo $(DEPDIR)/ltablib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltablib.c' object='ltablib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltablib.o `test -f 'src/ltablib.c' || echo '$(srcdir)/'`src/ltablib.c
+
+ltablib.obj: src/ltablib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltablib.obj -MD -MP -MF $(DEPDIR)/ltablib.Tpo -c -o ltablib.obj `if test -f 'src/ltablib.c'; then $(CYGPATH_W) 'src/ltablib.c'; else $(CYGPATH_W) '$(srcdir)/src/ltablib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltablib.Tpo $(DEPDIR)/ltablib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltablib.c' object='ltablib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltablib.obj `if test -f 'src/ltablib.c'; then $(CYGPATH_W) 'src/ltablib.c'; else $(CYGPATH_W) '$(srcdir)/src/ltablib.c'; fi`
+
+lvm.o: src/lvm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lvm.o -MD -MP -MF $(DEPDIR)/lvm.Tpo -c -o lvm.o `test -f 'src/lvm.c' || echo '$(srcdir)/'`src/lvm.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lvm.Tpo $(DEPDIR)/lvm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lvm.c' object='lvm.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lvm.o `test -f 'src/lvm.c' || echo '$(srcdir)/'`src/lvm.c
+
+lvm.obj: src/lvm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lvm.obj -MD -MP -MF $(DEPDIR)/lvm.Tpo -c -o lvm.obj `if test -f 'src/lvm.c'; then $(CYGPATH_W) 'src/lvm.c'; else $(CYGPATH_W) '$(srcdir)/src/lvm.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lvm.Tpo $(DEPDIR)/lvm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lvm.c' object='lvm.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lvm.obj `if test -f 'src/lvm.c'; then $(CYGPATH_W) 'src/lvm.c'; else $(CYGPATH_W) '$(srcdir)/src/lvm.c'; fi`
+
+print.o: src/print.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT print.o -MD -MP -MF $(DEPDIR)/print.Tpo -c -o print.o `test -f 'src/print.c' || echo '$(srcdir)/'`src/print.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/print.Tpo $(DEPDIR)/print.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/print.c' object='print.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o print.o `test -f 'src/print.c' || echo '$(srcdir)/'`src/print.c
+
+print.obj: src/print.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT print.obj -MD -MP -MF $(DEPDIR)/print.Tpo -c -o print.obj `if test -f 'src/print.c'; then $(CYGPATH_W) 'src/print.c'; else $(CYGPATH_W) '$(srcdir)/src/print.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/print.Tpo $(DEPDIR)/print.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/print.c' object='print.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o print.obj `if test -f 'src/print.c'; then $(CYGPATH_W) 'src/print.c'; else $(CYGPATH_W) '$(srcdir)/src/print.c'; fi`
+
+lauxlib.o: src/lauxlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lauxlib.o -MD -MP -MF $(DEPDIR)/lauxlib.Tpo -c -o lauxlib.o `test -f 'src/lauxlib.c' || echo '$(srcdir)/'`src/lauxlib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lauxlib.Tpo $(DEPDIR)/lauxlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lauxlib.c' object='lauxlib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lauxlib.o `test -f 'src/lauxlib.c' || echo '$(srcdir)/'`src/lauxlib.c
+
+lauxlib.obj: src/lauxlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lauxlib.obj -MD -MP -MF $(DEPDIR)/lauxlib.Tpo -c -o lauxlib.obj `if test -f 'src/lauxlib.c'; then $(CYGPATH_W) 'src/lauxlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lauxlib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lauxlib.Tpo $(DEPDIR)/lauxlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lauxlib.c' object='lauxlib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lauxlib.obj `if test -f 'src/lauxlib.c'; then $(CYGPATH_W) 'src/lauxlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lauxlib.c'; fi`
+
+ldblib.o: src/ldblib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldblib.o -MD -MP -MF $(DEPDIR)/ldblib.Tpo -c -o ldblib.o `test -f 'src/ldblib.c' || echo '$(srcdir)/'`src/ldblib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldblib.Tpo $(DEPDIR)/ldblib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldblib.c' object='ldblib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldblib.o `test -f 'src/ldblib.c' || echo '$(srcdir)/'`src/ldblib.c
+
+ldblib.obj: src/ldblib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldblib.obj -MD -MP -MF $(DEPDIR)/ldblib.Tpo -c -o ldblib.obj `if test -f 'src/ldblib.c'; then $(CYGPATH_W) 'src/ldblib.c'; else $(CYGPATH_W) '$(srcdir)/src/ldblib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldblib.Tpo $(DEPDIR)/ldblib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldblib.c' object='ldblib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldblib.obj `if test -f 'src/ldblib.c'; then $(CYGPATH_W) 'src/ldblib.c'; else $(CYGPATH_W) '$(srcdir)/src/ldblib.c'; fi`
+
+ldump.o: src/ldump.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldump.o -MD -MP -MF $(DEPDIR)/ldump.Tpo -c -o ldump.o `test -f 'src/ldump.c' || echo '$(srcdir)/'`src/ldump.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldump.Tpo $(DEPDIR)/ldump.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldump.c' object='ldump.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldump.o `test -f 'src/ldump.c' || echo '$(srcdir)/'`src/ldump.c
+
+ldump.obj: src/ldump.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ldump.obj -MD -MP -MF $(DEPDIR)/ldump.Tpo -c -o ldump.obj `if test -f 'src/ldump.c'; then $(CYGPATH_W) 'src/ldump.c'; else $(CYGPATH_W) '$(srcdir)/src/ldump.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ldump.Tpo $(DEPDIR)/ldump.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ldump.c' object='ldump.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ldump.obj `if test -f 'src/ldump.c'; then $(CYGPATH_W) 'src/ldump.c'; else $(CYGPATH_W) '$(srcdir)/src/ldump.c'; fi`
+
+linit.o: src/linit.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT linit.o -MD -MP -MF $(DEPDIR)/linit.Tpo -c -o linit.o `test -f 'src/linit.c' || echo '$(srcdir)/'`src/linit.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/linit.Tpo $(DEPDIR)/linit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/linit.c' object='linit.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o linit.o `test -f 'src/linit.c' || echo '$(srcdir)/'`src/linit.c
+
+linit.obj: src/linit.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT linit.obj -MD -MP -MF $(DEPDIR)/linit.Tpo -c -o linit.obj `if test -f 'src/linit.c'; then $(CYGPATH_W) 'src/linit.c'; else $(CYGPATH_W) '$(srcdir)/src/linit.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/linit.Tpo $(DEPDIR)/linit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/linit.c' object='linit.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o linit.obj `if test -f 'src/linit.c'; then $(CYGPATH_W) 'src/linit.c'; else $(CYGPATH_W) '$(srcdir)/src/linit.c'; fi`
+
+lmathlib.o: src/lmathlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lmathlib.o -MD -MP -MF $(DEPDIR)/lmathlib.Tpo -c -o lmathlib.o `test -f 'src/lmathlib.c' || echo '$(srcdir)/'`src/lmathlib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lmathlib.Tpo $(DEPDIR)/lmathlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lmathlib.c' object='lmathlib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lmathlib.o `test -f 'src/lmathlib.c' || echo '$(srcdir)/'`src/lmathlib.c
+
+lmathlib.obj: src/lmathlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lmathlib.obj -MD -MP -MF $(DEPDIR)/lmathlib.Tpo -c -o lmathlib.obj `if test -f 'src/lmathlib.c'; then $(CYGPATH_W) 'src/lmathlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lmathlib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lmathlib.Tpo $(DEPDIR)/lmathlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lmathlib.c' object='lmathlib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lmathlib.obj `if test -f 'src/lmathlib.c'; then $(CYGPATH_W) 'src/lmathlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lmathlib.c'; fi`
+
+lobject.o: src/lobject.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lobject.o -MD -MP -MF $(DEPDIR)/lobject.Tpo -c -o lobject.o `test -f 'src/lobject.c' || echo '$(srcdir)/'`src/lobject.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lobject.Tpo $(DEPDIR)/lobject.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lobject.c' object='lobject.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lobject.o `test -f 'src/lobject.c' || echo '$(srcdir)/'`src/lobject.c
+
+lobject.obj: src/lobject.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lobject.obj -MD -MP -MF $(DEPDIR)/lobject.Tpo -c -o lobject.obj `if test -f 'src/lobject.c'; then $(CYGPATH_W) 'src/lobject.c'; else $(CYGPATH_W) '$(srcdir)/src/lobject.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lobject.Tpo $(DEPDIR)/lobject.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lobject.c' object='lobject.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lobject.obj `if test -f 'src/lobject.c'; then $(CYGPATH_W) 'src/lobject.c'; else $(CYGPATH_W) '$(srcdir)/src/lobject.c'; fi`
+
+lparser.o: src/lparser.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lparser.o -MD -MP -MF $(DEPDIR)/lparser.Tpo -c -o lparser.o `test -f 'src/lparser.c' || echo '$(srcdir)/'`src/lparser.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lparser.Tpo $(DEPDIR)/lparser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lparser.c' object='lparser.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lparser.o `test -f 'src/lparser.c' || echo '$(srcdir)/'`src/lparser.c
+
+lparser.obj: src/lparser.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lparser.obj -MD -MP -MF $(DEPDIR)/lparser.Tpo -c -o lparser.obj `if test -f 'src/lparser.c'; then $(CYGPATH_W) 'src/lparser.c'; else $(CYGPATH_W) '$(srcdir)/src/lparser.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lparser.Tpo $(DEPDIR)/lparser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lparser.c' object='lparser.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lparser.obj `if test -f 'src/lparser.c'; then $(CYGPATH_W) 'src/lparser.c'; else $(CYGPATH_W) '$(srcdir)/src/lparser.c'; fi`
+
+lstrlib.o: src/lstrlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstrlib.o -MD -MP -MF $(DEPDIR)/lstrlib.Tpo -c -o lstrlib.o `test -f 'src/lstrlib.c' || echo '$(srcdir)/'`src/lstrlib.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstrlib.Tpo $(DEPDIR)/lstrlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstrlib.c' object='lstrlib.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstrlib.o `test -f 'src/lstrlib.c' || echo '$(srcdir)/'`src/lstrlib.c
+
+lstrlib.obj: src/lstrlib.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lstrlib.obj -MD -MP -MF $(DEPDIR)/lstrlib.Tpo -c -o lstrlib.obj `if test -f 'src/lstrlib.c'; then $(CYGPATH_W) 'src/lstrlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lstrlib.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lstrlib.Tpo $(DEPDIR)/lstrlib.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lstrlib.c' object='lstrlib.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lstrlib.obj `if test -f 'src/lstrlib.c'; then $(CYGPATH_W) 'src/lstrlib.c'; else $(CYGPATH_W) '$(srcdir)/src/lstrlib.c'; fi`
+
+ltm.o: src/ltm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltm.o -MD -MP -MF $(DEPDIR)/ltm.Tpo -c -o ltm.o `test -f 'src/ltm.c' || echo '$(srcdir)/'`src/ltm.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltm.Tpo $(DEPDIR)/ltm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltm.c' object='ltm.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltm.o `test -f 'src/ltm.c' || echo '$(srcdir)/'`src/ltm.c
+
+ltm.obj: src/ltm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ltm.obj -MD -MP -MF $(DEPDIR)/ltm.Tpo -c -o ltm.obj `if test -f 'src/ltm.c'; then $(CYGPATH_W) 'src/ltm.c'; else $(CYGPATH_W) '$(srcdir)/src/ltm.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/ltm.Tpo $(DEPDIR)/ltm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/ltm.c' object='ltm.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ltm.obj `if test -f 'src/ltm.c'; then $(CYGPATH_W) 'src/ltm.c'; else $(CYGPATH_W) '$(srcdir)/src/ltm.c'; fi`
+
+luac.o: src/luac.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT luac.o -MD -MP -MF $(DEPDIR)/luac.Tpo -c -o luac.o `test -f 'src/luac.c' || echo '$(srcdir)/'`src/luac.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/luac.Tpo $(DEPDIR)/luac.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/luac.c' object='luac.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o luac.o `test -f 'src/luac.c' || echo '$(srcdir)/'`src/luac.c
+
+luac.obj: src/luac.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT luac.obj -MD -MP -MF $(DEPDIR)/luac.Tpo -c -o luac.obj `if test -f 'src/luac.c'; then $(CYGPATH_W) 'src/luac.c'; else $(CYGPATH_W) '$(srcdir)/src/luac.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/luac.Tpo $(DEPDIR)/luac.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/luac.c' object='luac.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o luac.obj `if test -f 'src/luac.c'; then $(CYGPATH_W) 'src/luac.c'; else $(CYGPATH_W) '$(srcdir)/src/luac.c'; fi`
+
+lzio.o: src/lzio.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lzio.o -MD -MP -MF $(DEPDIR)/lzio.Tpo -c -o lzio.o `test -f 'src/lzio.c' || echo '$(srcdir)/'`src/lzio.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lzio.Tpo $(DEPDIR)/lzio.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lzio.c' object='lzio.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lzio.o `test -f 'src/lzio.c' || echo '$(srcdir)/'`src/lzio.c
+
+lzio.obj: src/lzio.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT lzio.obj -MD -MP -MF $(DEPDIR)/lzio.Tpo -c -o lzio.obj `if test -f 'src/lzio.c'; then $(CYGPATH_W) 'src/lzio.c'; else $(CYGPATH_W) '$(srcdir)/src/lzio.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/lzio.Tpo $(DEPDIR)/lzio.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/lzio.c' object='lzio.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o lzio.obj `if test -f 'src/lzio.c'; then $(CYGPATH_W) 'src/lzio.c'; else $(CYGPATH_W) '$(srcdir)/src/lzio.c'; fi`
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+lua_tinker.o: src/lua_tinker.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT lua_tinker.o -MD -MP -MF $(DEPDIR)/lua_tinker.Tpo -c -o lua_tinker.o `test -f 'src/lua_tinker.cpp' || echo '$(srcdir)/'`src/lua_tinker.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/lua_tinker.Tpo $(DEPDIR)/lua_tinker.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/lua_tinker.cpp' object='lua_tinker.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o lua_tinker.o `test -f 'src/lua_tinker.cpp' || echo '$(srcdir)/'`src/lua_tinker.cpp
+
+lua_tinker.obj: src/lua_tinker.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT lua_tinker.obj -MD -MP -MF $(DEPDIR)/lua_tinker.Tpo -c -o lua_tinker.obj `if test -f 'src/lua_tinker.cpp'; then $(CYGPATH_W) 'src/lua_tinker.cpp'; else $(CYGPATH_W) '$(srcdir)/src/lua_tinker.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/lua_tinker.Tpo $(DEPDIR)/lua_tinker.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/lua_tinker.cpp' object='lua_tinker.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o lua_tinker.obj `if test -f 'src/lua_tinker.cpp'; then $(CYGPATH_W) 'src/lua_tinker.cpp'; else $(CYGPATH_W) '$(srcdir)/src/lua_tinker.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -375,6 +986,7 @@ clean: clean-am
 clean-am: clean-generic clean-libLIBRARIES mostlyclean-am
 
 distclean: distclean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -420,6 +1032,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -452,59 +1065,6 @@ uninstall-am: uninstall-libLIBRARIES
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-libLIBRARIES
 
-						inc/lparser.h\
-						inc/lstring.h\
-						inc/ltm.h\
-						inc/lua_tinker.h
-						inc/lualib.h \
-						inc/lvm.h\
-						inc/ndk-print.h\
-						inc/lauxlib.h \
-						inc/ldebug.h\
-						inc/lfunc.h \
-						inc/llex.h \
-						inc/lmem.h \
-						inc/lopcodes.h\
-						inc/lstate.h  \
-						inc/ltable.h\
-						inc/lua.h \
-						inc/luaconf.h \
-						inc/lundump.h \
-						inc/lzio.h\
-						src/lbaselib.c \
-						src/ldebug.c \
-						src/lfunc.c \
-						src/liolib.c \
-						src/lmem.c \
-						src/lopcodes.c \
-						src/lstate.c \
-						src/ltable.c \
-						src/lua.c  \
-						src/lundump.c\
-						src/ndk-print.c\
-						src/lapi.c\
-						src/lcode.c\
-						src/ldo.c\
-						src/lgc.c\
-						src/llex.c\
-						src/loadlib.c\
-						src/loslib.c \
-						src/lstring.c\
-						src/ltablib.c\
-						src/lua_tinker.cpp\
-						src/lvm.c \
-						src/print.c\
-						src/lauxlib.c \
-						src/ldblib.c \
-						src/ldump.c \
-						src/linit.c\
-						src/lmathlib.c \
-						src/lobject.c \
-						src/lparser.c \
-						src/lstrlib.c \
-						src/ltm.c \
-						src/luac.c \
-						src/lzio.c
 #DEFS=-DLINUX
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

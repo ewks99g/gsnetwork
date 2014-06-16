@@ -7,6 +7,7 @@
 ******************************************************************/
 #include "test.inl"
 #include <stdio.h>
+#include "head.h"
 
 void test_static_function_mem()
 {
@@ -19,9 +20,28 @@ void test_static_function_mem()
 	printf("static mem %d\n",test_function_static_mem);
 }
 
-void add_num(int val)
+template<>
+void CDBCacheDataElem<int,int>::conditionRmv(int conditon)
 {
-	val = val + 30;
+        TElemMap::iterator _iter = m_vElems.begin();
+        for (; _iter != m_vElems.end();_iter++)
+        {   
+//              if (_iter->first.nZoneType == conditon)
+//              {
+//                      m_vElems.erase(_iter++);
+//              }
+//              else
+//              {
+//                      _iter++;
+//              }
+        }                                                                                                                                                                                                      
+}
+
+template<>
+void TestSpcial<SkillInfo,skillBaseInfo>::testFunc2() 
+{
+
+	     printf("testFunc int size %d\n", sizeof(TestTemplatePush<int>));
 }
 
 int
@@ -33,10 +53,20 @@ main()
 	IntTemplate<30> _inttemplate;
 	_inttemplate.dofunc();
 	
-	//do not pass type through<>
-	template_func(30,&add_num);
+	test_static_function_mem();
+	test_static_function_mem();
 
-	test_static_function_mem();
-	test_static_function_mem();
+	SonNormalClass _sonclass;
+	_sonclass.classTemplateFunction<int>();
+
+	TestSpcial<SkillInfo,skillBaseInfo> _testsp1;
+	_testsp1.testFunc1();
+	_testsp1.testFunc2();
+
+	testtemplatepush();
+
+	CDBCacheDataElem<int,int> _cachedata;
+	_cachedata.conditionRmv(2);
+
 }
 
