@@ -175,7 +175,7 @@ top_builddir = ..
 top_srcdir = ..
 
 #AUTOMAKE_OPTIONS=foreign
-SUBDIRS = zmqserver zmqclient zmqbroker normalserver normalclient memtest rawweb templatetest #mongotest cgiscript cgippscript
+SUBDIRS = zmqserver zmqclient zmqbroker normalserver normalclient memtest rawweb templatetest testcenter #mongotest cgiscript cgippscript
 all: all-recursive
 
 .SUFFIXES:
@@ -188,9 +188,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu test/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign test/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu test/Makefile
+	  $(AUTOMAKE) --foreign test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

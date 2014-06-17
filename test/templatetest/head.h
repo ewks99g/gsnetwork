@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma pack(1)
 template<typename T>
 struct TestTemplatePush
 {
@@ -8,3 +9,5 @@ struct TestTemplatePush
 };
 
 void testtemplatepush();
+
+#pragma pop()

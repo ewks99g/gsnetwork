@@ -41,6 +41,7 @@ AC_OUTPUT(Makefile source/Makefile
 			test/cgiscript/Makefile
 			test/cgippscript/Makefile
 			test/rawweb/Makefile
+			test/testcenter/Makefile
 			thirdparty/Makefile
 			thirdparty/json/Makefile
 			thirdparty/pugixml/Makefile
