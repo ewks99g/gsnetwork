@@ -81,7 +81,7 @@ CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DLINUX 
+DEFS = -DLINUX
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -159,7 +159,7 @@ top_srcdir = ../..
 AUTOMAKE_OPTIONS = foreign
 testcenter_SOURCES = main.cpp head.h test.cpp
 INCLUDES = -I/usr/local/include -I/usr/include 
-LDADD = -L/usr/local/lib -L/usr/lib -L/lib
+LDADD = -L/usr/local/lib -L/usr/lib -L/lib -lpthread
 all: all-am
 
 .SUFFIXES:

@@ -6,19 +6,24 @@
 *  CreateTime: 2014/05/31
 ******************************************************************/
 #include <stdio.h>
+#include <unistd.h>
 #include <map>
 #include "head.h"
+#include <pthread.h>
+
+
+void *func1(void * arg)
+{
+sleep(20);
+   printf("线程1（ID：0x%x）退出。/n",(unsigned int)pthread_self());
+   pthread_exit((void *)0);
+}
 
 
 int
 main()
 {
-	std::map<int,int> _map;
-	_map[10] = 10;
-	_map[11] = 11;
-	_map[12] = 12;
-	_map[13] = 13;
-
-	std::map<int,int> _maptest;
-}
+	float _val = float(90)/float(100);
+	printf("%0.5f",_val);
+}	
 

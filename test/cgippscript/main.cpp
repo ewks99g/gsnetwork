@@ -25,7 +25,7 @@ public:
         {
 				out << "Content-Type: text/html;\r\n\r\n";
                 out << "<html><body>";
-                out << "Hello world!<br />";
+                out << "Hello worldXXXXX!<br />";
                 out << "</body></html>";
                 return true;
         }  
